@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import kosta.ridonbox.model.dto.BookDTO;
+import kosta.ridonbox.model.dto.BookingDTO;
 import kosta.ridonbox.model.dto.EventDTO;
 import kosta.ridonbox.model.dto.MemberDTO;
 import kosta.ridonbox.model.dto.MovieDTO;
@@ -11,43 +12,43 @@ import kosta.ridonbox.model.dto.MyPageDTO;
 
 public interface UserDAO {
 	/**
-	 * ì‚¬ìš©ì(ê³ ê°) ë¡œê·¸ì¸
+	 * »ç¿ëÀÚ(°í°´) ·Î±×ÀÎ
 	 * 
 	 * @param id
-	 *            (ì‚¬ìš©ì ì•„ì´ë””)
+	 *            (»ç¿ëÀÚ ¾ÆÀÌµğ)
 	 * @param password
-	 *            (ì‚¬ìš©ì ë¹„ë²ˆ)
-	 * @return int : 1 ì´ìƒì´ë©´ ì„±ê³µ, 0ì´ë©´ ì‹¤íŒ¨
+	 *            (»ç¿ëÀÚ ºñ¹ø)
+	 * @return int : 1 ÀÌ»óÀÌ¸é ¼º°ø, 0ÀÌ¸é ½ÇÆĞ
 	 */
 	public int loginMember(String id, String password) throws SQLException;
 
 	/**
-	 * ì‚¬ìš©ì(ê³ ê°) íšŒì›ê°€ì…
+	 * »ç¿ëÀÚ(°í°´) È¸¿ø°¡ÀÔ
 	 * 
 	 * @param MemberDTO
 	 *            (memberId, memberPwd, email, phone, joinDate)
-	 * @return int : 1 ì´ìƒì´ë©´ ì„±ê³µ, 0ì´ë©´ ì‹¤íŒ¨
+	 * @return int : 1 ÀÌ»óÀÌ¸é ¼º°ø, 0ÀÌ¸é ½ÇÆĞ
 	 */
 	public int joinMember(MemberDTO memberDTO) throws SQLException;
 
 	/**
-	 * ë°•ìŠ¤ì˜¤í”¼ìŠ¤ ìˆœìœ„ ì •ë ¬
+	 * ¹Ú½º¿ÀÇÇ½º ¼øÀ§ Á¤·Ä
 	 * 
-	 * @return List<MovieDTO> ë°•ìŠ¤ì˜¤í”¼ìŠ¤ ìˆœìœ„ë¡œ ì •ë ¬í•˜ì—¬ ë¦¬ìŠ¤íŠ¸ë¡œ ë°˜í™˜
+	 * @return List<MovieDTO> ¹Ú½º¿ÀÇÇ½º ¼øÀ§·Î Á¤·ÄÇÏ¿© ¸®½ºÆ®·Î ¹İÈ¯
 	 * @throws SQLException
 	 */
 	public List<MovieDTO> showByBoxoffice() throws SQLException;
 
 	/**
-	 * ìµœì‹ ê°œë´‰ì‘ ìˆœìœ„ ì •ë ¬
+	 * ÃÖ½Å°³ºÀÀÛ ¼øÀ§ Á¤·Ä
 	 * 
-	 * @return List<MovieDTO> ìµœì‹ ê°œë´‰ì‘ ìˆœìœ„ë¡œ ì •ë ¬í•˜ì—¬ ë¦¬ìŠ¤íŠ¸ë¡œ ë°˜í™˜
+	 * @return List<MovieDTO> ÃÖ½Å°³ºÀÀÛ ¼øÀ§·Î Á¤·ÄÇÏ¿© ¸®½ºÆ®·Î ¹İÈ¯
 	 * @throws SQLException
 	 */
 	public List<MovieDTO> showByLatest() throws SQLException;
 
 	/**
-	 * ì„¸ë¶€ ì˜í™”ë³´ê¸°
+	 * ¼¼ºÎ ¿µÈ­º¸±â
 	 * 
 	 * @param movieNo
 	 *            (pk)
@@ -57,27 +58,27 @@ public interface UserDAO {
 	public MovieDTO showDetail(String movieNo) throws SQLException;
 
 	/**
-	 * ì˜ˆë§¤ ì‹œìŠ¤í…œ
+	 * ¿¹¸Å ½Ã½ºÅÛ
 	 * 
 	 * @param booking
 	 *            (pk)
-	 * @return int : 1 ì´ìƒì´ë©´ ì„±ê³µ, 0ì´ë©´ ì‹¤íŒ¨
+	 * @return int : 1 ÀÌ»óÀÌ¸é ¼º°ø, 0ÀÌ¸é ½ÇÆĞ
 	 * @throws SQLException
 	 */
 	public int Booking(BookDTO booking) throws SQLException;
 
 	/**
-	 * ì‚¬ìš©ìê°€ ì´ë²¤íŠ¸í˜ì´ì§€ ë³´ê¸°
+	 * »ç¿ëÀÚ°¡ ÀÌº¥Æ®ÆäÀÌÁö º¸±â
 	 * 
 	 * @return List<EventDTO>
 	 * @throws SQLException
 	 */
 	public List<EventDTO> listEvent() throws SQLException;
 
-	// ë§ˆì´í˜ì´ì§€
-	// íšŒì›ì •ë³´ë³´ê¸°, ì˜ˆë§¤ì •ë³´ë³´ê¸°
+	// ¸¶ÀÌÆäÀÌÁö
+	// È¸¿øÁ¤º¸º¸±â, ¿¹¸ÅÁ¤º¸º¸±â
 	/**
-	 * ì‚¬ìš©ì ë§ˆì´í˜ì´ì§€ / ë§ˆì´í˜ì´ì§€ ë‚´ë¶€ì—ì„œ ì‚¬ìš©ìì •ë³´ë¥¼ ë¿Œë ¤ì¤€ë‹¤.
+	 * »ç¿ëÀÚ ¸¶ÀÌÆäÀÌÁö / ¸¶ÀÌÆäÀÌÁö ³»ºÎ¿¡¼­ »ç¿ëÀÚÁ¤º¸¸¦ »Ñ·ÁÁØ´Ù.
 	 * 
 	 * @param id
 	 *            (member)
@@ -87,7 +88,7 @@ public interface UserDAO {
 	public MemberDTO myPageByMember(String id) throws SQLException;
 
 	/**
-	 * ì‚¬ìš©ì ë§ˆì´í˜ì´ì§€ / ë§ˆì´í˜ì´ì§€ ë‚´ë¶€ì—ì„œ ì‚¬ìš©ìì •ë³´ë¥¼ ìˆ˜ì •í•œë‹¤.
+	 * »ç¿ëÀÚ ¸¶ÀÌÆäÀÌÁö / ¸¶ÀÌÆäÀÌÁö ³»ºÎ¿¡¼­ »ç¿ëÀÚÁ¤º¸¸¦ ¼öÁ¤ÇÑ´Ù.
 	 * 
 	 * @param MyPageDTO
 	 * @return MyPageDTO
@@ -96,15 +97,23 @@ public interface UserDAO {
 	public int myPageByMemberUpdate(MemberDTO memberDto) throws SQLException;
 
 	/**
-	 * ì‚¬ìš©ì ë§ˆì´í˜ì´ì§€ / ë§ˆì´í˜ì´ì§€ ë‚´ë¶€ì—ì„œ ì‚¬ìš©ì ì˜ˆë§¤ ì •ë³´ë¥¼ ë¿Œë ¤ì¤€ë‹¤.
+	 * »ç¿ëÀÚ ¸¶ÀÌÆäÀÌÁö / ¸¶ÀÌÆäÀÌÁö ³»ºÎ¿¡¼­ »ç¿ëÀÚ ¿¹¸Å Á¤º¸¸¦ »Ñ·ÁÁØ´Ù.
 	 * 
 	 * @param id
 	 *            (member)
 	 * @return List<myPageDTO>
 	 * @throws SQLException
 	 */
-	public List<BookDTO> myPageByMemberBooking(String id) throws SQLException;
+	public List<BookingDTO> myPageByMemberBooking(String id) throws SQLException;
 
+	/**
+	 * »ç¿ëÀÚ ¸ŞÀÎÆäÀÌÁö¿¡¼­ ¿¹¾à Ãë¼Ò¸Ş¼Òµå
+	 * @param revNum ¿¹¾à Á¤º¸ 
+	 * @return È®ÀÎ
+	 * @throws SQLException
+	 */
+	public int deleteByBooking(String revNum) throws SQLException;
+	
 	int checkById(String id) throws SQLException;
 
 }

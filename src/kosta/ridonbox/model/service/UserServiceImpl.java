@@ -7,6 +7,7 @@ import java.util.List;
 import kosta.ridonbox.model.dao.UserDAO;
 import kosta.ridonbox.model.dao.UserDAOImpl;
 import kosta.ridonbox.model.dto.BookDTO;
+import kosta.ridonbox.model.dto.BookingDTO;
 import kosta.ridonbox.model.dto.EventDTO;
 import kosta.ridonbox.model.dto.MemberDTO;
 import kosta.ridonbox.model.dto.MovieDTO;
@@ -65,11 +66,19 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public List<BookDTO> memberbyBookList(String memberId) throws SQLException  {
-		List<BookDTO> list = new ArrayList<>();
+	public List<BookingDTO> memberbyBookList(String memberId) throws SQLException  {
+		List<BookingDTO> list = new ArrayList<>();
 		list=userDAO.myPageByMemberBooking(memberId);
+		System.out.println("userservice:"+list);
 		if(list==null) throw new SQLException("예약한 내용이 없습니다.");
 		return list;
+	}
+	
+	public int deleteByBooking(String revNum) throws SQLException{
+		int result=userDAO.deleteByBooking(revNum);
+		if(result==0) throw new SQLException("수정되지 않았습니다.");
+		
+		return result;
 	}
 	
 	@Override
