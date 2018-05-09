@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <html>
 <title>W3.CSS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,7 +50,7 @@
 
 .w3-btn {
 	background-color: #4CAF50;
-	margin-bottom: 4px
+	margin-botto0m: 4px
 }
 
 .w3-code {
@@ -82,13 +83,38 @@ button{
 	<script>
 		$(function() {
 			$("#tabs").tabs();
+			//수정하기 
+			$("#button").click(function(){
+				$("input").attr
+			});
+		
 		});
+		
+		function checkValid() {
+			var f = window.document.memberInfo;
+			if ( f.memberPwd.value == "" ) {
+				alert( "비밀번호를 입력해 주세요." );
+				f.memberPwd.focus();
+				return false;
+			}
+			if ( f.memberPwdCheck.value == "" ) {
+				alert( "입력해 주세요." );
+				f.inputPasswordCheck.focus();
+				return false;
+			}
+			if ( f.memberPwd.value!=f.memberPwdCheck.value ) {
+		        alert( "비밀번호가 같지 않습니다. 다시 입력해주세요." );
+		        f.description.focus();
+		        return false;
+		    }
+		}
 	</script>
 <div id="tabs">
 	<ul>
 		<li><a href="#tabs-1">회원 정보 수정</a></li>
 		<li><a href="#tabs-2">예매확인 및 취소</a></li>
 	</ul>
+	<!-- 회원정보 수정 부분. -->
 	<div id="tabs-1">
 		<div class="w3-panel w3-padding-large w3-card-4 w3-light-grey">
 			<p class="w3-large">
@@ -100,11 +126,11 @@ button{
 						<div class="page-header">
 							<h1>회원 정보 수정</h1>
 						</div>
-						<form class="form-horizontal">
+						<form class="form-horizontal" name="memberInfo" id="memberInfo" method=post action="main?command=updatemember"  onSubmit="return checkValid()">
 							<div class="form-group">
 								<label class="col-sm-3 control-label" for="inputnID">아이디</label>
 								<div class="col-sm-6">
-									<input class="form-control" id="inputnID" type="text"
+									<input class="form-control" id="inputnID" type="text" value="${member.memberId}" name="memberId"
 										readonly="readonly">
 									<p class="help-block">수정할 수 없습니다.</p>
 								</div>
@@ -112,7 +138,7 @@ button{
 							<div class="form-group">
 								<label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
 								<div class="col-sm-6">
-									<input class="form-control" id="inputPassword" type="password"
+									<input class="form-control" id="inputPassword" type="password" name="memberPwd"
 										placeholder="비밀번호">
 								</div>
 							</div>
@@ -120,45 +146,38 @@ button{
 								<label class="col-sm-3 control-label" for="inputPasswordCheck">비밀번호
 									확인</label>
 								<div class="col-sm-6">
-									<input class="form-control" id="inputPasswordCheck"
+									<input class="form-control" id="inputPasswordCheck"  name="memberPwdCheck"
 										type="password" placeholder="비밀번호 확인">
 									<p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label" for="inputName">이름</label>
-								<div class="col-sm-6">
-									<input class="form-control" id="inputName" type="text"
-										placeholder="이름">
-								</div>
-							</div>
-							<div class="form-group">
 								<label class="col-sm-3 control-label" for="inputEmail">이메일</label>
 								<div class="col-sm-6">
-									<input class="form-control" id="inputEmail" type="email"
+									<input class="form-control" id="inputEmail" type="email"  value="${member.email}"  name="memberEmail"
 										placeholder="이메일">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label" for="inputNumber">휴대폰번호</label>
 								<div class="col-sm-6">
-									<input type="tel" class="form-control" id="inputNumber"
+									<input type="tel" class="form-control" id="inputNumber"  value="${member.phone}" name="memberPhone"
 										placeholder="- 없이 입력해 주세요" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label" for="inputJoin">가입날짜</label>
 								<div class="col-sm-6">
-									<input type="text" class="form-control" id="inputJoin"
+									<input type="text" class="form-control" id="inputJoin"   value="${member.joinDate}" name="memberJoin"
 										readonly="readonly" />
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-sm-12 text-center">
-									<button class="btn btn-primary" type="submit">
+									<button class="btn btn-primary" type="submit" value="update">
 										회원수정<i class="fa fa-check spaceLeft"></i>
 									</button>
-									<button class="btn btn-danger" type="reset">
+									<button class="btn btn-danger" type="reset" value="cancel">
 										취 소<i class="fa fa-times spaceLeft"></i>
 									</button>
 								</div>
@@ -170,6 +189,12 @@ button{
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	$(document).on("click","button",function(){
+		var value=$(this).parent().find("tr:first-child").find("td:nth-child(2)").text();
+		location.href="main?command=deleteBooking&revName="+value;
+	})
+	</script>
 	<div id="tabs-2">
 		<!-- 예매확인 페이지 -->
 		<div class="w3-panel w3-padding-large w3-card-4 w3-light-grey">
@@ -183,96 +208,39 @@ button{
 							<h1>현재 예매한 영화</h1>
 						</div>
 						<div class="row" style="text-align: center;">
+						<!-- 예매 테이블 1 -->
+						<c:forEach items="${bookingList}" var="book">
 						  <div class="w3-col s4 w3-center" style="height:800">
-						  	<img src="${pageContext.request.contextPath}/web/2.jpg" alt="" style="width:90%;height:50%;"/>
+						  	<img src="${book.movieImgPath}" alt="" style="width:90%;height:50%;"/>
 						  	<table>
 						  		<tr>
-						  			<th style="width:40%;">제목</th>
-						  			<th>아가씨</th>
+						  			<td style="width:40%;">예매 번호</td>
+						  			<td >${book.bookingNum}</td>
 						  		</tr>
 						  		<tr>
-						  			<th style="width:40%;">예매날짜</th>
-						  			<th>2018-05-04</th>
+						  			<th style="width:40%;">제목</td>
+						  			<td>${book.movieName}</td>
 						  		</tr>
 						  		<tr>
-						  			<th>예매시간</th>
-						  			<th>19:00</th>
+						  			<td style="width:40%;">예매날짜</td>
+						  			<td>${book.screenDate}</td>
 						  		</tr>
 						  		<tr>
-						  			<th>상영관</th>
-						  			<th>1관</th>
+						  			<td>예매시간</td>
+						  			<td>${book.screenTime}</td>
+						  		</tr>
+						  		<tr>
+						  			<td>상영관</td>
+						  			<td>${book.auditoriumNo}</td>
 						  		</tr>
 						  	</table>
-						  	
 						  	<p></p>
-							<button class="w3-button w3-block w3-red" style="width:90%">취소하기</button>
+							<button class="w3-button w3-block w3-red" style="width:90%" type="button" name="bookingCancel">취소하기</button>
 						  </div>
-						  <div class="w3-col s4 w3-center" style="height:800">
-						  	<img src="${pageContext.request.contextPath}/web/3.jpg" alt="" style="width:90%;height:50%;"/>
-						  	<table>
-						    	<tr>
-						  			<th style="width:40%;">제목</th>
-						  			<th>아가씨</th>
-						  		</tr>
-						  		<tr>
-						  			<th>예매날짜</th>
-						  			<th>2018-05-04</th>
-						  		</tr>
-						  		<tr>
-						  			<th>예매시간</th>
-						  			<th>19:00</th>
-						  		</tr>
-						  		<tr>
-						  			<th>상영관</th>
-						  			<th>1관</th>
-						  		</tr>
-						  	</table>
-						  	<button class="w3-button w3-block w3-red" style="width:90%">취소하기</button>
-						  </div>
-						  <div class="w3-col s4 w3-center" style="height:800">
-						  	<img src="${pageContext.request.contextPath}/web/4.jpg" alt="" style="width:90%;height:50%;"/>
-						  	<table>
-						  		<tr>
-						  			<th style="width:40%;">제목</th>
-						  			<th>아가씨</th>
-						  		</tr>
-						  		<tr>
-						  			<th>예매날짜</th>
-						  			<th>2018-05-04</th>
-						  		</tr>
-						  		<tr>
-						  			<th>예매시간</th>
-						  			<th>19:00</th>
-						  		</tr>
-						  		<tr>
-						  			<th>상영관</th>
-						  			<th>1관</th>
-						  		</tr>
-						  	</table>
-						  	<button class="w3-button w3-block w3-red" style="width:90%">취소하기</button>
-						  </div>
-						    <div class="w3-col s4 w3-center" style="height:800">
-						  	<img src="${pageContext.request.contextPath}/web/4.jpg" alt="" style="width:90%;height:50%;"/>
-						  	<table>
-						  		<tr>
-						  			<th style="width:40%;">제목</th>
-						  			<th>아가씨</th>
-						  		</tr>
-						  		<tr>
-						  			<th>예매날짜</th>
-						  			<th>2018-05-04</th>
-						  		</tr>
-						  		<tr>
-						  			<th>예매시간</th>
-						  			<th>19:00</th>
-						  		</tr>
-						  		<tr>
-						  			<th>상영관</th>
-						  			<th>1관</th>
-						  		</tr>
-						  	</table>
-						  	<button class="w3-button w3-block w3-red" style="width:90%">취소하기</button>
-						  </div>
+						  	
+						  	
+						  	<!-- 끝 -->
+						  	</c:forEach>
 						</div>
 						<hr>
 					</div>

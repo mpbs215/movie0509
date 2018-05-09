@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kosta.ridonbox.model.dto.BookDTO;
+import kosta.ridonbox.model.dto.BookingDTO;
 import kosta.ridonbox.model.dto.EventDTO;
 import kosta.ridonbox.model.dto.MemberDTO;
 import kosta.ridonbox.model.dto.MovieDTO;
-import kosta.ridonbox.model.dto.MyPageDTO;
 import kosta.ridonbox.util.DbUtil;
 
 public class UserDAOImpl implements UserDAO {
@@ -139,6 +139,7 @@ public class UserDAOImpl implements UserDAO {
 		return null;
 	}
 
+
 	@Override
 	public MemberDTO myPageByMember(String id) throws SQLException {
 		Connection con=null;
@@ -157,7 +158,6 @@ public class UserDAOImpl implements UserDAO {
 			DbUtil.dbClose(con, ps, rs);
 		}
 		return member;
-		
 	}
 
 
@@ -182,25 +182,41 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public List<BookDTO> myPageByMemberBooking(String id) throws SQLException {
+	public List<BookingDTO> myPageByMemberBooking(String id) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<BookDTO> list =new ArrayList<>();
+		List<BookingDTO> list =new ArrayList<>();
 		try {
 		con = DbUtil.getConnection();
-		ps = con.prepareStatement("select * from reservation where MEMBER_ID =?");
+		String sql = "SELECT m.MOVIE_PATH,r.REV_NUM,m.MOVIE_TITLE,s.SCREEN_DATE,s.SCREEN_TIME,s.THEATER_NAME from screen_info s JOIN reservation r ON r.SCREEN_NUM =s.SCREEN_NUM JOIN MOVIE_INFO m ON s.MOVIE_NUM=m.MOVIE_NUM where r.REV_NUM = ANY (select rev_num from reservation where MEMBER_ID=?)";
+		ps = con.prepareStatement(sql);
 		ps.setString(1, id);
 		rs=ps.executeQuery();
 		String test = "test";
 		while(rs.next()) { 
-			list.add(new BookDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
+			list.add(new BookingDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
 		}
 		}finally {
 			DbUtil.dbClose(con, ps, rs);
 		}
 		return list;
 	}
-
+	
+	public int deleteByBooking(String revNum) throws SQLException{
+		Connection con=null;
+		PreparedStatement ps = null;
+		int result = 0;
+		try {
+		con = DbUtil.getConnection();
+		ps = con.prepareStatement("delete from reservation where REV_NUM=?");
+		ps.setString(1, revNum);
+		result = ps.executeUpdate();
+		
+		}finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
 
 }
