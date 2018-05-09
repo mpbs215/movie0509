@@ -121,9 +121,28 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public int movieInsert(MovieDTO movieDTO) throws SQLException {
-
-		return 0;
+	public int movieInsert(MovieDTO dto) throws SQLException {
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result =0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("insert into movie_info values(?,?,?,?,?,?,?,?,?)");
+			ps.setString(1,dto.getMovieNum());
+			ps.setString(2, dto.getMovieTitle());
+			ps.setString(3, dto.getMovieEtitle());
+			ps.setString(4, dto.getMovieDate());
+			ps.setString(5, dto.getMovieCountry());
+			ps.setString(6, dto.getMovieDir());
+			ps.setString(7, dto.getMovieState());
+			ps.setString(8, dto.getMoviePath());
+			ps.setString(9, dto.getMovieYoutube());
+			result=ps.executeUpdate();
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
 	}
 
 	@Override
@@ -131,9 +150,42 @@ public class AdminDAOImpl implements AdminDAO {
 
 		return 0;
 	}
+	
+	@Override
+	public List<MovieDTO> movieList() throws SQLException{
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<MovieDTO> list = new ArrayList<>();
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("select*from movie_info");
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				String movieNum=rs.getString("movie_num");
+				String movieTitle= rs.getString("movie_title");
+				String movieEtitle = rs.getString("movie_etitle");
+				String movieDate=rs.getString("movie_date");
+				String movieCountry=rs.getString("movie_country");
+				String movieDir=rs.getString("movie_Dir");
+				String movieState=rs.getString("movie_state");
+				String moviePath=rs.getString("movie_path");
+				String movieYoutube=rs.getString("movie_youtube");
+				
+				MovieDTO dto = new MovieDTO(movieNum, movieTitle, movieEtitle, movieDate, movieCountry, movieDir, movieState, moviePath, movieYoutube);
+				list.add(dto);
+			}
+		} finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		
+		return list;
+	}
 
 	@Override
-	public List<MovieScreenDTO> movieList() throws SQLException {
+	public List<MovieScreenDTO> screenList() throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -213,6 +265,22 @@ public class AdminDAOImpl implements AdminDAO {
 			DbUtil.dbClose(con, ps);
 		}
 
+		return result;
+	}
+
+	@Override
+	public int screenDelete(String screenNum) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result=0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("delete from screen_info where screen_num=?");
+			ps.setString(1, screenNum);
+			result=ps.executeUpdate();
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
 		return result;
 	}
 

@@ -91,10 +91,10 @@ public class UserDAOImpl implements UserDAO {
 			 ps = con.prepareStatement( "select * from movie_info");
 			 rs = ps.executeQuery();
 			 while(rs.next()){
-				 MovieDTO movie = new MovieDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getInt(10));
-				 
-			    list.add(movie);
-			 }
+/*				 MovieDTO movie = new MovieDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getInt(10));
+*/				 
+/*			    list.add(movie);
+*/			 }
 		}finally{
 			DbUtil.dbClose(con, ps, rs);
 		}
@@ -112,7 +112,7 @@ public class UserDAOImpl implements UserDAO {
 		Connection con = DbUtil.getConnection();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		MovieDTO dto = null;
+/*		MovieDTO dto = null;
 		
 		ps = con.prepareStatement("select * from movie_info where movie_num=?");
 		ps.setString(1, movieNo);
@@ -122,9 +122,9 @@ public class UserDAOImpl implements UserDAO {
 			dto = new MovieDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getInt(10));
 		}
 		
-		DbUtil.dbClose(con, ps, rs);
+		DbUtil.dbClose(con, ps, rs);*/
 		
-		return dto;
+		return null;
 	}
 
 	@Override

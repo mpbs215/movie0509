@@ -70,7 +70,11 @@ public interface AdminService {
 
 		int movieDelete(String movieNo) throws SQLException;
 
-		List<MovieScreenDTO> movieList() throws SQLException;
+		List<MovieDTO> movieList() throws SQLException;
 
 		List<TheaterDTO> theaterList() throws SQLException;
+
+		public int screenDelete(String screenNum) throws SQLException;
+
+		public List<MovieScreenDTO> screenList() throws SQLException;
 }

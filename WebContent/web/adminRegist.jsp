@@ -25,8 +25,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } 
+
 
 
 
@@ -97,26 +99,40 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	});
 </script>
 <style>
-th,td {
+th, td {
 	text-align: center;
+	white-space: nowrap
+}
+
+th>span{
+	color: black;
 }
 
 table {
 	border: 1px solid gray;
-	table-layout:fixed;
 }
 
-div {overflow-x:auto;}
+div {
+	overflow-x: auto;
+}
 
-input[type=file] {
+.table-fixed {
+	overflow-x: auto;
+}
+
+.form-control {
+	width: 30%;
+}
+
+/* input[type=file] {
 	opacity: 0;
-}
+} */
 </style>
 <!-- start-smoth-scrolling -->
 </head>
 
 <script>
-	
+
 	function selectAll(){
 		$.ajax({
 			type:"post",//전송방식
@@ -125,28 +141,19 @@ input[type=file] {
 				success: function(result){
 					$("#movietabs tr:gt(0)").remove();
  					var str="";
- 					var str2="";
  					$.each(result,function(index,item){
- 						$.each(item.tList,function(index,item3){str2+="<option>"+item3.theaterName+"</option>"})
-						$.each(item.list,function(index,item2){
 							str+="<tr>";
-							str+="<td>"+item2.movie_num+"</td>"
-							str+="<td>"+item2.movie_title+"</td>"
-							str+="<td>"+item2.movie_etitle+"</td>"
-							str+="<td>"+item2.movie_dir+"</td>"
-							str+="<td>"+item2.movie_act+"</td>"
-							str+="<td>"+item2.movie_date+"</td>"
-							str+="<td>"+item2.movie_rat+"</td>"
-							str+="<td>"+item2.movie_path+"</td>"
-							str+="<td>"+item2.movie_youtube+"</td>"
-							str+="<td>"+item2.screenNum+"</td>"
-							str+="<td><select>"
-							str+=(str2+"</select></td>")
-							str+="<td>"+item2.screenDate+"</td>"
-							str+="<td>"+item2.revTotal+"</td>"
-							str+="<td><input type='button' value='삭제' name='"+item2.movie_num+"' id='delete'/></td>"
+							str+="<td>"+item.movieNum+"</td>"
+							str+="<td>"+item.movieTitle+"</td>"
+							str+="<td>"+item.movieEtitle+"</td>"
+							str+="<td>"+item.movieDate+"</td>"
+							str+="<td>"+item.movieCountry+"</td>"
+							str+="<td>"+item.movieDir+"</td>"
+							str+="<td>"+item.movieState+"</td>"
+							str+="<td>"+item.moviePath+"</td>"
+							str+="<td>"+item.movieYoutube+"</td>"
+							str+="<td><input type='button' value='삭제' name='"+item.movieNum+"' id='delete'/></td>"
 							str+="</tr>";
-						})
 					}) 
 					$("#movietabs").append(str); 
 				},
@@ -157,8 +164,46 @@ input[type=file] {
 	  });
 	}
 	selectAll()
+	function screenAll(){
+		$.ajax({
+			type:"post",//전송방식
+				url: "../admin?command=screenList", //서버주소
+				dataType: "json",
+				success: function(result){
+					$("#movietabs tr:gt(0)").remove();
+ 					var str="";
+ 					$.each(result,function(index,item){
+							str+="<tr>";
+							str+="<td>"+item.screenNum+"</td>"
+							str+="<td>"+item.movieNum+"</td>"
+							str+="<td>"+item.movieTitle+"</td>"
+							str+="<td>"+item.theaterName+"</td>"
+							str+="<td>"+item.screenDate+"</td>"
+							str+="<td>"+item.screenTime+"</td>"
+							str+="<td><input type='button' value='삭제' name='"+item.screenNum+"' id='delete2'/></td>"
+							str+="</tr>";
+					}) 
+					$("#screentabs").append(str); 
+				},
+				
+				error:function(err){
+					console.log("에러 발생 : "+err);
+				}
+	  });
+	}
 	
  	$(function(){
+		$(document).on("click",'#delete2',function(){
+			alert("삭제요청");
+			$.ajax({
+				type:"post",
+				url:"../admin?command=screendelete&screenNum="+$(this).attr("name"),
+				success : function(result){
+					selectAll()
+				}
+			})
+			
+		})
 		$(document).on("click",'#delete',function(){
 			alert("삭제요청");
 			$.ajax({
@@ -170,6 +215,22 @@ input[type=file] {
 			})
 			
 		})
+		$('.datepick').each(function(){ $(this).datepicker({
+			 dateFormat: 'yy.mm.dd',
+			 prevText: '이전 달',
+			 nextText: '다음 달',
+			 monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		 	 monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		     dayNames: ['일','월','화','수','목','금','토'],
+		     dayNamesShort: ['일','월','화','수','목','금','토'],
+		     dayNamesMin: ['일','월','화','수','목','금','토'],
+		     showMonthAfterYear: true,
+			 changeMonth: true,
+	   	     changeYear: true,
+			 yearSuffix: '년'
+			})
+		})
+
 	})
 
 
@@ -202,92 +263,46 @@ input[type=file] {
 								<ul>
 									<li><a href="#tabs-1">영화 등록하기</a></li>
 									<li><a href="#tabs-2">현재 등록된 영화</a></li>
+									<li><a href="#tabs-3">예매 영화 등록하기</a></li>
 								</ul>
-								<div id="tabs-1" style="overflow-x:auto">
-									<table class="table table-hover">
-										<caption>
-											<b>등록 가능 영화 리스트</b>
-										</caption>
-										<thead>
-											<tr>
-												<th>영화번호</th>
-												<th>영화제목</th>
-												<th>영어제목</th>
-												<th>감독</th>
-												<th>배우</th>
-												<th>개봉일</th>
-												<th>평점</th>
-												<th>이미지</th>
-												<th>상영관</th>
-												<th>상영시간</th>
-												<th>등록</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td contenteditable="true">1</td>
-												<td contenteditable="true">인피니티 워</td>
-												<td contenteditable="true">infinite war</td>
-												<td contenteditable="true">김돈황</td>
-												<td contenteditable="true">이재문</td>
-												<td contenteditable="true">2018/05/04</td>
-												<td contenteditable="true">4.5</td>
-												<td><input type="file" name="" id="" value="찾기" /></td>
-												<td><select name="" id=""></select></td>
-												<td><select name="" id=""></select></td>
-												<td><input type="button" value="등록" /></td>
-											</tr>
-										</tbody>
-									</table>
+								<div id="tabs-1" style="overflow-x: auto">
+									<%@include file="sample1.jsp"%>
 								</div>
-								<div id="tabs-2" style="overflow-x:auto">
-									<div>
-									<table class="table table-hover" id="movietabs">
-										<caption>
-											<b>상영 중인 영화</b>
-										</caption>
-											<tr>
-												<th>영화번호</th>
-												<th>영화제목</th>
-												<th>영어제목</th>
-												<th>감독</th>
-												<th>배우</th>
-												<th>개봉일</th>
-												<th>평점</th>
-												<th>이미지</th>
-												<th>영상주소</th>
-												<th>상영번호</th>
-												<th>상영관</th>
-												<th>상영날짜</th>
-												<th>상영시간</th>
-												<th>삭제</th>
+								<div id="tabs-2" style="overflow-x: auto">
+										<table class="table table-hover table-fixed pre-scrollable"
+											id="movietabs">
+											<caption>
+												<b>상영 중인 영화</b>
+											</caption>
+											<tr style="background-color: #FF8D1B;">
+												<th style="color: white">영화번호</th>
+												<th style="color: white">영화제목</th>
+												<th style="color: white">영어제목</th>
+												<th style="color: white">개봉일</th>
+												<th style="color: white">국가</th>
+												<th style="color: white">감독</th>
+												<th style="color: white">개봉여부</th>
+												<th style="color: white">이미지</th>
+												<th style="color: white">영상</th>
+												<th style="color: white">삭제</th>
 											</tr>
-
-<%-- 											<c:forEach items="request.list" var="movie">
-												<tr>
-													<td contenteditable="true">${movie.movie_num}</td>
-													<td contenteditable="true">${movie.movie_title}</td>
-													<td contenteditable="true">${movie.movie_etitle}</td>
-													<td contenteditable="true">${movie.movie_dir}</td>
-													<td contenteditable="true">${movie.movie_act}</td>
-													<td contenteditable="true">${movie.movie_date}</td>
-													<td contenteditable="true">${movie.grade}</td>
-													<td>${movie.movie_path}</td>
-													<td>${movie.movie_youtube}</td>
-													<td>${movie.screenNum}</td>
-													<td><select name="" id="">
-															<c:forEach items="tList" var="t">
-																<option value="{t.theaterName}"></option>
-															</c:forEach>
-
-													</select></td>
-													<td>${movie.screenDate}</td>
-													<td><${movie.screenNum}</td>
-													<td><input type="button" value="삭제" id="Moviedelete" name="${movie.movie_num}" /></td>
-												</tr>
-											</c:forEach> --%>
-									</table>
-									</div>
+										</table>
+								</div>
+								<div id="tabs-3" style="overflow-x: auto">
+									<table class="table table-hover table-fixed pre-scrollable" id="screentabs">
+											<caption>
+												<b>상영 중인 영화</b>
+											</caption>
+											<tr style="background-color: #FF8D1B;">
+												<th style="color: white">상영번호</th>
+												<th style="color: white">영화번호</th>
+												<th style="color: white">영화제목</th>
+												<th style="color: white">상영관이름</th>
+												<th style="color: white">상영날짜</th>
+												<th style="color: white">상영시간</th>
+												<th style="color: white">감독</th>
+											</tr>
+										</table>
 								</div>
 							</div>
 						</div>
