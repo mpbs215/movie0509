@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kosta.ridonbox.model.dto.BookDTO;
+import kosta.ridonbox.model.dto.BookingDTO;
 import kosta.ridonbox.model.dto.EventDTO;
 import kosta.ridonbox.model.dto.MemberDTO;
 import kosta.ridonbox.model.dto.MovieDTO;
@@ -22,14 +23,15 @@ public class UserDAOImpl implements UserDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql="select * from member where id=? and password=?";
+		String sql="select * from member where member_id=? and member_password=?";
 		
 		con = DbUtil.getConnection();
 		ps = con.prepareStatement(sql);
-		rs = ps.executeQuery();
 		ps.setString(1, id);
 		ps.setString(2, password);
 		
+		rs = ps.executeQuery();
+	
 		if(rs.next()) {	
 			re = 1;
 		}
@@ -43,17 +45,15 @@ public class UserDAOImpl implements UserDAO {
 		
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql="insert into member values(?, ?, ?, ?, ?)";
+		String sql="insert into member (member_id, member_password, member_email, member_phone, member_date)values(?, ?, ?, ?, sysdate)";
 		
 		con = DbUtil.getConnection();
 		ps = con.prepareStatement(sql);
 		int re=0 ;
-		
 			ps.setString(1, memberDTO.getMemberId());
 			ps.setString(2, memberDTO.getMemberPwd());
 			ps.setString(3, memberDTO.getEmail());
 			ps.setString(4, memberDTO.getPhone());
-			ps.setString(5, memberDTO.getJoinDate());		
 			
 		re = ps.executeUpdate();
 		DbUtil.dbClose(con, ps);
@@ -61,24 +61,25 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	@Override
-	public int checkById(String id)  throws SQLException{
-		int re = 0 ;
-		
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String sql="select * from member where id=?";
-		
-		con = DbUtil.getConnection();
-		ps = con.prepareStatement(sql);
-		rs = ps.executeQuery();
-		if(rs.next()) {
+	public String checkById(String id)  throws SQLException{
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String result="사용가능합니다.";
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("select * from member where  member_id=?");
 			ps.setString(1, id);
-			re = 1;
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				result="중복입니다.";
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
 		}
-		DbUtil.dbClose(con, ps, rs);		
-		
-		return re;
+		return result;
 	}
 
 	@Override
@@ -139,6 +140,7 @@ public class UserDAOImpl implements UserDAO {
 		return null;
 	}
 
+
 	@Override
 	public MemberDTO myPageByMember(String id) throws SQLException {
 		Connection con=null;
@@ -182,24 +184,40 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public List<BookDTO> myPageByMemberBooking(String id) throws SQLException {
+	public List<BookingDTO> myPageByMemberBooking(String id) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<BookDTO> list =new ArrayList<>();
+		List<BookingDTO> list =new ArrayList<>();
 		try {
 		con = DbUtil.getConnection();
-		ps = con.prepareStatement("select * from reservation where MEMBER_ID =?");
+		String sql = "SELECT m.MOVIE_PATH,r.REV_NUM,m.MOVIE_TITLE,s.SCREEN_DATE,s.SCREEN_TIME,s.THEATER_NAME from screen_info s JOIN reservation r ON r.SCREEN_NUM =s.SCREEN_NUM JOIN MOVIE_INFO m ON s.MOVIE_NUM=m.MOVIE_NUM where r.REV_NUM = ANY (select rev_num from reservation where MEMBER_ID=?)";
+		ps = con.prepareStatement(sql);
 		ps.setString(1, id);
 		rs=ps.executeQuery();
 		String test = "test";
 		while(rs.next()) { 
-			list.add(new BookDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
+			list.add(new BookingDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
 		}
 		}finally {
 			DbUtil.dbClose(con, ps, rs);
 		}
 		return list;
+	}
+		public int deleteByBooking(String revNum) throws SQLException{
+		Connection con=null;
+		PreparedStatement ps = null;
+		int result = 0;
+		try {
+		con = DbUtil.getConnection();
+		ps = con.prepareStatement("delete from reservation where REV_NUM=?");
+		ps.setString(1, revNum);
+		result = ps.executeUpdate();
+		
+		}finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
 	}
 	
 	@Override

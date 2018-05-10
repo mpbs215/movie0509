@@ -7,21 +7,14 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import kosta.ridonbox.model.dto.BookDTO;
 import kosta.ridonbox.model.dto.BookingDTO;
 import kosta.ridonbox.model.dto.MemberDTO;
 import kosta.ridonbox.model.dto.ModelAndView;
 import kosta.ridonbox.model.service.UserService;
 import kosta.ridonbox.model.service.UserServiceImpl;
 
-/**
- * myPage 이동시 사용하는 Action
- * 현재세션에서 ID값을 읽어와야함
- * 응답값: ID에 해당하는 회원정보, 예매정보
- */
-public class MyPageAction implements Action {
+public class DeleteBookingAction implements Action {
 
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
@@ -30,27 +23,15 @@ public class MyPageAction implements Action {
 		UserService service = new UserServiceImpl();
 		//mv.setPath("errView/error.jsp");//에러페이지로 옮김.
 		
-		
-		HttpSession session = request.getSession();	
-		String userId = (String)session.getAttribute("userid");
 		try {
-			if(userId==null) {
+		String revName =request.getParameter("revName");
+		System.out.println(revName);
+		int result = service.deleteByBooking(revName);
+		if(result==0) {
+				throw new SQLException("해당하는 예약이 없습니다.");
+			}else {
+				request.setAttribute("result", result);
 				mv.setPath("web/index.jsp");
-			}else {
-
-			MemberDTO member = service.memberInfo(userId);
-			System.out.println("1");
-			List<BookingDTO> list = service.memberbyBookList(userId);
-			
-			System.out.println(list);
-			System.out.println("2"+member);
-			if(member==null) {
-				throw new SQLException("해당하는 상품이 없습니다.");
-			}else {
-				request.setAttribute("bookingList", list);
-				request.setAttribute("member", member);
-				mv.setPath("web/myPage.jsp");
-			}
 			}
 			
 		}catch (Exception e) {
@@ -58,7 +39,7 @@ public class MyPageAction implements Action {
 		}
 
 		return mv;
+		
 	}
 
 }
-

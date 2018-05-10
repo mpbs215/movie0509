@@ -303,3 +303,6 @@ select * from MEMBER;
 select * from BOARD;
 select * from EVENT;
 
+select * from member where  member_id='don'
+
+select * from member where member_id='don' and member_password='c1234'

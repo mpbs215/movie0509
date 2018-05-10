@@ -4,10 +4,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 import kosta.ridonbox.model.dto.BookDTO;
+import kosta.ridonbox.model.dto.BookingDTO;
 import kosta.ridonbox.model.dto.EventDTO;
 import kosta.ridonbox.model.dto.MemberDTO;
 import kosta.ridonbox.model.dto.MovieDTO;
 import kosta.ridonbox.model.dto.QnADTO;
+import kosta.ridonbox.model.dto.MyPageDTO;
 
 public interface UserDAO {
 	/**
@@ -103,9 +105,17 @@ public interface UserDAO {
 	 * @return List<myPageDTO>
 	 * @throws SQLException
 	 */
-	public List<BookDTO> myPageByMemberBooking(String id) throws SQLException;
+	public List<BookingDTO> myPageByMemberBooking(String id) throws SQLException;
 
-	int checkById(String id) throws SQLException;
+	/**
+	 * 사용자 메인페이지에서 예약 취소메소드
+	 * @param revNum 예약 정보 
+	 * @return 확인
+	 * @throws SQLException
+	 */
+	public int deleteByBooking(String revNum) throws SQLException;
+	
+	String checkById(String id) throws SQLException;
 	
 	/**
 	 * QA 등록

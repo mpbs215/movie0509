@@ -32,6 +32,9 @@ public class FrontController extends HttpServlet {
 		Action action=map.get(key);
 		ModelAndView mv=action.execute(request, response);
 		
+		if(mv==null) {
+			return;
+		}
 		
 		//리턴값에 따라 이동방식과 이동경로를 정한다.
 		if(mv.isRedirect()) {
