@@ -274,7 +274,6 @@ insert into event values(1, '이벤트 제목이 키값이 되나?', '그러니깐 insert되는거
 insert into event values(2, '이벤트는 플젝 끝나고 회식', '플젝끝나고 즐겁게', '2018-05-03','경로를 지정');
 insert into event values(3, '이벤트 주말에 봅니까?', '그런데 저기 날짜는 무슨 날짜야? 등록날짜?', '2018-03-15','경로를 지정');
 
-
 ------------------------------------------------------------------------------------------------------------------------------
 select * from movie_info;
 select * from THEATER;
@@ -284,3 +283,8 @@ select * from MEMBER;
 select * from BOARD;
 select * from EVENT;
 
+delete from reservation where rev_pep=5
+
+
+select movie_path, theater_name, screen_num from movie_info m join screen_info s on m.movie_num = s.movie_num where m.movie_num='movie-100';
+select movie_path, theater_name, screen_num from movie_info m join screen_info s on m.movie_num = s.movie_num where m.movie_num=

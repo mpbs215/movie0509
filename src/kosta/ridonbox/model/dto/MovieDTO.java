@@ -13,6 +13,12 @@ public class MovieDTO {
 	private String movieYoutube;		//유튜브경로
 	private int movieState;				//영화 상태(상영중 1, 상영종료 0)
 	
+	
+	public MovieDTO(String movieTitle, String movieNum) {
+		this.movieTitle = movieTitle;
+		this.movieNum = movieNum;
+	}
+	
 	public MovieDTO(String movieNum, String movieTitle, String movieEtitle, String movieDir, String movieAct,
 			String movieDate, int movieRat, String moviePath, String movieYoutube, int movieState) {
 		super();

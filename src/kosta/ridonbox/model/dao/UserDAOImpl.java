@@ -5,13 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kosta.ridonbox.model.dto.BookDTO;
 import kosta.ridonbox.model.dto.BookingDTO;
+import kosta.ridonbox.model.dto.BranchDTO;
 import kosta.ridonbox.model.dto.EventDTO;
 import kosta.ridonbox.model.dto.MemberDTO;
 import kosta.ridonbox.model.dto.MovieDTO;
+import kosta.ridonbox.model.dto.ReservationDTO;
 import kosta.ridonbox.util.DbUtil;
 
 public class UserDAOImpl implements UserDAO {
@@ -219,4 +223,131 @@ public class UserDAOImpl implements UserDAO {
 		return result;
 	}
 
+	@Override
+	public List<MovieDTO> movieNameList() throws SQLException {
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		List<MovieDTO> list = new ArrayList<>();
+		MovieDTO movieDTO = new MovieDTO();
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("select movie_num, movie_title from movie_info");
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				movieDTO = new MovieDTO(rs.getString(2), rs.getString(1));
+				
+				list.add(movieDTO);
+			} 
+		} finally { DbUtil.dbClose(con, ps, rs); }
+		
+		return list;
+	}
+	
+	@Override
+	public List<String> movieDateList(String movieNum) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String screenDate = "";
+		List<String> list = new ArrayList<>();
+		
+		try { 
+				con = DbUtil.getConnection();
+				ps = con.prepareStatement("select substr(screen_date,1,10) from screen_info where movie_num =?" );
+				ps.setString(1, movieNum);
+				rs = ps.executeQuery();
+				
+			while (rs.next()) {
+				screenDate = rs.getString(1);
+				list.add(screenDate);
+			}
+		} finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return list;
+	}
+
+	@Override
+	public List<Integer> movieTimeList(String movieNum) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		List<Integer> list = new ArrayList<>();
+		int screenTime =0;
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("select screen_time from screen_info where movie_num = ? ");
+			ps.setString(1, movieNum);
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				screenTime = rs.getInt(1);
+				list.add(screenTime);
+			}
+		} finally { DbUtil.dbClose(con, ps, rs); }
+		
+		return list;
+	}
+	public List<String> movieRevList(String movieNum) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<String> list = new ArrayList<>();
+		
+		String moviePath = "";
+		String theaterName = "";
+		String screenNum= "";
+		
+		try { 
+				con = DbUtil.getConnection();
+				ps = con.prepareStatement("select movie_path, theater_name, screen_num from movie_info m join screen_info s on m.movie_num = s.movie_num where m.movie_num=?" );
+				ps.setString(1, movieNum);
+				rs = ps.executeQuery();
+				
+				while(rs.next()) {
+					moviePath = rs.getString(1);
+					theaterName = rs.getString(2);
+					screenNum = rs.getString(3);
+					
+					list.add(moviePath);
+					list.add(theaterName);
+					list.add(screenNum);
+				}
+		} finally { 
+			DbUtil.dbClose(con, ps, rs);
+		}
+			return list;
+	}
+
+	@Override
+	public int revList(ReservationDTO revDTO) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		int result = 0;
+		
+		try {
+			
+				con = DbUtil.getConnection();
+				ps = con.prepareStatement("insert into reservation values('rev-300',?,?,?,?,?)");
+				ps.setString(1, "hee");
+				ps.setString(2, revDTO.getMovieNum());
+				ps.setString(3, revDTO.getTheaterName());
+				ps.setString(4, revDTO.getScreenNum());
+				ps.setInt(5, revDTO.getRevPep());
+				
+				result = ps.executeUpdate();
+			
+		} finally { DbUtil.dbClose(con, ps); }
+		
+		return result;
+	}
 }

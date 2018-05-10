@@ -2,7 +2,9 @@ package kosta.ridonbox.model.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kosta.ridonbox.model.dao.UserDAO;
 import kosta.ridonbox.model.dao.UserDAOImpl;
@@ -11,6 +13,7 @@ import kosta.ridonbox.model.dto.BookingDTO;
 import kosta.ridonbox.model.dto.EventDTO;
 import kosta.ridonbox.model.dto.MemberDTO;
 import kosta.ridonbox.model.dto.MovieDTO;
+import kosta.ridonbox.model.dto.ReservationDTO;
 
 public class UserServiceImpl implements UserService {
 	
@@ -103,6 +106,62 @@ public class UserServiceImpl implements UserService {
 		
 		return re;
 	}
+	
+	@Override
+	public List<MovieDTO> movieNameList() throws SQLException {
+		List<MovieDTO> list = userDAO.movieNameList();
+		
+		if(list.isEmpty()) {
+			throw new SQLException("?????");	
+		}
+		System.out.println("list값은= " +list);
+		return list;
+	}
+	
+	
+	@Override
+	public List<String> movieDateList(String movieNum) throws SQLException {
+		
+		List<String> list = new ArrayList<>();
+		
+		list = userDAO.movieDateList(movieNum);
+		
+		if (list.size() == 0 || list==null) {
+			throw new SQLException("해당 영화 정보에 대한 상영날짜가 존재 하지 않습니다.");
+		}
+		return list;
+	}
 
+	@Override
+	public List<Integer> movieTimeList(String movieNum) throws SQLException {
+		List<Integer> list = new ArrayList<>();
+		
+		list = userDAO.movieTimeList(movieNum);
+		if (list.size() == 0 || list == null) 
+			throw new SQLException("해당 영화 정보에 대한 상영 시간이 존재 하지 않습니다.");
+		
+		return list;
+	}
 
+	@Override
+	public List<String> movieRevList(String movieNum) throws SQLException {
+		List<String> list = new ArrayList<>();
+		
+		list = userDAO.movieRevList(movieNum);
+		
+		System.out.println("ststs" +list);
+		
+		if (list.size() ==0 || list == null) throw new SQLException("에러에러에러러어어어~");
+		
+		return list;
+	}
+
+	@Override
+	public int revList(ReservationDTO revDTO) throws SQLException {
+		int result = userDAO.revList(revDTO);
+		
+		if (result == 0 ) { throw new SQLException("추가 실패 하였습니다"); }
+		
+		return result;
+	}
 }
