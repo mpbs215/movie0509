@@ -1,24 +1,48 @@
 package kosta.ridonbox.model.dto;
 
-public class QnADTO {
+public class QnADTO{
 	private int qnaNo;	  //pk 글번호 
 	private String memberId;  //memberid
-	private String eventTitle;//제목
+	private String qnaTitle;//제목
 	private String context;	  //내용
 	private String comment;		//댓글
 	private String date;	  //등록날짜.
 	private String password;//비밀번호.
 	
-	public QnADTO(int qnaNo, String memberId, String eventTitle, String context, String comment, String date,
+	public QnADTO(){}
+
+	public QnADTO(int qnaNo,String password) {
+		this.qnaNo = qnaNo;
+		this.password = password;
+	}
+		public QnADTO(int qnaNo, String memberId, String context) {
+		super();
+		this.qnaNo = qnaNo;
+		this.memberId = memberId;
+		this.context = context;
+	}
+	
+	public QnADTO(String memberId, String qnaTitle, String context, String comment, String date, String password) {
+			super();
+			this.memberId = memberId;
+			this.qnaTitle = qnaTitle;
+			this.context = context;
+			this.comment = comment;
+			this.date = date;
+			this.password = password;
+		}
+
+	public QnADTO(int qnaNo, String memberId, String qnaTitle, String context, String comment, String date,
 			String password) {
 		this.qnaNo = qnaNo;
 		this.memberId = memberId;
-		this.eventTitle = eventTitle;
+		this.qnaTitle = qnaTitle;
 		this.context = context;
 		this.comment = comment;
 		this.date = date;
 		this.password = password;
 	}
+
 
 	public int getQnaNo() {
 		return qnaNo;
@@ -36,12 +60,12 @@ public class QnADTO {
 		this.memberId = memberId;
 	}
 
-	public String getEventTitle() {
-		return eventTitle;
+	public String getQnaTitle() {
+		return qnaTitle;
 	}
 
-	public void setEventTitle(String eventTitle) {
-		this.eventTitle = eventTitle;
+	public void setQnaTitle(String qnaTitle) {
+		this.qnaTitle = qnaTitle;
 	}
 
 	public String getContext() {

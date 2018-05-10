@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kosta.ridonbox.model.dto.BookDTO;
 import kosta.ridonbox.model.dto.BookingDTO;
@@ -29,12 +30,14 @@ public class MyPageAction implements Action {
 		UserService service = new UserServiceImpl();
 		//mv.setPath("errView/error.jsp");//에러페이지로 옮김.
 		
-		String userId ="hee"; 
 		
+		HttpSession session = request.getSession();	
+		String userId = (String)session.getAttribute("userid");
 		try {
-			if(userId==null)	{
-				throw new SQLException("로그인을 해주세요.");
-			}
+			if(userId==null) {
+				mv.setPath("web/index.jsp");
+			}else {
+
 			MemberDTO member = service.memberInfo(userId);
 			System.out.println("1");
 			List<BookingDTO> list = service.memberbyBookList(userId);
@@ -47,6 +50,7 @@ public class MyPageAction implements Action {
 				request.setAttribute("bookingList", list);
 				request.setAttribute("member", member);
 				mv.setPath("web/myPage.jsp");
+			}
 			}
 			
 		}catch (Exception e) {

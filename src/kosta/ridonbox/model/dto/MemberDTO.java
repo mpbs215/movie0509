@@ -8,11 +8,18 @@ public class MemberDTO {
 	private String joinDate; 	//회원가입일
 	
 	public MemberDTO(String memberId, String memberPwd, String email, String phone, String joinDate) {
+		this(memberId, memberPwd, email, phone);
+		this.joinDate = joinDate;
+	}
+
+	public MemberDTO(String memberId, String memberPwd, String email, String phone) {
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
 		this.email = email;
 		this.phone = phone;
-		this.joinDate = joinDate;
+	}
+
+	public MemberDTO() {
 	}
 
 	public String getMemberId() {

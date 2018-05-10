@@ -14,6 +14,7 @@ import kosta.ridonbox.model.dto.EventDTO;
 import kosta.ridonbox.model.dto.MemberDTO;
 import kosta.ridonbox.model.dto.MovieDTO;
 import kosta.ridonbox.model.dto.ReservationDTO;
+import kosta.ridonbox.model.dto.QnADTO;
 
 public class UserServiceImpl implements UserService {
 	
@@ -100,9 +101,9 @@ public class UserServiceImpl implements UserService {
 		return re;
 	}
 	
-	public int checkById(String id) throws SQLException{
+	public String checkById(String id) throws SQLException{
 		
-		int re = userDAO.checkById(id);
+		String re = userDAO.checkById(id);
 		
 		return re;
 	}
@@ -130,6 +131,44 @@ public class UserServiceImpl implements UserService {
 			throw new SQLException("해당 영화 정보에 대한 상영날짜가 존재 하지 않습니다.");
 		}
 		return list;
+	}
+	
+	@Override
+	public int qaInsert(QnADTO qaDTO) throws SQLException {
+		
+		int result = userDAO.qaInsert(qaDTO);
+		if(result==0) throw new SQLException("등록되지 않았습니다");
+		return result;
+		
+	}
+
+	@Override
+	public int qaUpdate(QnADTO qaNo) throws SQLException {
+		int result = userDAO.qaUpdate(qaNo);
+		if(result==0) throw new SQLException("수정되지 않았습니다");
+		return result;
+	}
+
+	@Override
+	public int qaDelete(int qaNo) throws SQLException {
+		int result = userDAO.qaDelete(qaNo);
+		if(result==0) throw new SQLException("삭제되지 않았습니다");
+		return result;
+	}
+
+	@Override
+	public List<QnADTO> selectAll() throws SQLException {
+		List<QnADTO> list = userDAO.selectAll();
+		//if(list.size() == 0) throw new SQLException("검색되지 않았습니다");
+		return list;
+	}
+
+	@Override
+	public QnADTO selectByQaNo(int qaNo) throws SQLException {
+		 //상세보기 게시물 가져오기
+		  QnADTO qnADTO = userDAO.selectByQaNo(qaNo);
+		  if(qnADTO==null)throw new SQLException(qaNo+"에 해당하는 게시글은 없습니다.");
+		  return qnADTO;
 	}
 
 	@Override

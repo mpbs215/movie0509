@@ -10,6 +10,7 @@ import kosta.ridonbox.model.dto.EventDTO;
 import kosta.ridonbox.model.dto.MemberDTO;
 import kosta.ridonbox.model.dto.MovieDTO;
 import kosta.ridonbox.model.dto.ReservationDTO;
+import kosta.ridonbox.model.dto.QnADTO;
 
 public interface UserService {
 	/**
@@ -34,7 +35,7 @@ public interface UserService {
 	 * @return 1이면 아이디 중복, 0이면 사용가능
 	 * @throws SQLException
 	 */
-	public int checkById(String id) throws SQLException;
+	public String checkById(String id) throws SQLException;
 	
 	/**
 	 *메인페이지에서 BoxOffice순으로 영화보여줌.
@@ -126,4 +127,38 @@ public List<String> movieRevList(String movieNum) throws SQLException;
 public int revList(ReservationDTO revDTO) throws SQLException;
 
 
+	//QA
+		/**
+		 * QA 등록
+		 * @param qaDAO 
+		 * @return int형으로 1 이상이면 성공, 0이면 실패
+		 */
+		public int qaInsert(QnADTO qaDTO) throws SQLException;
+		
+		/**
+		 * QA 수정
+		 * @param qaDAO 
+		 * @return int형으로 1 이상이면 성공, 0이면 실패
+		 */
+		public int qaUpdate(QnADTO qaNo) throws SQLException;
+
+		/**
+		 * QA 삭제
+		 * @param qaNo (pk) 
+		 * @return int형으로 1 이상이면 성공, 0이면 실패
+		 */
+		public int qaDelete(int qaNo) throws SQLException;
+		
+		/**
+		 * QA의 모든레코드 검색하는 메소드 호출
+		 * @return list
+		 * */
+		public List<QnADTO> selectAll() throws SQLException;
+		
+		/**
+		 * QA의 QA 번호에 해당하는 레코드 검색하는 메소드 호출
+		 * @param : qaNo (pk) 
+		 * */
+		QnADTO selectByQaNo(int qaNo) throws SQLException;
+		  
 }

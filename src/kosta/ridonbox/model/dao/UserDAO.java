@@ -9,6 +9,7 @@ import kosta.ridonbox.model.dto.BookingDTO;
 import kosta.ridonbox.model.dto.EventDTO;
 import kosta.ridonbox.model.dto.MemberDTO;
 import kosta.ridonbox.model.dto.MovieDTO;
+import kosta.ridonbox.model.dto.QnADTO;
 import kosta.ridonbox.model.dto.MyPageDTO;
 import kosta.ridonbox.model.dto.ReservationDTO;
 
@@ -116,7 +117,41 @@ public interface UserDAO {
 	 */
 	public int deleteByBooking(String revNum) throws SQLException;
 	
-	int checkById(String id) throws SQLException;
+	String checkById(String id) throws SQLException;
+	
+	/**
+	 * QA 등록
+	 * @param qaDAO 
+	 * @return int : 1 이상 - 성공, 0 - 실패
+	 */
+	public int qaInsert(QnADTO qnADTO) throws SQLException;
+	
+	/**
+	 * QA 업데이트
+	 * @param qaNo (pk)
+	 * @return int : 1 이상 - 성공, 0 - 실패
+	 */
+	public int qaUpdate(QnADTO qnADTO) throws SQLException;
+
+	/**
+	 * QA 삭제
+	 * @param qaNo (pk)
+	 * @return int : 1 이상 - 성공, 0 - 실패
+	 */
+	public int qaDelete(int qaNo) throws SQLException;
+	
+
+	/**
+	 * QA전체검색
+	 * */
+	public List<QnADTO> selectAll();
+	
+	/**
+	  * QA 번호에 해당하는 QA 검색
+	  * */
+	QnADTO selectByQaNo(int qnaNo) throws SQLException;
+ 
+	
 
 	
 	

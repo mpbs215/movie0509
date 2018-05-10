@@ -26,6 +26,7 @@ public class FrontController extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String key=request.getParameter("command");
+		if(key==null) key="main";
 		
 		//맵에서 키에 해당하는 클래스를 꺼내서 메소드를 호출하고 리턴값을 받는다.
 		Action action=map.get(key);
