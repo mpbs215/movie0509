@@ -96,7 +96,7 @@
 										<div class="clearfix"></div>
 									</div>
 									<div>
-										<button type="button" class="btn btn-info btn-bloc outline" onclick="location.href='${pageContext.request.contextPath}/main?command=booking&bookingNum=8'">예매하기</button>
+										<button type="button" class="btn btn-info btn-bloc outline" onclick="location.href='${pageContext.request.contextPath}/main?command=booking&bookingNum=8&movieNum=${movielist.movieNum}'">예매하기</button>
 									</div>
 
 								</div>

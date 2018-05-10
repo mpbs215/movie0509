@@ -2,6 +2,7 @@ package kosta.ridonbox.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,11 +26,13 @@ public class DetailAction implements Action {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		String movie_num = request.getParameter("movieNum");
+		String movieNum = request.getParameter("movieNum");
 		
 		UserService service = new UserServiceImpl();
 		try {
-			MovieDTO dto = service.showDetail(movie_num);
+			List<MovieDTO> movielist =service.showByBoxoffice();
+			request.setAttribute("movielist", movielist);
+			MovieDTO dto = service.showDetail(movieNum);
 			request.setAttribute("movie", dto);
 			mv.setPath("web/detail.jsp");
 		} catch (SQLException e) {

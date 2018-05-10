@@ -302,11 +302,3 @@ select * from MEMBER;
 select * from BOARD;
 select * from EVENT;
 
-<<<<<<< HEAD
-=======
-delete from reservation where rev_pep=5
-
-
-select movie_path, theater_name, screen_num from movie_info m join screen_info s on m.movie_num = s.movie_num where m.movie_num='movie-100';
-select movie_path, theater_name, screen_num from movie_info m join screen_info s on m.movie_num = s.movie_num where m.movie_num=
->>>>>>> branch 'master' of https://github.com/mpbs215/movie0509.git
