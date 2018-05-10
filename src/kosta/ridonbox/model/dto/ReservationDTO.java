@@ -2,19 +2,23 @@ package kosta.ridonbox.model.dto;
 
 public class ReservationDTO {
 
-	private String revNum;
-	private String memberId;
-	private String movieNum;
-	private String theaterName;
-	private String screenNum;
-	private int revPep;
+	private String revNum;			// 예매번호
+	private String memberId;		// 회원아이디
+	private String movieNum;		// 영화번호
+	private String theaterName;		// 상영관이름
+	private String screenNum;		// 상영번호
+	private int revPep;				// 예매수
 	
 	public ReservationDTO() {}
 
 	public ReservationDTO(String revNum, String memberId, String movieNum, String theaterName, String screenNum,
 			int revPep) {
-		super();
+		this(memberId, movieNum, theaterName, screenNum, revPep);
 		this.revNum = revNum;
+	}
+	public ReservationDTO( String memberId, String movieNum, String theaterName, String screenNum,
+			int revPep) {
+		super();
 		this.memberId = memberId;
 		this.movieNum = movieNum;
 		this.theaterName = theaterName;
