@@ -30,6 +30,11 @@ public class MovieDTO {
 		super();
 	}
 	
+	public MovieDTO(String movieNum, String movieTitle) {
+		this.movieNum = movieNum;
+		this.movieTitle = movieTitle;
+	}
+
 	public String getMovieNum() {
 		return movieNum;
 	}
