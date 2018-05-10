@@ -86,7 +86,7 @@
 		</tbody>
 	</table>
 	<hr />
-	<a class="btn btn-default pull-right"  style="margin-bottom:5%" onclick="location.href=''${pageContext.request.contextPath}/web/insertQA.jsp''">글쓰기</a>
+	<a class="btn btn-default pull-right"  style="margin-bottom:5%" onclick="location.href='${pageContext.request.contextPath}/web/insertQA.jsp'">글쓰기</a>
 </div>
 <%@include file="bottom.jsp" %>
 </body>

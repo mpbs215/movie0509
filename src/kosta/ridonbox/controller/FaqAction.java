@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kosta.ridonbox.model.dto.ModelAndView;
+import kosta.ridonbox.model.dto.QnADTO;
 
 /**
  * FAQ페이지 이동시 사용하는 Action
@@ -22,7 +23,6 @@ public class FaqAction implements Action {
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setPath("web/faq.jsp");
-		
 		
 		
 		return mv;

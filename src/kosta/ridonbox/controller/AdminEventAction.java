@@ -15,7 +15,7 @@ public class AdminEventAction implements Action{
 			throws ServletException, IOException {
 		
 		ModelAndView mv = new ModelAndView();
-		mv.setPath("web/eventView.jsp");
+		mv.setPath("web/adminEvent.jsp");
 		return mv;
 	}
 

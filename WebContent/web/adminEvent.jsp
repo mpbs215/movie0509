@@ -99,112 +99,30 @@ input[type=file] {
 
 <body>
 	<%@include file = "adminHead.jsp" %>
-	<script src="${pageContext.request.contextPath}/web/js/jquery.slidey.js"></script>
-	<script src="${pageContext.request.contextPath}/web/js/jquery.dotdotdot.min.js"></script>
-	<script type="text/javascript">
-		$("#slidey").slidey({
-			interval : 8000,
-			listCount : 5,
-			autoplay : false,
-			showList : true
-		});
-		$(".slidey-list-description").dotdotdot();
-	</script>
-	<!-- //banner -->
-	<div class="general">
-		<h4 class="latest-text w3_latest_text">영화 리스트</h4>
-		<div class="container">
-			<div>
-				<div class="col-md-12">
-					<div class="panel ">
-						<div class="panel-body text-center">
-							<div id="tabs">
-							  <ul>
-							    <li><a href="#tabs-1">영화 등록하기</a></li>
-							    <li><a href="#tabs-2">현재 등록된 영화</a></li>
-							  </ul>
-							  	<div id="tabs-1">
-								<table class="table table-hover">
-									<caption>
-										<b>등록 가능 영화 리스트</b>
-									</caption>
-									<thead>
-										<tr>
-											<th>영화번호</th>
-											<th>영화제목</th>
-											<th>영어제목</th>
-											<th>감독</th>
-											<th>배우</th>
-											<th>개봉일</th>
-											<th>평점</th>
-											<th>이미지</th>
-											<th>상영관</th>
-											<th>상영시간</th>
-											<th>등록</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td contenteditable="true">1</td>
-											<td contenteditable="true">인피니티 워</td>
-											<td contenteditable="true">infinite war</td>
-											<td contenteditable="true">김돈황</td>
-											<td contenteditable="true">이재문</td>
-											<td contenteditable="true">2018/05/04</td>
-											<td contenteditable="true">4.5</td>
-											<td><input type="file" name="" id="" value="찾기" /></td>
-											<td><select name="" id=""></select></td>
-											<td><select name="" id=""></select></td>
-											<td><input type="button" value="등록" /></td>
-										</tr>
-									</tbody>
-								</table>
-								</div>
-								<div id="tabs-2">
-								<table class="table table-hover">
-									<caption>
-										<b>상영 중인 영화</b>
-									</caption>
-									<thead>
-										<tr>
-											<th>영화번호</th>
-											<th>영화제목</th>
-											<th>영어제목</th>
-											<th>감독</th>
-											<th>배우</th>
-											<th>개봉일</th>
-											<th>평점</th>
-											<th>이미지</th>
-											<th>상영관</th>
-											<th>상영시간</th>
-											<th>삭제</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td contenteditable="true">1</td>
-											<td contenteditable="true">인피니티 워</td>
-											<td contenteditable="true">infinite war</td>
-											<td contenteditable="true">김돈황</td>
-											<td contenteditable="true">이재문</td>
-											<td contenteditable="true">2018/05/04</td>
-											<td contenteditable="true">4.5</td>
-											<td><input type="file" name="" id="" value="찾기" /></td>
-											<td><select name="" id=""></select></td>
-											<td><select name="" id=""></select></td>
-											<td><input type="button" value="삭제" /></td>
-										</tr>
-									</tbody>
-								</table>
-								</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
+	<div class="container"  style="margin-top: 5%">
+	<table class="table table-striped">
+		<thead class="bg-warning">
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>날짜</th>
+				<th>조회수</th>
+			</tr>
+		</thead>
+		<tbody id="boardList">
+			<tr>
+				<td>번호</td>
+				<td>제목</td>
+				<td>작성자</td>
+				<td>날짜</td>
+				<td>조회수</td>
+			</tr>
+		</tbody>
+	</table>
+	<hr />
+	<a class="btn btn-default pull-right"  style="margin-bottom:5%" onclick="location.href='${pageContext.request.contextPath}/web/insertEvent.jsp'">글쓰기</a>
+</div>
 		<%@include file="bottom.jsp"%>
 </body>
 </html>
