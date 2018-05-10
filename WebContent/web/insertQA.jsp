@@ -109,6 +109,31 @@ button {
 			}, 1000);
 		});
 	});
+	
+function checkVaild(){
+	
+	var f = window.document.writeFrom;
+	
+	alert(f.context.value);
+	
+	if(f.qnaTitle.value==""){
+		alert("제목을 입력해주세요");
+		f.qnaTitle.focus();
+		return false;
+	}
+	if(f.context.value=""){
+		alert("내용을 입력해주세요");
+		f.context.focus();
+		return false;
+	}
+	if(f.password.value=""){
+		alert("비밀번호를 입력해주세요");
+		f.password.focus();
+		return false;
+	}
+	return true;
+}
+
 </script>
 </head>
 <body>
@@ -121,19 +146,20 @@ button {
 						<div class="panel-body text-center">
 								<h2><b><span class="text-primary">Q&A 등록</span></b></h2>
 							    <br />
+							    <form name="writeForm" method="post" onSubmit="return checkVaild()" action="${pageContext.request.contextPath}/main?command=insertQA&qnaNo='10'">
 							    <label for="usr"  style="float:left">제목</label>
-  								<div><input type="text" class="form-control" id="usr" placeholder="제목을 입력하세요."></div>
+  								<div><input type="text"  name="qnaTitle" class="form-control" id="usr" placeholder="제목을 입력하세요."></div>
   								<br />
   								<label for="comment"  style="float:left">내용</label>
-  								<textarea class="form-control" rows="20" id="comment" placeholder="내용을 입력하세요."></textarea>
+  								<textarea class="form-control" rows="20" name="context" placeholder="내용을 입력하세요."></textarea>
   								<br />
   								<label for="usr"  style="float:left">비밀번호</label>
   								<br />
-  								<div><input type="password" class="form-control" id="usr"></div>
+  								<div><input type="password" name="password" class="form-control" id="usr"></div>
   								<br />
-  								 <input type="button" value="등록하기" onclick="sendData()" class="pull-right btn-success"/>
-			                    <input type="button" value="취소하기" class="pull-left btn-danger"  onclick="location.href='${pageContext.request.contextPath}/web/QAboard.jsp'"/>
-												
+  								 <input type="submit" value="등록하기"  class="pull-right btn-success"/>
+			                    <input type="button" value="취소하기" class="pull-left btn-danger"  onclick="location.href='${pageContext.request.contextPath}/main?command=QA'"/>
+								</form>				
 						</div>
 					</div>
 

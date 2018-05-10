@@ -2,13 +2,16 @@ package kosta.ridonbox.model.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import kosta.ridonbox.model.dto.BookDTO;
 import kosta.ridonbox.model.dto.BookingDTO;
 import kosta.ridonbox.model.dto.EventDTO;
 import kosta.ridonbox.model.dto.MemberDTO;
 import kosta.ridonbox.model.dto.MovieDTO;
+import kosta.ridonbox.model.dto.QnADTO;
 import kosta.ridonbox.model.dto.MyPageDTO;
+import kosta.ridonbox.model.dto.ReservationDTO;
 
 public interface UserDAO {
 	/**
@@ -115,5 +118,74 @@ public interface UserDAO {
 	public int deleteByBooking(String revNum) throws SQLException;
 	
 	String checkById(String id) throws SQLException;
+	
+	/**
+	 * QA 등록
+	 * @param qaDAO 
+	 * @return int : 1 이상 - 성공, 0 - 실패
+	 */
+	public int qaInsert(QnADTO qnADTO) throws SQLException;
+	
+	/**
+	 * QA 업데이트
+	 * @param qaNo (pk)
+	 * @return int : 1 이상 - 성공, 0 - 실패
+	 */
+	public int qaUpdate(QnADTO qnADTO) throws SQLException;
 
+	/**
+	 * QA 삭제
+	 * @param qaNo (pk)
+	 * @return int : 1 이상 - 성공, 0 - 실패
+	 */
+	public int qaDelete(int qaNo) throws SQLException;
+	
+
+	/**
+	 * QA전체검색
+	 * */
+	public List<QnADTO> selectAll();
+	
+	/**
+	  * QA 번호에 해당하는 QA 검색
+	  * */
+	QnADTO selectByQaNo(int qnaNo) throws SQLException;
+ 
+	
+
+	
+	
+	
+	
+	/**
+	 * 		사용자에게 영화리스트를 뿌려주는 메소드(예매페이지)
+	 *		@return 확인
+	 * 		@throws SQLException
+	 * */
+	public List<MovieDTO> movieNameList() throws SQLException;
+	
+	
+	
+	/**
+	 *  사용자의 영화 날짜를 뿌려주는 메소드( 예매페이지)
+	 * */
+	public List<String> movieDateList(String movieNum) throws SQLException;
+	
+	
+	/**
+	 *  선택한 영화, 날짜에 대한 예매 가능 시간을 보여주는 메소드(예매 페이지)
+	 * */
+	public List<Integer> movieTimeList(String movieNum) throws SQLException;
+	
+	/**
+	 *  시간 선택 하였을 때에 이미지경로, 상영관 이름, 상영관 번호를 해당하는 영화번호에 대한 값을 이용하여 가저온다
+	 * */
+	public List<String> movieRevList(String movieNum) throws SQLException;
+	
+	
+	/**
+	 * 	예매 테이블에 저장해야 하는 정보들을 DTO에 insert해준다.
+	 * */
+	public int revList(ReservationDTO revDTO) throws SQLException;
+	
 }

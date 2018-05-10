@@ -2,12 +2,15 @@ package kosta.ridonbox.model.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import kosta.ridonbox.model.dto.BookDTO;
 import kosta.ridonbox.model.dto.BookingDTO;
 import kosta.ridonbox.model.dto.EventDTO;
 import kosta.ridonbox.model.dto.MemberDTO;
 import kosta.ridonbox.model.dto.MovieDTO;
+import kosta.ridonbox.model.dto.ReservationDTO;
+import kosta.ridonbox.model.dto.QnADTO;
 
 public interface UserService {
 	/**
@@ -93,6 +96,69 @@ public int deleteByBooking(String revNum) throws SQLException;
 
 int myPageByMemberUpdate(MemberDTO memberDTO) throws SQLException;
 
-	//영화관 정보 (보류)
+
+/**
+ *  예매 가능한 영화 목록들을 보여주기 위함
+ * */
+public List<MovieDTO> movieNameList() throws SQLException;
+
+
+/**
+ *  사용자의 영화 날짜를 뿌려주는 메소드( 예매페이지)
+ * */
+public List<String> movieDateList(String movieNum) throws SQLException;
+
+
+/**
+ *  선택한 영화, 날짜에 대한 예매 가능 시간을 보여주는 메소드(예매 페이지)
+ * */
+public List<Integer> movieTimeList(String movieNum) throws SQLException;
+
+
+/**
+ * 예매 리스트를 보여주는 기능 (예매 페이지)
+ * */
+public List<String> movieRevList(String movieNum) throws SQLException;
 	
+
+/**
+ * bookingView의 Form 에서 전송한 값들을 DB에 저장하는 기능
+ * */
+public int revList(ReservationDTO revDTO) throws SQLException;
+
+
+	//QA
+		/**
+		 * QA 등록
+		 * @param qaDAO 
+		 * @return int형으로 1 이상이면 성공, 0이면 실패
+		 */
+		public int qaInsert(QnADTO qaDTO) throws SQLException;
+		
+		/**
+		 * QA 수정
+		 * @param qaDAO 
+		 * @return int형으로 1 이상이면 성공, 0이면 실패
+		 */
+		public int qaUpdate(QnADTO qaNo) throws SQLException;
+
+		/**
+		 * QA 삭제
+		 * @param qaNo (pk) 
+		 * @return int형으로 1 이상이면 성공, 0이면 실패
+		 */
+		public int qaDelete(int qaNo) throws SQLException;
+		
+		/**
+		 * QA의 모든레코드 검색하는 메소드 호출
+		 * @return list
+		 * */
+		public List<QnADTO> selectAll() throws SQLException;
+		
+		/**
+		 * QA의 QA 번호에 해당하는 레코드 검색하는 메소드 호출
+		 * @param : qaNo (pk) 
+		 * */
+		QnADTO selectByQaNo(int qaNo) throws SQLException;
+		  
 }

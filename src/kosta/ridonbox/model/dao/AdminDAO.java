@@ -38,34 +38,44 @@ public interface AdminDAO {
 	 * @param MovieDTO
 	 * @return boolean : true - 성공, false - 실패
 	 */
-	public int movieInsert(MovieDTO movieDTO) throws SQLException;
+	int movieInsert(MovieDTO movieDTO) throws SQLException;
 
 	/**
 	 * 영화 수정
 	 * @param movieNo (pk)
 	 * @return boolean : true - 성공, false - 실패
 	 */
-	public int movieUpdate(MovieDTO movieNo) throws SQLException;
+	int movieUpdate(MovieDTO movieNo) throws SQLException;
 
 	/**
 	 * 상영 시간표 정보 등록
 	 * @param BranchDTO 
 	 * @return boolean : true - 성공, false - 실패
 	 */
-	public int branchInsert(ScreenDTO screenDTO) throws SQLException;
+	int branchInsert(ScreenDTO screenDTO) throws SQLException;
 
 	/**
 	 * 상영 시간표 정보 수정
 	 * @param branchNo (pk) //복합키로 관리하는게 편함
 	 * @return boolean : true - 성공, false - 실패
 	 */
-	public BranchDTO branchUpdate(int branchNo) throws SQLException;
+	BranchDTO branchUpdate(int branchNo) throws SQLException;
 
-	List<MovieScreenDTO> movieList() throws SQLException;
+	List<MovieScreenDTO> screenList() throws SQLException;
 
 	List<TheaterDTO> theaterList() throws SQLException;
 
-	public int movieDelete(String movieNo) throws SQLException;
+	int movieDelete(String movieNo) throws SQLException;
+	
+	List<MovieDTO> movieList() throws SQLException;
+
+	public int screenDelete(String screenNum) throws SQLException;
+
+	public int screenInsert(ScreenDTO dto) throws SQLException;
+
+	public int theaterDelete(String theaterName) throws SQLException;
+
+	public int theaterInsert(TheaterDTO dto) throws SQLException;
 
 
 }

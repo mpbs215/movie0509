@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kosta.ridonbox.model.dto.ModelAndView;
-import kosta.ridonbox.model.dto.MovieScreenDTO;
+import kosta.ridonbox.model.dto.MovieDTO;
 import kosta.ridonbox.model.dto.TheaterDTO;
 import kosta.ridonbox.model.service.AdminService;
 import kosta.ridonbox.model.service.AdminServiceImpl;
@@ -27,11 +27,12 @@ public class AdminRegistAction implements Action {
 		System.out.println("어드민레지스트액션실행");
 		AdminService service = new AdminServiceImpl();
 		try {
-			List<MovieScreenDTO> list=service.movieList();
-			List<TheaterDTO> tList= service.theaterList();
+			List<MovieDTO> list=service.movieList();
+			List<TheaterDTO> tlist=service.theaterList();
+			
 			Map<String, List> map = new HashMap<>();
 			map.put("list", list);
-			map.put("tList", tList);
+			map.put("tlist", tlist);
 			JSONArray arr = JSONArray.fromObject(map);
 			PrintWriter out = response.getWriter();
 			System.out.println(arr);

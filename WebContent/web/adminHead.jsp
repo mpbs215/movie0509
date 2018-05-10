@@ -3,7 +3,7 @@
 <div class="header">
 	<div class="container">
 		<div class="w3layouts_logo">
-			<a href="index.html"><h1>
+			<a href="${pageContext.request.contextPath}/web/adminRegist.jsp"><h1>
 					One<span>Movies</span>
 				</h1></a>
 		</div>
@@ -104,8 +104,10 @@
 				id="bs-example-navbar-collapse-1">
 				<nav>
 					<ul class="nav navbar-nav">
-						<li><a href="${pageContext.request.contextPath}/admin?command=adminRegist">영화등록</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin?command=adminEvent">이벤트 페이지 관리</a></li>
+						<li><a href="${pageContext.request.contextPath}/web/adminRegist.jsp">영화관리</a></li>
+						<li><a href="${pageContext.request.contextPath}/web/adminTheater.jsp">영화관관리</a></li>
+						<li><a href="${pageContext.request.contextPath}/web/adminTheater.jsp">이벤트관리</a></li>
+						
 					</ul>
 				</nav>
 			</div>

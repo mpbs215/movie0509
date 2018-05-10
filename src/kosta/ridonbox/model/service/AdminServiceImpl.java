@@ -9,6 +9,7 @@ import kosta.ridonbox.model.dto.BranchDTO;
 import kosta.ridonbox.model.dto.EventDTO;
 import kosta.ridonbox.model.dto.MovieDTO;
 import kosta.ridonbox.model.dto.MovieScreenDTO;
+import kosta.ridonbox.model.dto.ScreenDTO;
 import kosta.ridonbox.model.dto.TheaterDTO;
 
 public class AdminServiceImpl implements AdminService {
@@ -79,11 +80,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public List<MovieScreenDTO> movieList() throws SQLException{
-		List<MovieScreenDTO> list = adminDAO.movieList();
-		if(list==null || list.size()==0) {
-			throw new SQLException();
-		}
+	public List<MovieDTO> movieList() throws SQLException{
+		List<MovieDTO> list = adminDAO.movieList();
 		
 		return list;
 	}
@@ -91,11 +89,43 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<TheaterDTO> theaterList() throws SQLException{
 		List<TheaterDTO> list = adminDAO.theaterList();
-		if(list==null || list.size()==0) {
-			throw new SQLException();
-		}
 		
 		return list;
+	}
+
+	@Override
+	public int screenDelete(String screenNum) throws SQLException {
+		int result=adminDAO.screenDelete(screenNum);
+		if(result==0) {
+			throw new SQLException("삭제 실패");
+		}
+		return result;
+		
+	}
+	
+	@Override
+	public List<MovieScreenDTO> screenList() throws SQLException {
+		List<MovieScreenDTO> list = adminDAO.screenList();
+		
+		return list;
+	}
+
+	@Override
+	public int screenInsert(ScreenDTO dto) throws SQLException {
+		int result=adminDAO.screenInsert(dto);
+		return result;
+	}
+
+	@Override
+	public int theaterDelete(String theaterName) throws SQLException {
+		int result=adminDAO.theaterDelete(theaterName);
+		return result;
+	}
+
+	@Override
+	public int theaterInsert(TheaterDTO dto) throws SQLException{
+		int result=adminDAO.theaterInsert(dto);
+		return result;
 	}
 
 }
