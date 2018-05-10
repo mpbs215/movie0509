@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kosta.ridonbox.model.dto.ModelAndView;
 import kosta.ridonbox.model.dto.QnADTO;
@@ -20,10 +21,10 @@ public class InsertQAAction implements Action {
 			throws ServletException, IOException {
 		
 	ModelAndView mv = new ModelAndView();
+	HttpSession session = request.getSession();	
 	
 	try {
-//		  String qnaNo = request.getParameter("qnaNo");
-		  String memberId =  request.getParameter("memberId");
+		  String memberId =  (String) session.getAttribute("userid");
 		  String qnaTitle =  request.getParameter("qnaTitle");
 		  String context =  request.getParameter("context");
 		  String comment= request.getParameter("comment");

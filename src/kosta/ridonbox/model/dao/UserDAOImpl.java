@@ -224,7 +224,7 @@ public class UserDAOImpl implements UserDAO {
 	public int qaInsert(QnADTO qaDTO) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql =  "insert into BOARD values((board_seq.nextval+3),'don',?,?,'ss',sysdate,?)";
+		String sql =  "insert into BOARD values((board_seq.nextval+3),?,?,?,null,sysdate,?)";
 		int result = 0;
 		
 		try {
@@ -232,12 +232,12 @@ public class UserDAOImpl implements UserDAO {
 			ps = con.prepareStatement(sql);
 
 //			ps.setInt(1, qaDTO.getQnaNo());
-//			ps.setString(2, qaDTO.getMemberId());
-			ps.setString(1, qaDTO.getQnaTitle());
-			ps.setString(2, qaDTO.getContext());
+			ps.setString(1, qaDTO.getMemberId());
+			ps.setString(2, qaDTO.getQnaTitle());
+			ps.setString(3, qaDTO.getContext());
 //			ps.setString(5, qaDTO.getComment()); 
 //			ps.setString(6, qaDTO.getDate()); 
-			ps.setString(3, qaDTO.getPassword()); 
+			ps.setString(4, qaDTO.getPassword()); 
 			
 			result = ps.executeUpdate();
 		} finally {
