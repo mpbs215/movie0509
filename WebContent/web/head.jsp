@@ -182,7 +182,7 @@ $(function(){
 							<li><a href="${pageContext.request.contextPath}/main?command=event">이벤트</a></li>
 							<li><a href="${pageContext.request.contextPath}/main?command=myPage">MyPage</a></li>
 							<li><a href="${pageContext.request.contextPath}/main?command=QA">Q&A</a></li>
-							<li><a href="${pageContext.request.contextPath}/main?command=faq">FAQ</a></li>
+							<li><a href="${pageContext.request.contextPath}/main?command=faq">영화관 이용안내</a></li>
 						</ul>
 					</nav>
 				</div>
