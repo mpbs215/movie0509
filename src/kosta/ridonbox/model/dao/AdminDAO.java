@@ -71,5 +71,11 @@ public interface AdminDAO {
 
 	public int screenDelete(String screenNum) throws SQLException;
 
+	public int screenInsert(ScreenDTO dto) throws SQLException;
+
+	public int theaterDelete(String theaterName) throws SQLException;
+
+	public int theaterInsert(TheaterDTO dto) throws SQLException;
+
 
 }

@@ -53,8 +53,7 @@ CREATE TABLE screen_info (
    movie_num VARCHAR2(20) NOT NULL, /* 영화번호 */
    theater_name VARCHAR2(20) NOT NULL, /* 상영관이름 */
    screen_date DATE NOT NULL, /* 영화상영날짜 */
-   screen_time NUMBER, /* 상영시간 */
-   rev_total NUMBER NOT NULL /* 총예매수 */
+   screen_time NUMBER /* 상영시간 */
 );
 
 ALTER TABLE screen_info
@@ -240,9 +239,9 @@ insert into theater values('C관', 500);
 
 
 --------------screen_info----------------
-insert into screen_info values('screen-100', 'movie-100', 'A관', '2018-05-01', 07, 30);
-insert into screen_info values('screen-200', 'movie-200', 'B관', '2018-05-02', 21, 50);
-insert into screen_info values('screen-300', 'movie-300', 'C관', '2018-05-03', 15, 100);
+insert into screen_info values('screen-100', 'movie-100', 'A관', '2018-05-01', 07);
+insert into screen_info values('screen-200', 'movie-200', 'B관', '2018-05-02', 21);
+insert into screen_info values('screen-300', 'movie-300', 'C관', '2018-05-03', 15);
 
 
 
@@ -283,3 +282,4 @@ select * from RESERVATION;
 select * from MEMBER;
 select * from BOARD;
 select * from EVENT;
+select*from movie_info natural join screen_info

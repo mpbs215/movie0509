@@ -31,7 +31,6 @@ public class AdminDAOImpl implements AdminDAO {
 			ps.setString(3, screenDTO.getMovieNum());
 			ps.setString(3, screenDTO.getTheaterName());
 			ps.setString(4, screenDTO.getScreenDate());
-			ps.setInt(5, screenDTO.getRevTotal());
 			result = ps.executeUpdate();
 
 		} finally {
@@ -197,25 +196,20 @@ public class AdminDAOImpl implements AdminDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				String movie_num = rs.getString("movie_num");
-				String movie_title = rs.getString("movie_title");
-				String movie_etitle = rs.getString("movie_etitle");
-				String movie_dir = rs.getString("movie_dir");
-				String movie_act = rs.getString("movie_act");
-				String movie_date = rs.getString("movie_date");
-				String movie_path = rs.getString("movie_path");
-				String movie_youtube = rs.getString("movie_youtube");
-				int movie_rat = rs.getInt("movie_rat");
-				int movie_state = rs.getInt("movie_state");
+				String movieNum = rs.getString("movie_num");
+				String movieTitle = rs.getString("movie_title");
+				String movieEtitle = rs.getString("movie_etitle");
+				String movieDir = rs.getString("movie_dir");
+				String movieDate = rs.getString("movie_date");
+				String moviePath = rs.getString("movie_path");
+				String movieYoutube = rs.getString("movie_youtube");
+				String movieState = rs.getString("movie_state");
 				String screenNum = rs.getString("screen_num");
 				String theaterName = rs.getString("theater_name");
 				String screenDate = rs.getString("screen_date");
-				int revTotal = rs.getInt("rev_total");
-
-				MovieScreenDTO dto = new MovieScreenDTO(movie_num, movie_title, movie_etitle, movie_dir, movie_act,
-						movie_date, movie_rat, movie_path, movie_youtube, movie_state, screenNum, theaterName,
-						screenDate, revTotal);
-
+				String screenTime = rs.getString("screen_time");
+				
+				MovieScreenDTO dto = new MovieScreenDTO(movieNum, movieTitle, screenNum, theaterName, screenDate, screenTime);
 				list.add(dto);
 			}
 		} finally {
@@ -277,6 +271,64 @@ public class AdminDAOImpl implements AdminDAO {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement("delete from screen_info where screen_num=?");
 			ps.setString(1, screenNum);
+			result=ps.executeUpdate();
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+
+	@Override
+	public int screenInsert(ScreenDTO dto) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("insert into screen_info values(?,?,?,?,?)");
+			ps.setString(1, dto.getScreenNum());
+			ps.setString(2, dto.getMovieNum());
+			ps.setString(3, dto.getTheaterName());
+			ps.setString(4, dto.getScreenDate());
+			ps.setInt(5, dto.getScreenTime());
+			result = ps.executeUpdate();
+
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+
+		return result;
+	}
+
+	@Override
+	public int theaterDelete(String theaterName) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("delete from theater where theater_name=?");
+			ps.setString(1, theaterName);
+			result=ps.executeUpdate();
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+
+	@Override
+	public int theaterInsert(TheaterDTO dto) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("insert into theater values(?,?)");
+			ps.setString(1, dto.getTheaterName());
+			ps.setInt(2, dto.getTheaterTotal());
 			result=ps.executeUpdate();
 		} finally {
 			DbUtil.dbClose(con, ps);

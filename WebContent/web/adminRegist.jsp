@@ -136,26 +136,63 @@ div {
 	function selectAll(){
 		$.ajax({
 			type:"post",//전송방식
-				url: "../admin?command=movieList", //서버주소
+				url: "${pageContext.request.contextPath}/admin?command=movieList", //서버주소
 				dataType: "json",
 				success: function(result){
 					$("#movietabs tr:gt(0)").remove();
+					$("#addscreentabs tr:gt(0)").remove();
  					var str="";
+ 					var str3="";
+ 					var theaterName="";
  					$.each(result,function(index,item){
+ 						$.each(item.tlist,function(index,item3){
+ 							theaterName += "<option value='"+item3.theaterName+"'>"+item3.theaterName+"</option>"
+ 						})
+ 						
+ 						$.each(item.list,function(index,item2){
 							str+="<tr>";
-							str+="<td>"+item.movieNum+"</td>"
-							str+="<td>"+item.movieTitle+"</td>"
-							str+="<td>"+item.movieEtitle+"</td>"
-							str+="<td>"+item.movieDate+"</td>"
-							str+="<td>"+item.movieCountry+"</td>"
-							str+="<td>"+item.movieDir+"</td>"
-							str+="<td>"+item.movieState+"</td>"
-							str+="<td>"+item.moviePath+"</td>"
-							str+="<td>"+item.movieYoutube+"</td>"
-							str+="<td><input type='button' value='삭제' name='"+item.movieNum+"' id='delete'/></td>"
+							str+="<td>"+item2.movieNum+"</td>"
+							str+="<td>"+item2.movieTitle+"</td>"
+							str+="<td>"+item2.movieEtitle+"</td>"
+							str+="<td>"+item2.movieDate+"</td>"
+							str+="<td>"+item2.movieCountry+"</td>"
+							str+="<td>"+item2.movieDir+"</td>"
+							str+="<td>"+item2.movieState+"</td>"
+							str+="<td>"+item2.moviePath+"</td>"
+							str+="<td>"+item2.movieYoutube+"</td>"
+							str+="<td><input type='button' value='삭제' name='"+item2.movieNum+"' id='delete'/></td>"
 							str+="</tr>";
+							
+					
+							str3+="<tr>";
+							str3+="<td id='movieNum'>"+item2.movieNum+"</td>"
+							str3+="<td>"+item2.movieTitle+"</td>"
+							str3+="<td><input type='text' name='screenNum' /></td>"
+							str3+="<td><select name='theaterName'>"+theaterName+"</select></td>"
+							str3+="<td><input type='text' name='screenDate' class='datepick' /></td>"
+							str3+="<td><input type='number' name='screenTime' /></td>"
+							str3+="<td><input type='button' value='등록' id='newScreen'/></td>"
+							str3+="</tr>";
+ 						}) 
 					}) 
 					$("#movietabs").append(str); 
+ 					$("#addscreentabs").append(str3);
+ 					
+ 					$('.datepick').each(function(){ $(this).datepicker({
+ 						 dateFormat: 'yy.mm.dd',
+ 						 prevText: '이전 달',
+ 						 nextText: '다음 달',
+ 						 monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+ 					 	 monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+ 					     dayNames: ['일','월','화','수','목','금','토'],
+ 					     dayNamesShort: ['일','월','화','수','목','금','토'],
+ 					     dayNamesMin: ['일','월','화','수','목','금','토'],
+ 					     showMonthAfterYear: true,
+ 						 changeMonth: true,
+ 				   	     changeYear: true,
+ 						 yearSuffix: '년'
+ 						})
+ 					})
 				},
 				
 				error:function(err){
@@ -163,14 +200,14 @@ div {
 				}
 	  });
 	}
-	selectAll()
+
 	function screenAll(){
 		$.ajax({
 			type:"post",//전송방식
-				url: "../admin?command=screenList", //서버주소
+				url: "${pageContext.request.contextPath}/admin?command=screenList", //서버주소
 				dataType: "json",
 				success: function(result){
-					$("#movietabs tr:gt(0)").remove();
+					$("#screentabs tr:gt(0)").remove();
  					var str="";
  					$.each(result,function(index,item){
 							str+="<tr>";
@@ -194,43 +231,58 @@ div {
 	
  	$(function(){
 		$(document).on("click",'#delete2',function(){
-			alert("삭제요청");
 			$.ajax({
 				type:"post",
-				url:"../admin?command=screendelete&screenNum="+$(this).attr("name"),
+				url:"${pageContext.request.contextPath}/admin?command=screendelete&screenNum="+$(this).attr("name"),
 				success : function(result){
-					selectAll()
+					screenAll()
 				}
 			})
 			
 		})
 		$(document).on("click",'#delete',function(){
-			alert("삭제요청");
 			$.ajax({
 				type:"post",
-				url:"../admin?command=moviedelete&MovieNum="+$(this).attr("name"),
+				url:"${pageContext.request.contextPath}/admin?command=moviedelete&MovieNum="+$(this).attr("name"),
 				success : function(result){
 					selectAll()
+					screenAll()
 				}
 			})
 			
 		})
-		$('.datepick').each(function(){ $(this).datepicker({
-			 dateFormat: 'yy.mm.dd',
-			 prevText: '이전 달',
-			 nextText: '다음 달',
-			 monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		 	 monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		     dayNames: ['일','월','화','수','목','금','토'],
-		     dayNamesShort: ['일','월','화','수','목','금','토'],
-		     dayNamesMin: ['일','월','화','수','목','금','토'],
-		     showMonthAfterYear: true,
-			 changeMonth: true,
-	   	     changeYear: true,
-			 yearSuffix: '년'
-			})
+  		$(document).on("click",'#newScreen',function(){
+  			var movieNum=$(this).parent().parent().find("#movieNum").text();
+  			var screenNum=$(this).parent().parent().find("input[name=screenNum]").val();
+  			var theaterName=$(this).parent().parent().find("select[name=theaterName]").val();
+  			var screenDate=$(this).parent().parent().find("input[name=screenDate]").val();
+  			var screenTime=$(this).parent().parent().find("input[name=screenTime]").val();
+ 			
+  			if(screenTime!=null & screenNum!=null &screenDate!=null & screenTime!="" & screenNum!="" &screenDate!=""){
+	  			$.ajax({
+					type:"post",
+					url:"${pageContext.request.contextPath}/admin?command=screenInsert",
+					data:"screenNum="+screenNum+"&movieNum="+movieNum+"&theaterName="+theaterName+"&screenDate="+screenDate+"&screenTime="+screenTime,				
+					success : function(result){
+						selectAll()
+						screenAll()
+					}
+				}) 
+  			}else{
+  				alert("모든 값을 넣어주세요!");
+  			}
 		})
+		
 
+	})
+	
+	window.onload=selectAll()
+	window.onload=screenAll()
+	
+	$("a").click(function(){
+		alert("클릭")
+		selectAll()
+		screenAll()
 	})
 
 
@@ -263,7 +315,8 @@ div {
 								<ul>
 									<li><a href="#tabs-1">영화 등록하기</a></li>
 									<li><a href="#tabs-2">현재 등록된 영화</a></li>
-									<li><a href="#tabs-3">예매 영화 등록하기</a></li>
+									<li><a href="#tabs-3">현재 상영중 영화</a></li>
+									<li><a href="#tabs-4">영화 상영 추가</a></li>
 								</ul>
 								<div id="tabs-1" style="overflow-x: auto">
 									<%@include file="sample1.jsp"%>
@@ -272,7 +325,7 @@ div {
 										<table class="table table-hover table-fixed pre-scrollable"
 											id="movietabs">
 											<caption>
-												<b>상영 중인 영화</b>
+												<b>등록된 영화</b>
 											</caption>
 											<tr style="background-color: #FF8D1B;">
 												<th style="color: white">영화번호</th>
@@ -300,7 +353,23 @@ div {
 												<th style="color: white">상영관이름</th>
 												<th style="color: white">상영날짜</th>
 												<th style="color: white">상영시간</th>
-												<th style="color: white">감독</th>
+												<th style="color: white">취소</th>
+											</tr>
+										</table>
+								</div>
+								<div id="tabs-4" style="overflow-x: auto">
+									<table class="table table-hover table-fixed pre-scrollable" id="addscreentabs">
+											<caption>
+												<b>영화 상영 추가하기</b>
+											</caption>
+											<tr style="background-color: #FF8D1B;">
+												<th style="color: white">영화번호</th>
+												<th style="color: white">영화제목</th>
+												<th style="color: white">상영번호</th>
+												<th style="color: white">상영관이름</th>
+												<th style="color: white">상영날짜</th>
+												<th style="color: white">상영시간</th>
+												<th style="color: white">등록</th>
 											</tr>
 										</table>
 								</div>

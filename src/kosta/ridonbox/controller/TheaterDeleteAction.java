@@ -1,42 +1,25 @@
 package kosta.ridonbox.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kosta.ridonbox.model.dto.ModelAndView;
-import kosta.ridonbox.model.dto.MovieDTO;
-import kosta.ridonbox.model.dto.TheaterDTO;
 import kosta.ridonbox.model.service.AdminService;
 import kosta.ridonbox.model.service.AdminServiceImpl;
-import net.sf.json.JSONArray;
 
-public class AdminRegistAction implements Action {
+public class TheaterDeleteAction implements Action {
 
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		System.out.println("어드민레지스트액션실행");
+		String theaterName=request.getParameter("theaterName");
 		AdminService service = new AdminServiceImpl();
 		try {
-			List<MovieDTO> list=service.movieList();
-			List<TheaterDTO> tlist=service.theaterList();
-			
-			Map<String, List> map = new HashMap<>();
-			map.put("list", list);
-			map.put("tlist", tlist);
-			JSONArray arr = JSONArray.fromObject(map);
-			PrintWriter out = response.getWriter();
-			System.out.println(arr);
-			out.println(arr);
+			service.theaterDelete(theaterName);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

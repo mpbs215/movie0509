@@ -106,21 +106,17 @@ $(function(){
 			<td><c:out value="${movie.repNationNm}"/></td>
 			<td><c:forEach items="${movie.directors}" var="director"><c:out value="${director.peopleNm}"/>,</c:forEach></td>
 			<td><c:out value="${movie.prdtStatNm}"/></td>
-			<td><input type="file" name="file" /></td>
+			<td><input type="file" name="file" required="required"/></td>
 			<td><input type="text" name="movieYoutube"/></td>
-			<td><input type="text" name="movieNum"/></td>
+			<td><input type="text" name="movieNum" required="required"/></td>
 			<td><input type="submit" value="등록"/></td>
 			<input type="hidden" name="movieTitle" value="${movie.movieNm}"/>
 			<input type="hidden" name="movieEtitle" value="${movie.movieNmEn}"/>
-			<input type="hidden" name="movieDir" value="${movie.directors}"/>
+			<input type="hidden" name="movieDir" value="<c:forEach items="${movie.directors}" var="director"><c:out value="${director.peopleNm}"/>,</c:forEach>"/>
 			<input type="hidden" name="movieDate" value="${movie.openDt}"/>
 			<input type="hidden" name="movieState" value="${movie.prdtStatNm}"/>
 			<input type="hidden" name="movieCountry" value="${movie.repNationNm}"/>
 			</form> 
-<!-- 			<td contenteditable="true"></td>
-			<td contenteditable="true"></td>
-			<td><input type="text" class="datepick"></td>
-			<td contenteditable="true"></td> -->
 		</tr>
 		
 	</c:forEach>
@@ -129,12 +125,12 @@ $(function(){
 	
 	
 	<form action="">
-		현재페이지 :<input type="text" name="curPage" value="<%=curPage %>" class="form-control">
-		최대 출력갯수:<input type="text" name="itemPerPage" value="<%=itemPerPage %>" class="form-control">
-		감독명:<input type="text" name="directorNm" value="<%=directorNm %>" class="form-control">		
-		영화명:<input type="text" name="movieNm" value="<%=movieNm %>" class="form-control"> <br/>
-		개봉연도조건:<input type="text" name="openStartDt" value="<%=openStartDt %>" class="form-control"> ~ <input type="text" name="openEndDt" value="<%=openEndDt %>" class="form-control">
-		제작연도조건:<input type="text" name="prdtStartYear" value="<%=prdtStartYear %>" class="form-control"> ~ <input type="text" name="prdtEndYear" value="<%=prdtEndYear %>" class="form-control">		
+		현재페이지 :<input type="text" name="curPage" value="<%=curPage %>" >
+		최대 출력갯수:<input type="text" name="itemPerPage" value="<%=itemPerPage %>" >
+		감독명:<input type="text" name="directorNm" value="<%=directorNm %>" >		
+		영화명:<input type="text" name="movieNm" value="<%=movieNm %>"> <br /> <br />
+		개봉연도조건:<input type="text" name="openStartDt" value="<%=openStartDt %>" > ~ <input type="text" name="openEndDt" value="<%=openEndDt %>" >
+		제작연도조건:<input type="text" name="prdtStartYear" value="<%=prdtStartYear %>" > ~ <input type="text" name="prdtEndYear" value="<%=prdtEndYear %>" >		<br />
 
 		국적:<select name="repNationCd">
 			<option value="">-전체-</option>
