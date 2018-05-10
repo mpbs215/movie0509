@@ -97,12 +97,11 @@ public class UserServiceImpl implements UserService {
 		return re;
 	}
 	
-	public int checkById(String id) throws SQLException{
+	public String checkById(String id) throws SQLException{
 		
-		int re = userDAO.checkById(id);
+		String re = userDAO.checkById(id);
 		
 		return re;
 	}
-
 
 }

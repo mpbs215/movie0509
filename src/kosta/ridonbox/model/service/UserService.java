@@ -32,7 +32,7 @@ public interface UserService {
 	 * @return 1이면 아이디 중복, 0이면 사용가능
 	 * @throws SQLException
 	 */
-	public int checkById(String id) throws SQLException;
+	public String checkById(String id) throws SQLException;
 	
 	/**
 	 *메인페이지에서 BoxOffice순으로 영화보여줌.

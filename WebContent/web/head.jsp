@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 		<div class="header">
 		<div class="container">
 			<div class="w3layouts_logo">
@@ -13,7 +14,8 @@
 			</div>
 			<div class="w3l_sign_in_register">
 				<ul>
-					<li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
+				<li><input type ="text" id="conid" readonly="readonly" style="border: 0px"/></li>
+					<li><a href="#" data-toggle="modal" data-target="#myModal" id="logbtn" >Login</a></li>
 				</ul>
 			</div>
 			<div class="clearfix"> </div>
@@ -21,6 +23,12 @@
 	</div>
 <!-- //header -->
 <!-- bootstrap-pop-up 로그인 팝업 -->
+<% 
+if((String)session.getAttribute("userid")==null){
+%>
+<script>
+
+</script>
 	<div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -46,15 +54,16 @@
 							  <div class="form">
 								<h3>회원 가입</h3>
 								<form action="${pageContext.request.contextPath}/main?command=regist" method="post">
-								  <input type="text" name="Username" placeholder="아이디" required="">
-								  <input type="password" name="Password" placeholder="패스워드" required="">
-								  <input type="password" name="Password2" placeholder="패스워드 확인" required="">
-								  <input type="email" name="Email" placeholder="메일 주소" required="">
-								  <input type="text" name="Phone" placeholder="핸드폰 번호" required="">
+								  <input type="text" id="id" name="Username" placeholder="아이디" required/>
+								  <span id = "chkMsg"></span> 
+								  <input type="password" id = "pwd"name="Password" placeholder="패스워드" required>
+								  <input type="password" id = "pwdCheck" name="Password2" placeholder="패스워드 확인" required>
+								  <span id = "chkPwdMsg"></span> 
+								  <input type="email" name="Email" placeholder="메일 주소" required>
+								  <input type="text" name="Phone" placeholder="핸드폰 번호" required>
 								  <input type="submit" value="등록">
 								</form>
 							  </div>
-							  <div class="cta"><a href="#">비밀번호를 잊어버리셨나요?</a></div>
 							</div>
 						</div>
 					</div>
@@ -63,6 +72,58 @@
 		</div>
 	</div>
 	<script>
+	
+	//아이디 중복체크하기
+	$("#id").focusout(function(){
+		$.ajax({
+ 				type:"post", //전송방식
+ 				url :"../main?command=idDuplChk",//서버주소(데베를 가져옴으로 servlet)
+ 				data:"id="+$(this).val(),//서버에게 보낼 parameter정보
+ 				dataType :"text",
+ 				success:function(result){//개수|단어,단어,단어, ....
+ 					$("#chkMsg").text(result);
+ 				},
+ 				error : function(err){
+ 					console.log("에러발생:"+err);
+ 				}
+ 			});//ajax
+	});//idcheck;
+	
+	$("#id").focusin(function(){
+		$("#chkMsg").text("")
+	});//idcheck;
+	
+	$("#id").focusout(function(){
+		$.ajax({
+ 				type:"post", //전송방식
+ 				url :"${pageContext.request.contextPath}/main?command=idDuplChk",//서버주소(데베를 가져옴으로 servlet)
+ 				data:"id="+$(this).val(),//서버에게 보낼 parameter정보
+ 				dataType :"text",
+ 				success:function(result){//개수|단어,단어,단어, ....
+ 					$("#chkMsg").text(result);
+ 				},
+ 				error : function(err){
+ 					console.log("에러발생:"+err);
+ 				}
+ 			});//ajax
+	});//idcheck;
+	
+	$("#id").focusin(function(){
+		$("#chkMsg").text("")
+	});//idcheck;
+	
+	
+	$("#pwdCheck").focusout(function(){
+		if($("#pwd").val()!=$(this).val()){
+			$("#chkPwdMsg").text("패스워드가 같지 않습니다.")
+		}
+		});//pwcheck;
+
+	$("#pwdCheck").focusin(function(){
+		$("#chkPwdMsg").text("")
+	});//pwcheck;
+
+	
 		$('.toggle').click(function(){
 		  // Switches the Icon
 		  $(this).children('i').toggleClass('fa-pencil');
@@ -72,10 +133,33 @@
 			'padding-top': 'toggle',
 			'padding-bottom': 'toggle',
 			opacity: "toggle"
-		  }, "slow");
+		  }, "slow");  
 		});
 	</script>
 <!-- //bootstrap-pop-up 로그인 팝업-->
+<%
+}else{ //session id값이 있을때.%>
+	<script>
+	$(function(){
+		$("#logbtn").text("LoginOut");
+		var str ="<%=(String)session.getAttribute("userid")%>";
+		
+		$("#conid").val("<%=(String)session.getAttribute("userid")%>님 접속중")
+	})
+	</script>
+	
+<%} %>
+<script type="text/javascript">
+$(function(){
+	$("#logbtn").click(function(){
+		if($(this).text() =="LoginOut"){
+			if(confirm("로그아웃 하시겠습니까?????")){
+			location.href="${pageContext.request.contextPath}/main?command=loginout";}
+		}
+	})
+})
+</script>
+
 <!-- 상단 메뉴 -->
 	<div class="movies_nav">
 		<div class="container">

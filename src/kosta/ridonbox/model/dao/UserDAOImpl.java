@@ -22,14 +22,15 @@ public class UserDAOImpl implements UserDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql="select * from member where id=? and password=?";
+		String sql="select * from member where member_id=? and member_password=?";
 		
 		con = DbUtil.getConnection();
 		ps = con.prepareStatement(sql);
-		rs = ps.executeQuery();
 		ps.setString(1, id);
 		ps.setString(2, password);
 		
+		rs = ps.executeQuery();
+	
 		if(rs.next()) {	
 			re = 1;
 		}
@@ -43,42 +44,40 @@ public class UserDAOImpl implements UserDAO {
 		
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql="insert into member values(?, ?, ?, ?, ?)";
+		String sql="insert into member (member_id, member_password, member_email, member_phone, member_date)values(?, ?, ?, ?, sysdate)";
 		
 		con = DbUtil.getConnection();
 		ps = con.prepareStatement(sql);
 		int re=0 ;
-		
 			ps.setString(1, memberDTO.getMemberId());
 			ps.setString(2, memberDTO.getMemberPwd());
 			ps.setString(3, memberDTO.getEmail());
 			ps.setString(4, memberDTO.getPhone());
-			ps.setString(5, memberDTO.getJoinDate());		
-			
 		re = ps.executeUpdate();
 		DbUtil.dbClose(con, ps);
 		return re;
 	}
 	
 	@Override
-	public int checkById(String id)  throws SQLException{
-		int re = 0 ;
-		
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String sql="select * from member where id=?";
-		
-		con = DbUtil.getConnection();
-		ps = con.prepareStatement(sql);
-		rs = ps.executeQuery();
-		if(rs.next()) {
+	public String checkById(String id)  throws SQLException{
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String result="사용가능합니다.";
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("select * from member where  member_id=?");
 			ps.setString(1, id);
-			re = 1;
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				result="중복입니다.";
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
 		}
-		DbUtil.dbClose(con, ps, rs);		
-		
-		return re;
+		return result;
 	}
 
 	@Override
