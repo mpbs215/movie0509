@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <title>무비 원</title>
@@ -109,32 +110,45 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div id="myTabContent" class="tab-content">
 					<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
 						<div class="w3_agile_featured_movies">
+							
+							
+							
+							
+							<c:forEach items="${movielist}" var="movielist">
+						
 							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="${pageContext.request.contextPath}/web/detail.jsp" class="hvr-shutter-out-horizontal"><img src="${pageContext.request.contextPath}/web/images/m15.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-								<div class="mid-1 agileits_w3layouts_mid_1_home">
+								<a href="${pageContext.request.contextPath}/main?command=detail&movieNum=${movielist.movieNum}" class="hvr-shutter-out-horizontal"><img
+									src="${movielist.moviePath}" title="album-name" alt=" " />
+									<div class="w3l-action-icon">
+										<i class="fa fa-play-circle" aria-hidden="true"></i>
+									</div> </a>
+								<div class="mid-1">
 									<div class="w3l-movie-text">
-										<h6><a href="${pageContext.request.contextPath}/web/detail.jsp">God’s Compass</a></h6>							
+										<h6>
+											<a href="${pageContext.request.contextPath}/main?command=detail&movieNum=${movielist.movieNum}">${movielist.movieTitle }</a>
+										</h6>
 									</div>
-									<div class="mid-2 agile_mid_2_home">
-										<p>2016</p>
+									<div class="mid-2">
+
+										<p>개봉일 : ${movielist.movieDate}</p>
 										<div class="block-stars">
 											<ul class="w3l-ratings">
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-												<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+												평점 : ${movielist.movieRat }
 											</ul>
 										</div>
 										<div class="clearfix"></div>
 									</div>
-								</div>
-								<div class="ribben">
-									<p>NEW</p>
+									<div>
+										<button type="button" class="btn btn-info btn-block outline" onclick="location.href='bookingview.jsp'">예매하기</button>
+									</div>
+
 								</div>
 							</div>
+						</c:forEach>
+							
+							
+							
+							
 							<div class="col-md-2 w3l-movie-gride-agile">
 								<a href="${pageContext.request.contextPath}/web/detail.jsp" class="hvr-shutter-out-horizontal"><img src="${pageContext.request.contextPath}/web/images/m2.jpg" title="album-name" class="img-responsive" alt=" "  />
 									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
@@ -425,32 +439,45 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="${pageContext.request.contextPath}/web/detail.jsp" class="hvr-shutter-out-horizontal"><img src="${pageContext.request.contextPath}/web/images/m22.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${pageContext.request.contextPath}/web/detail.jsp">Assassin's Creed 3</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
+						
+						
+						
+						<!-- 							관객수 -->
+						<c:forEach items="${movielist}" var="movielist">
+						
+							<div class="col-md-2 w3l-movie-gride-agile">
+								<a href="${pageContext.request.contextPath}/main?command=detail&movieNum=${movielist.movieNum}" class="hvr-shutter-out-horizontal"><img
+									src="${movielist.moviePath}" title="album-name" alt=" " />
+									<div class="w3l-action-icon">
+										<i class="fa fa-play-circle" aria-hidden="true"></i>
+									</div> </a>
+								<div class="mid-1">
+									<div class="w3l-movie-text">
+										<h6>
+											<a href="${pageContext.request.contextPath}/main?command=detail&movieNum=${movielist.movieNum}">${movielist.movieTitle }</a>
+										</h6>
 									</div>
-									<div class="clearfix"></div>
+									<div class="mid-2">
+
+										<p>개봉일 : ${movielist.movieDate}</p>
+										<div class="block-stars">
+											<ul class="w3l-ratings">
+												평점 : ${movielist.movieRat }
+											</ul>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div>
+										<button type="button" class="btn btn-info btn-block outline" onclick="location.href='bookingview.jsp'">예매하기</button>
+									</div>
+
 								</div>
 							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
+						</c:forEach>
+						<!-- 							관객수 끝 -->
+						
+						
+						
 						<div class="col-md-2 w3l-movie-gride-agile">
 							<a href="${pageContext.request.contextPath}/web/detail.jsp" class="hvr-shutter-out-horizontal"><img src="${pageContext.request.contextPath}/web/images/m2.jpg" title="album-name" class="img-responsive" alt=" " />
 								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
@@ -506,32 +533,44 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="clearfix"> </div>
 					</div>
 					<div role="tabpanel" class="tab-pane fade" id="rating" aria-labelledby="rating-tab">
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="${pageContext.request.contextPath}/web/detail.jsp" class="hvr-shutter-out-horizontal"><img src="${pageContext.request.contextPath}/web/images/m7.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${pageContext.request.contextPath}/web/detail.jsp">Light B/t Oceans</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
+						
+						
+						
+						
+						<c:forEach items="${movielist}" var="movielist">
+						
+							<div class="col-md-2 w3l-movie-gride-agile">
+								<a href="${pageContext.request.contextPath}/main?command=detail&movieNum=${movielist.movieNum}" class="hvr-shutter-out-horizontal"><img
+									src="${movielist.moviePath}" title="album-name" alt=" " />
+									<div class="w3l-action-icon">
+										<i class="fa fa-play-circle" aria-hidden="true"></i>
+									</div> </a>
+								<div class="mid-1">
+									<div class="w3l-movie-text">
+										<h6>
+											<a href="${pageContext.request.contextPath}/main?command=detail&movieNum=${movielist.movieNum}">${movielist.movieTitle }</a>
+										</h6>
 									</div>
-									<div class="clearfix"></div>
+									<div class="mid-2">
+
+										<p>개봉일 : ${movielist.movieDate}</p>
+										<div class="block-stars">
+											<ul class="w3l-ratings">
+												평점 : ${movielist.movieRat }
+											</ul>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div>
+										<button type="button" class="btn btn-info btn-block outline" onclick="location.href='bookingview.jsp'">예매하기</button>
+									</div>
+
 								</div>
 							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
+						</c:forEach>
+						
+						
+						
 						<div class="col-md-2 w3l-movie-gride-agile">
 							<a href="${pageContext.request.contextPath}/web/detail.jsp" class="hvr-shutter-out-horizontal"><img src="${pageContext.request.contextPath}/web/images/m11.jpg" title="album-name" class="img-responsive" alt=" " />
 								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>

@@ -75,23 +75,23 @@
 						<c:forEach items="${movielist}" var="movielist">
 						
 							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="${pageContext.request.contextPath}/main?command=detail&movieNum=${movielist.movie_num}" class="hvr-shutter-out-horizontal"><img
-									src="${movielist.movie_path}" title="album-name" alt=" " />
+								<a href="${pageContext.request.contextPath}/main?command=detail&movieNum=${movielist.movieNum}" class="hvr-shutter-out-horizontal"><img
+									src="${movielist.moviePath}" title="album-name" alt=" " />
 									<div class="w3l-action-icon">
 										<i class="fa fa-play-circle" aria-hidden="true"></i>
 									</div> </a>
 								<div class="mid-1">
 									<div class="w3l-movie-text">
 										<h6>
-											<a href="${pageContext.request.contextPath}/main?command=detail&movieNum=${movielist.movie_num}">${movielist.movie_title }</a>
+											<a href="${pageContext.request.contextPath}/main?command=detail&movieNum=${movielist.movieNum}">${movielist.movieTitle }</a>
 										</h6>
 									</div>
 									<div class="mid-2">
 
-										<p>개봉일 : ${movielist.movie_date}</p>
+										<p>개봉일 : ${movielist.movieDate}</p>
 										<div class="block-stars">
 											<ul class="w3l-ratings">
-												평점 : ${movielist.movie_rat }
+												평점 : ${movielist.movieRat }
 											</ul>
 										</div>
 										<div class="clearfix"></div>

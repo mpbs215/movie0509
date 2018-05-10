@@ -95,31 +95,31 @@ th{
 
 				<div class="card mb-4">
 					<div class="video-grid-single-page-agileits">
-						<div data-video="${movie.movie_youtube}" id="video">
-							<img src="${movie.movie_path}" alt="" class="img-responsive" />
+						<div data-video="${movie.movieYoutube}" id="video">
+							<img src="${movie.moviePath}" alt="" class="img-responsive" />
 						</div>
 					</div>
 				</div>
 				<table class="table">
 					<tr>
 						<th style="color: white;">영화제목</th>
-						<td>${movie.movie_title}</td>
+						<td>${movie.movieTitle}</td>
 					</tr>
 					<tr>
 						<th style="color: white">감독</th>
-						<td>${movie.movie_dir}</td>
+						<td>${movie.movieDir}</td>
 					</tr>
 					<tr>
 						<th style="color: white">개봉일</th>
-						<td>${movie.movie_date}</td>
+						<td>${movie.movieDate}</td>
 					</tr>
 					<tr>
 						<th style="color: white">평점</th>
-						<td>${movie.movie_rat}</td>
+						<td>${movie.movieRat}</td>
 					</tr>
 					<tr>
 						<th style="color: white">배우</th>
-						<td>${movie.movie_act}</td>
+						<td>${movie.movieAct}</td>
 					</tr>
 					<tr>
 						<th style="color: white">줄거리</th>
