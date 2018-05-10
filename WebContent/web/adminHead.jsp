@@ -15,76 +15,30 @@
 		</div>
 		<div class="w3l_sign_in_register">
 			<ul>
-				<li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
+			<li><input type ="text" id="conid" readonly="readonly" style="border: 0px"/></li>
+				<li><a href="#" id="logbtn" >LogOut</a>   <a href="#" id="move" >UserPage로 이동</a></li>
+
 			</ul>
 		</div>
 		<div class="clearfix"></div>
 	</div>
 </div>
-<!-- //header -->
-<!-- bootstrap-pop-up 로그인 팝업 -->
-<div class="modal video-modal fade" id="myModal" tabindex="-1"
-	role="dialog" aria-labelledby="myModal">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				Sign In & Sign Up
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<section>
-				<div class="modal-body">
-					<div class="w3_login_module">
-						<div class="module form-module">
-							<div class="toggle">
-								<i class="fa fa-times fa-pencil"></i>
-								<div class="tooltip">회원가입</div>
-							</div>
-							<div class="form">
-								<h3>회원 로그인</h3>
-								<form action="#" method="post">
-									<input type="text" name="Username" placeholder="아이디를 입력해주세요."
-										required=""> <input type="password" name="Password"
-										placeholder="암호를 입력하세요" required=""> <input
-										type="submit" value="로그인">
-								</form>
-							</div>
-							<div class="form">
-								<h3>회원 가입</h3>
-								<form action="#" method="post">
-									<input type="text" name="Username" placeholder="아이디"
-										required=""> <input type="password" name="Password"
-										placeholder="패스워드" required=""> <input type="password"
-										name="Password2" placeholder="패스워드 확인" required=""> <input
-										type="email" name="Email" placeholder="메일 주소" required="">
-									<input type="text" name="Phone" placeholder="핸드폰 번호"
-										required=""> <input type="submit" value="등록">
-								</form>
-							</div>
-							<div class="cta">
-								<a href="#">비밀번호를 잊어버리셨나요?</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-		</div>
-	</div>
-</div>
 <script>
-	$('.toggle').click(function() {
-		// Switches the Icon
-		$(this).children('i').toggleClass('fa-pencil');
-		// Switches the forms  
-		$('.form').animate({
-			height : "toggle",
-			'padding-top' : 'toggle',
-			'padding-bottom' : 'toggle',
-			opacity : "toggle"
-		}, "slow");
-	});
+	$(function(){
+		var str ="<%=(String)session.getAttribute("userid")%>";
+		$("#conid").val("<%=(String)session.getAttribute("userid")%>님 접속중")
+		
+		$("#move").click(function(){
+			location.href="${pageContext.request.contextPath}/web/index.jsp";
+		})
+		
+		$("#logbtn").click(function(){
+			if(confirm("로그아웃 하시겠습니까?????")){
+			location.href="${pageContext.request.contextPath}/main?command=loginout";}
+		})
+	
+	})
+
 </script>
 <!-- //bootstrap-pop-up 로그인 팝업-->
 <!-- 상단 메뉴 -->
