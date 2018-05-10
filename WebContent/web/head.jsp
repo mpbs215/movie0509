@@ -141,7 +141,7 @@ if((String)session.getAttribute("userid")==null){
 }else{ //session id값이 있을때.%>
 	<script>
 	$(function(){
-		$("#logbtn").text("LoginOut");
+		$("#logbtn").text("LogOut");
 		var str ="<%=(String)session.getAttribute("userid")%>";
 		
 		$("#conid").val("<%=(String)session.getAttribute("userid")%>님 접속중")
@@ -152,7 +152,7 @@ if((String)session.getAttribute("userid")==null){
 <script type="text/javascript">
 $(function(){
 	$("#logbtn").click(function(){
-		if($(this).text() =="LoginOut"){
+		if($(this).text() =="LogOut"){
 			if(confirm("로그아웃 하시겠습니까?????")){
 			location.href="${pageContext.request.contextPath}/main?command=loginout";}
 		}

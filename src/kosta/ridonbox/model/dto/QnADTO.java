@@ -15,10 +15,11 @@ public class QnADTO{
 		this.qnaNo = qnaNo;
 		this.password = password;
 	}
-		public QnADTO(int qnaNo, String memberId, String context) {
+	
+	public QnADTO(int qnaNo,  String comment, String context) {
 		super();
 		this.qnaNo = qnaNo;
-		this.memberId = memberId;
+		this.comment = comment;
 		this.context = context;
 	}
 	

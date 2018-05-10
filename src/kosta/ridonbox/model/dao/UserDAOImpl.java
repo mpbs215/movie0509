@@ -384,16 +384,37 @@ public class UserDAOImpl implements UserDAO {
 		PreparedStatement ps = null;
 		String sql = "update BOARD set  borad_conts=? where borad_num=? ";
 		int result = 0;
-
+		
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
-
+			
 			ps.setString(1, qaDTO.getContext());
 			ps.setInt(2, qaDTO.getQnaNo());
-
+			
 			result = ps.executeUpdate();
-
+			
+		}  finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+	@Override
+	public int qaCommendUpdate(QnADTO qaDTO) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "update BOARD set  reply=? where borad_num=? ";
+		int result = 0;
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, qaDTO.getComment());
+			ps.setInt(2, qaDTO.getQnaNo());
+			
+			result = ps.executeUpdate();
+			
 		}  finally {
 			DbUtil.dbClose(con, ps);
 		}

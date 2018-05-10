@@ -266,6 +266,7 @@ insert into screen_info values('screen-300', 'movie-300', 'C°ü', '2018-05-03', 1
 
 
 --------------member----------------
+insert into member values('admin', 'admin', 'hee@naver.com', '010-1234-5678', '2017-06-11');
 insert into member values('hee', 'a1234', 'hee@naver.com', '010-1234-5678', '2017-06-11');
 insert into member values('yong', 'b1234', 'yong@naver.com', '010-2578-5471', '2015-06-11');
 insert into member values('don', 'c1234', 'don@naver.com', '010-5678-5678', '2016-06-11');
@@ -306,7 +307,3 @@ select * from EVENT;
 =======
 delete from reservation where rev_pep=5
 
-
-select movie_path, theater_name, screen_num from movie_info m join screen_info s on m.movie_num = s.movie_num where m.movie_num='movie-100';
-select movie_path, theater_name, screen_num from movie_info m join screen_info s on m.movie_num = s.movie_num where m.movie_num=
->>>>>>> branch 'master' of https://github.com/mpbs215/movie0509.git

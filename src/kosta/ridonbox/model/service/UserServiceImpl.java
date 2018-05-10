@@ -148,6 +148,12 @@ public class UserServiceImpl implements UserService {
 		if(result==0) throw new SQLException("수정되지 않았습니다");
 		return result;
 	}
+	
+	public int qaCommendUpdate(QnADTO qaNo) throws SQLException {
+		int result = userDAO.qaCommendUpdate(qaNo);
+		if(result==0) throw new SQLException("수정되지 않았습니다");
+		return result;
+	}
 
 	@Override
 	public int qaDelete(int qaNo) throws SQLException {
