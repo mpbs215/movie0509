@@ -26,18 +26,38 @@ DROP TABLE board
 DROP TABLE theater 
 	CASCADE CONSTRAINTS;
 
+-------------------------------------------------------
+drop sequence movie_seq;
+drop sequence screen_seq;
+drop sequence theater_seq;
+drop sequence reservation_seq;
+drop sequence member_seq;
+drop sequence board_seq;
+drop sequence event_seq;
+
+
+create sequence movie_seq;
+create sequence screen_seq;
+create sequence theater_seq;
+create sequence reservation_seq;
+create sequence member_seq;
+create sequence board_seq;
+create sequence event_seq;
+
+
+-----------------------------------------------------------
 /* 영화정보 */
 CREATE TABLE movie_info (
 	movie_num VARCHAR2(20) NOT NULL, /* 영화번호 */
 	movie_title VARCHAR2(200) NOT NULL, /* 영화제목 */
 	movie_etitle VARCHAR2(200) NOT NULL, /* 영화영어제목 */
-	movie_dir VARCHAR2(200) NOT NULL, /* 감독 */
-	movie_act VARCHAR2(200) NOT NULL, /* 배우 */
 	movie_date DATE NOT NULL, /* 개봉일 */
-	movie_rat NUMBER NOT NULL, /* 평점 */
+	movie_country VARCHAR2(100) NOT NULL, /* 제작 국가 */
+	movie_dir VARCHAR2(200) NOT NULL, /* 감독 */
+	movie_state VARCHAR2(20) NOT NULL, /* 제작상태 */
 	movie_path VARCHAR2(100), /* 영화이미지경로 */
-	movie_youtube VARCHAR2(100), /* 영화유튜브경로 */
-	movie_state NUMBER NOT NULL /* 영화상태 */
+	movie_youtube VARCHAR2(100) /* 영화유튜브경로 */
+	
 );
 
 ALTER TABLE movie_info
@@ -53,8 +73,7 @@ CREATE TABLE screen_info (
 	movie_num VARCHAR2(20) NOT NULL, /* 영화번호 */
 	theater_name VARCHAR2(20) NOT NULL, /* 상영관이름 */
 	screen_date DATE NOT NULL, /* 영화상영날짜 */
-	screen_time NUMBER, /* 상영시간 */
-	rev_total NUMBER NOT NULL /* 총예매수 */
+	screen_time NUMBER /* 상영시간 */
 );
 
 ALTER TABLE screen_info
@@ -225,9 +244,9 @@ ALTER TABLE board
 	
 	--------movie_info-----------
 
-insert into movie_info values('movie-100', '어벤져스:인피니티 워', 'Avengers: Infinity War', '안소니 루소조 루소', '로버트 다우니 주니어|톰 홀랜드|크리스 헴스워스','2018-04-25',9.02,'http://imgmovie.naver.com/mdi/mit110/1363/136315_P16_142450.jpg','xUDhdCsLkjU',0);
-insert into movie_info values('movie-200', '챔피언', 'Champion', '김용완', '마동석|권율|한예리|','2018-05-01',0.00,'http://imgmovie.naver.com/mdi/mit110/1693/169347_P41_140014.jpg','null',0);
-insert into movie_info values('movie-300', '얼리맨', 'Early Man', '닉 파크|', '에디 레드메인|톰 히들스턴|메이지 윌리암스|','2018-05-03',8.85,'http://imgmovie.naver.com/mdi/mit110/1542/154251_P17_113702.jpg','null',1);
+insert into movie_info values('movie-100', '어벤져스:인피니티 워', 'Avengers: Infinity War', '2018-04-25', '미국', '안소니 루소조 루소', '개봉예정', 'http://imgmovie.naver.com/mdi/mit110/1363/136315_P16_142450.jpg','xUDhdCsLkjU');
+insert into movie_info values('movie-200', '챔피언', 'Champion', '2018-05-01', '한국', '김용완', '개봉예정', 'http://imgmovie.naver.com/mdi/mit110/1693/169347_P41_140014.jpg','null');
+insert into movie_info values('movie-300', '얼리맨', 'Early Man', '2018-05-03', '미국', '닉 파크', '개봉예정', 'http://imgmovie.naver.com/mdi/mit110/1542/154251_P17_113702.jpg','null');
 
 
 
@@ -240,9 +259,9 @@ insert into theater values('C관', 500);
 
 
 --------------screen_info----------------
-insert into screen_info values('screen-100', 'movie-100', 'A관', '2018-05-01', 07, 30);
-insert into screen_info values('screen-200', 'movie-200', 'B관', '2018-05-02', 21, 50);
-insert into screen_info values('screen-300', 'movie-300', 'C관', '2018-05-03', 15, 100);
+insert into screen_info values('screen-100', 'movie-100', 'A관', '2018-05-01', 07);
+insert into screen_info values('screen-200', 'movie-200', 'B관', '2018-05-02', 21);
+insert into screen_info values('screen-300', 'movie-300', 'C관', '2018-05-03', 15);
 
 
 

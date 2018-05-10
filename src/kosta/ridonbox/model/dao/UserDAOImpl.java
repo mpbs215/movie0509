@@ -11,7 +11,7 @@ import kosta.ridonbox.model.dto.BookDTO;
 import kosta.ridonbox.model.dto.EventDTO;
 import kosta.ridonbox.model.dto.MemberDTO;
 import kosta.ridonbox.model.dto.MovieDTO;
-import kosta.ridonbox.model.dto.MyPageDTO;
+import kosta.ridonbox.model.dto.QnADTO;
 import kosta.ridonbox.util.DbUtil;
 
 public class UserDAOImpl implements UserDAO {
@@ -201,6 +201,129 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return list;
 	}
+	
+	@Override
+	public int qaInsert(QnADTO qaDTO) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql =  "insert into BOARD values((board_seq.nextval+3),'don',?,?,'ss',sysdate,?)";
+		int result = 0;
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
 
+//			ps.setInt(1, qaDTO.getQnaNo());
+//			ps.setString(2, qaDTO.getMemberId());
+			ps.setString(1, qaDTO.getQnaTitle());
+			ps.setString(2, qaDTO.getContext());
+//			ps.setString(5, qaDTO.getComment()); 
+//			ps.setString(6, qaDTO.getDate()); 
+			ps.setString(3, qaDTO.getPassword()); 
+			
+			result = ps.executeUpdate();
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+		
+	}
+
+	@Override
+	public int qaUpdate(QnADTO qaDTO) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "update BOARD set  borad_conts=? where borad_num=? ";
+		int result = 0;
+
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, qaDTO.getContext());
+			ps.setInt(2, qaDTO.getQnaNo());
+
+			result = ps.executeUpdate();
+
+		}  finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+
+	@Override
+	public int qaDelete(int qaNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("delete board where borad_num=?");
+
+			ps.setInt(1, qaNo);
+
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+
+	@Override
+	public List<QnADTO> selectAll() {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<QnADTO>list = new ArrayList<>();
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("select * from board");
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				QnADTO dto = new QnADTO(rs.getInt(1),
+						rs.getString(2),rs.getString(3),rs.getString(4),
+						rs.getString(5), rs.getString(6),rs.getString(7)
+						);
+				list.add(dto);
+			}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				DbUtil.dbClose(con, ps , rs);
+			}
+		
+			return list;
+	}
+
+	@Override
+	public QnADTO selectByQaNo(int qnaNo) throws SQLException {
+		Connection con = DbUtil.getConnection();
+		PreparedStatement ps =null;
+		ResultSet rs =null;
+		QnADTO qnADTO=null;
+		System.out.println(qnaNo);
+		try{
+			 ps = con.prepareStatement( "select * from board where borad_num=?");
+			 ps.setInt(1, qnaNo);
+			 rs = ps.executeQuery();
+				 if(rs.next()){
+					 qnADTO = new QnADTO(rs.getInt(1),
+							 rs.getString(2),
+							 rs.getString(3),
+							 rs.getString(4),
+							 rs.getString(5),
+							 rs.getString(6),
+							 rs.getString(7)
+							 );
+				 }
+		}finally{
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return qnADTO;
+		
+	}
 
 }

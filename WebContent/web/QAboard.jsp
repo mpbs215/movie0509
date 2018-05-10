@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta charset="utf-8">
@@ -72,21 +73,31 @@
 				<th>제목</th>
 				<th>작성자</th>
 				<th>날짜</th>
-				<th>조회수</th>
 			</tr>
 		</thead>
 		<tbody id="boardList">
-			<tr>
-				<td>번호</td>
-				<td>제목</td>
-				<td>작성자</td>
-				<td>날짜</td>
-				<td>조회수</td>
-			</tr>
+		<c:choose>
+		<c:when test="${empty requestScope.list}">
+		<tr>
+	        <td colspan="4" ><p align="center">등록된 상품이 없습니다.</p></td>
+   		</tr>
+   		</c:when>
+    	<c:otherwise>
+    	<c:forEach items="${requestScope.list}" var="qaDto">
+    	<tr>
+			<td>${qaDto.qnaNo}</td> <!-- 번호 -->
+			<td><a href="${pageContext.request.contextPath}/main?command=readQA&qnaNo=${qaDto.qnaNo}"> ${qaDto.qnaTitle}</a></td> <!-- 제목 -->
+			<td>${qaDto.memberId}</td> <!-- 작성자 -->
+			<td>${qaDto.date}</td> <!-- 날짜 -->
+		</tr>
+    	
+    	</c:forEach>
+		</c:otherwise>
+		</c:choose>
 		</tbody>
 	</table>
 	<hr />
-	<a class="btn btn-default pull-right"  style="margin-bottom:5%" onclick="location.href=''${pageContext.request.contextPath}/web/insertQA.jsp''">글쓰기</a>
+	<a class="btn btn-default pull-right"  style="margin-bottom:5%" onclick="location.href='${pageContext.request.contextPath}/web/insertQA.jsp'">글쓰기</a>
 </div>
 <%@include file="bottom.jsp" %>
 </body>

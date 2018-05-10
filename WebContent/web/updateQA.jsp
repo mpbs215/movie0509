@@ -112,7 +112,7 @@ button {
 	
 function checkVaild(){
 	
-	var f = window.document.writeFrom;
+	var f = window.document.updateFrom;
 	
 	alert(f.context.value);
 	
@@ -144,20 +144,25 @@ function checkVaild(){
 				<div class="col-md-12">
 					<div class="panel ">
 						<div class="panel-body text-center">
-								<h2><b><span class="text-primary">Q&A 등록</span></b></h2>
+								<h2><b><span class="text-primary">Q&A 수정</span></b></h2>
 							    <br />
-							    <form name="writeForm" method="post" onSubmit="return checkVaild()" action="${pageContext.request.contextPath}/main?command=insertQA&qnaNo='10'">
+							    
+							    <form name="updateForm" method="post" onSubmit="return checkVaild()" action="qna">
+							     
+							     <input type="hidden" name="command" value="updateQA">
+							     <input type="hidden" name="qnaNo" vlaue="${qna.qnaNo}">
+							   
 							    <label for="usr"  style="float:left">제목</label>
-  								<div><input type="text"  name="qnaTitle" class="form-control" id="usr" placeholder="제목을 입력하세요."></div>
+  								<div><input type="text"  name="qnaTitle" class="form-control" id="usr"  value="${qna.qnaTitle}"></div>
   								<br />
   								<label for="comment"  style="float:left">내용</label>
-  								<textarea class="form-control" rows="20" name="context" placeholder="내용을 입력하세요."></textarea>
+  								<textarea class="form-control" rows="20" name="context">${qna.context}</textarea>
   								<br />
   								<label for="usr"  style="float:left">비밀번호</label>
   								<br />
   								<div><input type="password" name="password" class="form-control" id="usr"></div>
   								<br />
-  								 <input type="submit" value="등록하기"  class="pull-right btn-success"/>
+  								 <input type="submit" value="수정하기"  class="pull-right btn-success"/>
 			                    <input type="button" value="취소하기" class="pull-left btn-danger"  onclick="location.href='${pageContext.request.contextPath}/main?command=QA'"/>
 								</form>				
 						</div>

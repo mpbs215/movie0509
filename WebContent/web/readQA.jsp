@@ -85,7 +85,7 @@ table {
 
 table, th, tr, td {
 	border: 1px solid gray;
-	text-align: center;
+	text-align: left;
 	margin: 0 auto;
 	background-color: black;
 	color: white;
@@ -94,6 +94,7 @@ table, th, tr, td {
 button {
 	margin: 0 auto;
 }
+
 </style>
 <!-- //banner-bottom-plugin -->
 <!-- <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic,700,400italic,300italic,300' rel='stylesheet' type='text/css'> -->
@@ -108,32 +109,34 @@ button {
 				scrollTop : $(this.hash).offset().top
 			}, 1000);
 		});
+		
+		$("input[type=button]").click(function(){
+			
+			if($(this).val()=="수정하기"){
+				$(this).hide();
+				$("#delbtn").val("저장하기");
+				$("#qnatitle").text("Q&A 수정하기");
+				$("#qnacontext").attr("readonly",false);
+				}
+			if($(this).val()=="삭제하기"){
+				sendDelete();
+			}
+			if($(this).val()=="저장하기"){
+				sendUpdate();
+			}
+		})
 	});
 	
-function checkVaild(){
-	
-	var f = window.document.writeFrom;
-	
-	alert(f.context.value);
-	
-	if(f.qnaTitle.value==""){
-		alert("제목을 입력해주세요");
-		f.qnaTitle.focus();
-		return false;
+	function sendDelete(){
+		document.requestForm.command.value="deleteQA";
+		document.requestForm.submit();
 	}
-	if(f.context.value=""){
-		alert("내용을 입력해주세요");
-		f.context.focus();
-		return false;
+	
+	function sendUpdate(){
+		document.requestForm.command.value="updateQA";
+		document.requestForm.submit();
 	}
-	if(f.password.value=""){
-		alert("비밀번호를 입력해주세요");
-		f.password.focus();
-		return false;
-	}
-	return true;
-}
-
+	
 </script>
 </head>
 <body>
@@ -144,21 +147,27 @@ function checkVaild(){
 				<div class="col-md-12">
 					<div class="panel ">
 						<div class="panel-body text-center">
-								<h2><b><span class="text-primary">Q&A 등록</span></b></h2>
+								<h2><b><span class="text-primary" id="qnatitle">Q&A 상세보기</span></b></h2>
 							    <br />
-							    <form name="writeForm" method="post" onSubmit="return checkVaild()" action="${pageContext.request.contextPath}/main?command=insertQA&qnaNo='10'">
 							    <label for="usr"  style="float:left">제목</label>
-  								<div><input type="text"  name="qnaTitle" class="form-control" id="usr" placeholder="제목을 입력하세요."></div>
-  								<br />
+							    <input type="text"  name="qnaTitle" class="form-control" id="qnatitle" readonly="readonly" value="${qna.qnaTitle}"/>
+							    <br />
+							   <form name="requestForm" method=post action="${pageContext.request.contextPath}/main" >
   								<label for="comment"  style="float:left">내용</label>
-  								<textarea class="form-control" rows="20" name="context" placeholder="내용을 입력하세요."></textarea>
+  								<br />
+  								<textarea class="form-control" rows="20" name="context" id="qnacontext" readonly="readonly">${qna.context}</textarea>
   								<br />
   								<label for="usr"  style="float:left">비밀번호</label>
   								<br />
-  								<div><input type="password" name="password" class="form-control" id="usr"></div>
+  								
+  								<div><input type="password" class="form-control" id="usr" name="password"></div>
   								<br />
-  								 <input type="submit" value="등록하기"  class="pull-right btn-success"/>
-			                    <input type="button" value="취소하기" class="pull-left btn-danger"  onclick="location.href='${pageContext.request.contextPath}/main?command=QA'"/>
+  								<input type=hidden name="qnaNo" value="${qna.qnaNo}"/>
+  								<input type=hidden name="command" value=""/>
+  								
+  								<input type="button" id="delbtn" value="삭제하기"  class="pull-right btn-danger"/>
+			                    <input type="button" value="목록으로" onClick="location.href='${pageContext.request.contextPath}/main?command=QA'" class="pull-left btn-success" />
+			                    <input type="button" value="수정하기" class="pull-left btn-success" />
 								</form>				
 						</div>
 					</div>
