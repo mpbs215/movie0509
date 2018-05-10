@@ -114,6 +114,6 @@ public interface UserDAO {
 	 */
 	public int deleteByBooking(String revNum) throws SQLException;
 	
-	int checkById(String id) throws SQLException;
+	String checkById(String id) throws SQLException;
 
 }
