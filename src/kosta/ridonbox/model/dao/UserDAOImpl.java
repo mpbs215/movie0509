@@ -93,15 +93,16 @@ public class UserDAOImpl implements UserDAO {
 		PreparedStatement ps =null;
 		ResultSet rs =null;
 		List<MovieDTO> list = new ArrayList<MovieDTO>();
-		try{
-			 ps = con.prepareStatement( "select * from movie_info");
-			 rs = ps.executeQuery();
-			 while(rs.next()){
-/*				 MovieDTO movie = new MovieDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getInt(10));
-*/				 
-/*			    list.add(movie);
-*/			 }
-		}finally{
+		try {
+			ps = con.prepareStatement("select movie_num, movie_title, movie_etitle, substr(movie_date,1,10), movie_country, movie_dir, movie_state, movie_path, movie_youtube  from movie_info");
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				MovieDTO movie = new MovieDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+
+				list.add(movie);
+			}
+		} finally {
 			DbUtil.dbClose(con, ps, rs);
 		}
 		return list;
@@ -118,19 +119,22 @@ public class UserDAOImpl implements UserDAO {
 		Connection con = DbUtil.getConnection();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-/*		MovieDTO dto = null;
-		
-		ps = con.prepareStatement("select * from movie_info where movie_num=?");
-		ps.setString(1, movieNo);
-		rs = ps.executeQuery();
-		
-		if(rs.next()) {
-			dto = new MovieDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getInt(10));
+		MovieDTO dto = null;
+		try {
+
+			ps = con.prepareStatement("select * from movie_info where movie_num=?");
+			ps.setString(1, movieNo);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				dto = new MovieDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+			}
+		} finally {
+
+			DbUtil.dbClose(con, ps, rs);
 		}
-		
-		DbUtil.dbClose(con, ps, rs);*/
-		
-		return null;
+		return dto;
 	}
 
 	@Override
@@ -238,10 +242,10 @@ public class UserDAOImpl implements UserDAO {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement("select movie_num, movie_title from movie_info");
 			rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				movieDTO = new MovieDTO(rs.getString(2), rs.getString(1));
-				
+
+			while (rs.next()) {
+				movieDTO = new MovieDTO(rs.getString(1), rs.getString(2));
+
 				list.add(movieDTO);
 			} 
 		} finally { DbUtil.dbClose(con, ps, rs); }
@@ -257,13 +261,13 @@ public class UserDAOImpl implements UserDAO {
 		
 		String screenDate = "";
 		List<String> list = new ArrayList<>();
-		
-		try { 
-				con = DbUtil.getConnection();
-				ps = con.prepareStatement("select substr(screen_date,1,10) from screen_info where movie_num =?" );
-				ps.setString(1, movieNum);
-				rs = ps.executeQuery();
-				
+
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("select substr(screen_date,1,10) from screen_info where movie_num =?");
+			ps.setString(1, movieNum);
+			rs = ps.executeQuery();
+
 			while (rs.next()) {
 				screenDate = rs.getString(1);
 				list.add(screenDate);

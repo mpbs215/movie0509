@@ -72,11 +72,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<%@include file="head.jsp" %>
 		<div id="slidey" style="display:none;">
 		<ul>
-		
 		<c:forEach items="${movielist}" var="movielist">
 			<li><img src="${movielist.moviePath}" alt=" "><p class='title'>${movielist.movieTitle}</p><p class='description'> Tarzan, having acclimated to life in London, is called back to his former home in the jungle to investigate the activities at a mining encampment.</p></li>
-			
-		</c:forEach>
+		</c:forEach>	
+		
+		
+			<li><img src="${pageContext.request.contextPath}/web/images/2.jpg" alt=" "><p class='title'>Maximum Ride</p><p class='description'>Six children, genetically cross-bred with avian DNA, take flight around the country to discover their origins. Along the way, their mysterious past is ...</p></li>
+			<li><img src="${pageContext.request.contextPath}/web/images/3.jpg" alt=" "><p class='title'>Independence</p><p class='description'>The fate of humanity hangs in the balance as the U.S. President and citizens decide if these aliens are to be trusted ...or feared.</p></li>
+			<li><img src="${pageContext.request.contextPath}/web/images/4.jpg" alt=" "><p class='title'>Central Intelligence</p><p class='description'>Bullied as a teen for being overweight, Bob Stone (Dwayne Johnson) shows up to his high school reunion looking fit and muscular. Claiming to be on a top-secret ...</p></li>
+			<li><img src="${pageContext.request.contextPath}/web/images/6.jpg" alt=" "><p class='title'>Ice Age</p><p class='description'>In the film's epilogue, Scrat keeps struggling to control the alien ship until it crashes on Mars, destroying all life on the planet.</p></li>
+			<li><img src="${pageContext.request.contextPath}/web/images/7.jpg" alt=" "><p class='title'>X - Man</p><p class='description'>In 1977, paranormal investigators Ed (Patrick Wilson) and Lorraine Warren come out of a self-imposed sabbatical to travel to Enfield, a borough in north ...</p></li>
 		
 		
 		</ul>   	
@@ -114,7 +119,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							
 							
 							
-<!-- 							최신개봉작 -->
+<!-- 							최신개봉작순 -->
 							<c:forEach items="${movielist}" var="movielist">
 						
 							<div class="col-md-2 w3l-movie-gride-agile">
@@ -126,32 +131,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="mid-1">
 									<div class="w3l-movie-text">
 										<h6>
-											<a href="${pageContext.request.contextPath}/main?command=detail&movieNum=${movielist.movieNum}">${movielist.movieTitle }</a>
+											<a href="${pageContext.request.contextPath}/main?command=detail&movieNum=${movielist.movieNum}">${movielist.movieTitle}</a>
 										</h6>
 									</div>
-									<div class="mid-2">
-
-										<p>개봉일 : ${movielist.movieDate}</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												평점 : ${movielist.movieRat }
-											</ul>
+									<div class="mid-2" >
+										<div class="w3l-movie-text">
+										개봉일 : ${movielist.movieDate}<br>
+										
+												제작 국가 : ${movielist.movieCountry}
 										</div>
 										<div class="clearfix"></div>
 									</div>
 									<div>
-										<button type="button" class="btn btn-info btn-block outline" onclick="location.href='bookingview.jsp'">예매하기</button>
+										<button type="button" class="btn btn-info btn-bloc outline" onclick="location.href='${pageContext.request.contextPath}/main?command=booking&bookingNum=8'">예매하기</button>
 									</div>
 
 								</div>
 							</div>
 						</c:forEach>
-<!-- 							최신개봉작 끝-->
+<!-- 							최신개봉작순 끝-->
 							
 							
 							
-								
-							</div>
 							<div class="clearfix"> </div>
 						</div>
 					</div>
@@ -176,16 +177,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</div>
 									<div class="mid-2">
 
-										<p>개봉일 : ${movielist.movieDate}</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												평점 : ${movielist.movieRat }
-											</ul>
+										<div class="w3l-movie-text">
+										개봉일 : ${movielist.movieDate}<br>
+										
+												제작 국가 : ${movielist.movieCountry}
 										</div>
 										<div class="clearfix"></div>
 									</div>
 									<div>
-										<button type="button" class="btn btn-info btn-block outline" onclick="location.href='bookingview.jsp'">예매하기</button>
+										<button type="button" class="btn btn-info btn-bloc outline" onclick="location.href='${pageContext.request.contextPath}/main?command=booking&bookingNum=8'">예매하기</button>
 									</div>
 
 								</div>
@@ -195,58 +195,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						
 						
 						
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="${pageContext.request.contextPath}/web/detail.jsp" class="hvr-shutter-out-horizontal"><img src="${pageContext.request.contextPath}/web/images/m2.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${pageContext.request.contextPath}/web/detail.jsp">Bad Moms</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="${pageContext.request.contextPath}/web/detail.jsp" class="hvr-shutter-out-horizontal"><img src="${pageContext.request.contextPath}/web/images/m9.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${pageContext.request.contextPath}/web/detail.jsp">Central Intelligence</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
+						
+						
 						<div class="clearfix"> </div>
 					</div>
 					<div role="tabpanel" class="tab-pane fade" id="rating" aria-labelledby="rating-tab">
@@ -254,6 +204,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						
 						
 						
+						
+						<!-- 							평점순 -->
 						<c:forEach items="${movielist}" var="movielist">
 						
 							<div class="col-md-2 w3l-movie-gride-agile">
@@ -269,103 +221,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										</h6>
 									</div>
 									<div class="mid-2">
-
-										<p>개봉일 : ${movielist.movieDate}</p>
-										<div class="block-stars">
-											<ul class="w3l-ratings">
-												평점 : ${movielist.movieRat }
-											</ul>
+										<div class="w3l-movie-text">
+										개봉일 : ${movielist.movieDate}<br>
+										
+												제작 국가 : ${movielist.movieCountry}
 										</div>
 										<div class="clearfix"></div>
 									</div>
 									<div>
-										<button type="button" class="btn btn-info btn-block outline" onclick="location.href='bookingview.jsp'">예매하기</button>
+										<button type="button" class="btn btn-info btn-bloc outline" onclick="location.href='${pageContext.request.contextPath}/main?command=booking&bookingNum=8'">예매하기</button>
 									</div>
 
 								</div>
 							</div>
 						</c:forEach>
+						<!-- 							평점순  끝-->
 						
 						
 						
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="${pageContext.request.contextPath}/web/detail.jsp" class="hvr-shutter-out-horizontal"><img src="${pageContext.request.contextPath}/web/images/m11.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${pageContext.request.contextPath}/web/detail.jsp">X-Men</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="${pageContext.request.contextPath}/web/detail.jsp" class="hvr-shutter-out-horizontal"><img src="${pageContext.request.contextPath}/web/images/m8.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${pageContext.request.contextPath}/web/detail.jsp">The BFG</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="${pageContext.request.contextPath}/web/detail.jsp" class="hvr-shutter-out-horizontal"><img src="${pageContext.request.contextPath}/web/images/m17.jpg" title="album-name" class="img-responsive" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1 agileits_w3layouts_mid_1_home">
-								<div class="w3l-movie-text">
-									<h6><a href="${pageContext.request.contextPath}/web/detail.jsp">Peter</a></h6>							
-								</div>
-								<div class="mid-2 agile_mid_2_home">
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
+						
+						
+						
+						
 						<div class="clearfix"> </div>
 					</div>
 					<div role="tabpanel" class="tab-pane fade" id="imdb" aria-labelledby="imdb-tab">

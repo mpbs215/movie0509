@@ -114,12 +114,12 @@ th{
 						<td>${movie.movieDate}</td>
 					</tr>
 					<tr>
-						<th style="color: white">평점</th>
-						<td>${movie.movieRat}</td>
+						<th style="color: white">제작국가</th>
+						<td>${movie.movieCountry}</td>
 					</tr>
 					<tr>
-						<th style="color: white">배우</th>
-						<td>${movie.movieAct}</td>
+						<th style="color: white">영화상태</th>
+						<td>${movie.movieState}</td>
 					</tr>
 					<tr>
 						<th style="color: white">줄거리</th>

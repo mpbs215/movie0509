@@ -4,7 +4,7 @@
 		<div class="header">
 		<div class="container">
 			<div class="w3layouts_logo">
-				<a href="${pageContext.request.contextPath}/web/index.jsp"><h1>One<span>Movies</span></h1></a>
+				<a href="${pageContext.request.contextPath}/main?command=main"><h1>One<span>Movies</span></h1></a>
 			</div>
 			<div class="w3_search">
 				<form action="#" method="post">

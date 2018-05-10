@@ -201,10 +201,19 @@ body {
 
 <script>
 			$(function(){
-				
+			<%-- 	
 				$("#sendButton").click(function(){
-						$("#bookingForm").submit();			
-				})
+					<% 
+					if((String)session.getAttribute("userid")==null){
+					%>
+						console.log("!111");
+						alert(1111);
+						//slocation.href="errorView/error.jsp";
+					<%}else{%>
+					
+						$("#bookingForm").submit();	
+					<%}%>
+				}) --%>
 				
 				var standard;
 				var checkArr = [];
