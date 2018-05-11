@@ -22,6 +22,7 @@ public class InsertQAAction implements Action {
 		
 	ModelAndView mv = new ModelAndView();
 	HttpSession session = request.getSession();	
+	mv.setPath("errorView/error.jsp");
 	
 	try {
 		  String memberId =  (String) session.getAttribute("userid");
@@ -42,12 +43,14 @@ public class InsertQAAction implements Action {
 		  if(re>0) {//등록이 완료되었다.
 			  mv.setPath("main?command=QA"); 
 			  mv.setRedirect(true);//redirect방식으로 이동.
+		  }else {
+			  request.setAttribute("errorMsg", "값을 제대로 넣어주세요~");
 		  }
 
 	}catch (SQLException e) {
 		e.printStackTrace();
-		//request.setAttribute("errorMsg", e.getMessage());
-		//mv.setPath("errorView/error.jsp");
+		request.setAttribute("errorMsg", e.getMessage());
+		mv.setPath("errorView/error.jsp");
 	}
 	return mv;
 	}

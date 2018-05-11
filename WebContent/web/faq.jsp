@@ -249,14 +249,13 @@
 					</div>
 					<div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
 					   <div class="panel-body panel_text">
-
-					   주소: 경기 용인시 기흥구 보라동 308-1<br>
-					   대표전화: 031-284-1098<br>
-					   
+					<ul>
+					<li style = "color:green"> 주소: 경기도 성남시 분당구 삼평동 682 유스페이스2 B동 8층</li>
+					  <li style ="color:green"> 대표전화: 031-284-1098 </li>
+					   </ul>
 					  </div>
 					</div>
 				  </div>
-				   
 				    <div class="panel panel-default">
 					<div class="panel-heading" role="tab" id="headingEight">
 					  <h4 class="panel-title asd">
@@ -287,7 +286,7 @@
 			</table>
 			</div>
 			
-		<a href="QAboard.jsp" class="button">개인 문의하기</a>
+		<a href="main?command=QA" class="button">개인 문의하기</a>
 		
 			<!-- 공백 -->				
 			<div>

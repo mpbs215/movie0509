@@ -49,7 +49,7 @@ public class UserDAOImpl implements UserDAO {
 		
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql="insert into member (member_id, member_password, member_email, member_phone, member_date)values(?, ?, ?, ?, sysdate)";
+		String sql="insert into member(member_id, member_password, member_email, member_phone, member_date)values(?, ?, ?, ?, sysdate)";
 		
 		con = DbUtil.getConnection();
 		ps = con.prepareStatement(sql);
@@ -57,11 +57,11 @@ public class UserDAOImpl implements UserDAO {
 			ps.setString(1, memberDTO.getMemberId());
 			ps.setString(2, memberDTO.getMemberPwd());
 			ps.setString(3, memberDTO.getEmail());
-			ps.setString(4, memberDTO.getPhone());
-			ps.setString(5, memberDTO.getJoinDate());		
+			ps.setString(4, memberDTO.getPhone());	
 			
 		re = ps.executeUpdate();
 		DbUtil.dbClose(con, ps);
+		System.out.println("dao="+re);
 		return re;
 	}
 	
@@ -454,7 +454,7 @@ public class UserDAOImpl implements UserDAO {
 		List<QnADTO>list = new ArrayList<>();
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("select * from board");
+			ps = con.prepareStatement("select * from board ORDER BY borad_num DESC");
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				QnADTO dto = new QnADTO(rs.getInt(1),
@@ -471,7 +471,6 @@ public class UserDAOImpl implements UserDAO {
 		
 			return list;
 	}
-
 	@Override
 	public QnADTO selectByQaNo(int qnaNo) throws SQLException {
 		Connection con = DbUtil.getConnection();

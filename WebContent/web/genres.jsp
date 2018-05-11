@@ -46,6 +46,13 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="${pageContext.request.contextPath}/web/js/owl.carousel.js"></script>
 <script type="text/javascript">
+/* 클릭하면은 bookNum값 넘겨주는 부분.
+ * $(function(){
+	$("#bookbtn").click(function(){
+		alert($(this).next().val())
+		//location.href='${pageContext.request.contextPath}/main?command=booking&bookingNum='+$(this).next().val();
+	});
+}); */
 </script>
 </head>
 <body>

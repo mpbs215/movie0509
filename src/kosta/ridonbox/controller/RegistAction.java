@@ -1,6 +1,7 @@
 package kosta.ridonbox.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -25,28 +26,38 @@ public class RegistAction implements Action {
 		UserService userService = new UserServiceImpl();
 		ModelAndView mv = new ModelAndView();
 		MemberDTO memberDTO = null;
+		PrintWriter out = response.getWriter();
 		int re = 0;
+		mv.setPath("errorView/error.jsp");
 		
 		String userName = request.getParameter("Username");
 		String passWord = request.getParameter("Password");
+		String passWord2=request.getParameter("Password2");
 		String email = request.getParameter("Email");
 		String phone = request.getParameter("Phone");
-		String memberPwd = passWord;
-		memberDTO = new MemberDTO(userName, memberPwd, email, phone);
+		
+		
+		memberDTO = new MemberDTO(userName,passWord,email,phone);
 		try {
+			if(userService.checkById(userName) != null || !passWord.equals(passWord2)) {
 			re = userService.joinMember(memberDTO);
 			if(re==0) {
 				request.setAttribute("errorMsg", "회원가입오류");
 				mv.setPath("errorView/error.jsp");
 			} else {
-				request.setAttribute("errorMsg", "회원가입을 축하합니다.");
+				//request.setAttribute("errorMsg", "회원가입을 축하합니다.");
+				out.println("<script>alert('회원가입을 축하합니다.')</script>");
+				mv.setPath("web/index.jsp");
 				
 			}
+		}else {
+			request.setAttribute("errorMsg", "비밀번호가 중복되었습니다.");
+			mv.setPath("errorView/error.jsp");
+		}
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", e.getMessage());
 		}
-		mv.setPath("web/index.jsp");
 		return mv;
 	}
 }

@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
 	public int joinMember(MemberDTO memberDTO) throws SQLException {
 		
 		int re = userDAO.joinMember(memberDTO);
-		
+		System.out.println("service="+re);
 		return re;
 	}
 	

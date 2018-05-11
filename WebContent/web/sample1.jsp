@@ -124,7 +124,7 @@ $(function(){
 	</table>
 	
 	
-	<form action="">
+	<form action="${pageContext.request.contextPath}/web/adminRegist.jsp">
 		현재페이지 :<input type="text" name="curPage" value="<%=curPage %>" >
 		최대 출력갯수:<input type="text" name="itemPerPage" value="<%=itemPerPage %>" >
 		감독명:<input type="text" name="directorNm" value="<%=directorNm %>" >		

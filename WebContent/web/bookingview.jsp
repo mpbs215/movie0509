@@ -268,6 +268,87 @@ body {
 						});
 		       		});
 			});
+	$(function() {
+		
+		$("#sendButton").click(function(){
+			<% 
+			if((String)session.getAttribute("userid")==null){
+			%>
+				alert("로그인해주세요.");
+				location.href="errorView/error.jsp";
+			<%}else{%>
+				$("#bookingForm").submit();	
+			<%}%>
+		});
+		
+		var standard;
+		var checkArr = [];
+		$(document).on("click", "#movieName", function() {
+			$("#rMovieId").val($(this).text());
+			standard = $(this).parent().find("input").val()
+			$.ajax({
+				type : "post",
+				url : "main?command=booking2",
+				data : "id=" + $(this).parent().find("input").val(),
+				dataType : "json",
+				success : function(result) {
+					var str = "";
+					$.each(result, function(index, item) {
+						str = "<a href='#'>" + item + " </a><br>"
+					});
+					$("#date").empty();
+					$("#date").append(str);
+				},
+				error : function(err) {
+					console.log("에러발생 : " + result);
+				}
+			}) // ajax종료
+		});//moviename클릭
+
+		$(document).on("click", "#date", function() {
+			$("#MovieDate").val($(this).text())
+			$.ajax({
+				type : "post",
+				url : "main?command=booking3",
+				data : "id=" + standard,
+				dataType : "json",
+				success : function(result) {
+					var str = "";
+					$.each(result, function(index, item) {
+						str = "<a href='#' >" + item + " </a><br>"
+					});
+					$("#time").empty();
+					$("#time").append(str);
+				},
+				error : function(err) {
+					console.log("에러발생 : " + result);
+				}
+			});//ajax
+		});//날짜클릭
+		
+		$(document).on("click", "#time", function() {
+			$("#MovieTime").val($(this).text())
+			var items = [];
+			$.ajax({
+				type : "post",
+				url : "main?command=booking4",
+				data : "id=" + standard,
+				dataType : "json",
+				success : function(result) {
+					// alert(result)
+					$("#movieNumber").val(standard)
+
+					$.each(result, function(index, item) {
+						items[index] = item;
+					});
+					$("#movieImg").attr("src", items[0]);
+					$("#rRoomNum").val(items[1]);
+					$("#screenNumber").val(items[2]);
+				}
+			});//ajax
+		});//시간클릭
+		
+	});//jquery 끝.
 </script>
 </head>
 <body>

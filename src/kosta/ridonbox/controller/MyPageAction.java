@@ -35,7 +35,9 @@ public class MyPageAction implements Action {
 		String userId = (String)session.getAttribute("userid");
 		try {
 			if(userId==null) {
-				mv.setPath("web/index.jsp");
+				request.setAttribute("errorMsg", "로그인을 해주세요.");
+				mv.setPath("errorView/error.jsp");
+				
 			}else {
 
 			MemberDTO member = service.memberInfo(userId);
