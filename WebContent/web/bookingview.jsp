@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
 <head>
@@ -15,8 +15,10 @@
 	
 	
 	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } 
+
 
 
 </script>
@@ -69,7 +71,6 @@
 <script
 	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <style type="text/css">
-
 body {
 	padding: 20px;
 	font-family: 'Open Sans', sans-serif;
@@ -134,14 +135,16 @@ body {
 	padding: 0;
 }
 
-<!--	
+<!--
 예매
 
 
 
 
 
+
  
+
 
 
 
@@ -153,14 +156,16 @@ body {
 
 
 
+
  
 
 
 
 
 
-css-->
 
+css--
+>
 @import
 	url(https://fonts.googleapis.com/css?family=Raleway:400,900,700,600,500,300,200,100,800)
 	;
@@ -193,94 +198,94 @@ body {
 	padding: 10px 0px;
 }
 
-.container{
+.container {
 	margin: 0px auto;
 	text-align: center;
 }
 </style>
 
 <script>
-			$(function(){
-			<%-- 	
-				$("#sendButton").click(function(){
-					<% 
-					if((String)session.getAttribute("userid")==null){
-					%>
-						console.log("!111");
-						alert(1111);
-						//slocation.href="errorView/error.jsp";
-					<%}else{%>
-					
-						$("#bookingForm").submit();	
-					<%}%>
-				}) --%>
-				
-				var standard;
-				var checkArr = [];
-				$(document).on("click","#movieName",function(){
-						$("#rMovieId").val($(this).text());
-						standard = $(this).parent().find("input").val()
-				       			$.ajax({
-									type : "post", 									
-									url : "main?command=booking2",					
-									data : "id="+$(this).parent().find("input").val(),
-									dataType: "json",							 
-									success : function(result) {		
-										var str ="";
-										$.each(result, function(index, item) {
-											str = "<a href='#'>"+item+" </a><br>"
-										});
-										$("#date").empty();
-										$("#date").append(str);
-									},
-									error : function(err){						
-										console.log("에러발생 : " +result); 
-								}	
-							})	 // ajax종료
-						});
-				
-					$(document).on("click", "#date", function() {
-						$("#MovieDate").val($(this).text())
-						$.ajax({
-							type : "post", 									
-							url : "main?command=booking3",					
-							data : "id="+standard,
-							dataType: "json",							 
-							success : function(result) {			
-								var str ="";	
-								$.each(result, function(index, item) {
-									str = "<a href='#' >"+item+" </a><br>"
-								});
-								$("#time").empty();
-								$("#time").append(str);
-							},
-							error : function(err){						
-								console.log("에러발생 : " +result); 
-								}	
-							});								
-						})		
-				$(document).on("click", "#time", function() {
-					$("#MovieTime").val($(this).text())
-							var items=[];					
-						$.ajax({
-							type : "post", 									
-							url : "main?command=booking4",					
-							data : "id="+standard,
-							dataType: "json",							 
-							success : function(result) {
-								// alert(result)
-								$("#movieNumber").val(standard)
-								
-								$.each(result, function(index, item) {
-									items[index] = item;
-								});
-									$("#movieImg").attr("src", items[0]);
-									$("#rRoomNum").val(items[1]); 
-									$("#screenNumber").val(items[2]);
-							}	
-						});
-		       		});
-			});
+	$(function() {
+		
+		$("#sendButton").click(function(){
+			<% 
+			if((String)session.getAttribute("userid")==null){
+			%>
+				alert("로그인해주세요.");
+				location.href="errorView/error.jsp";
+			<%}else{%>
+				$("#bookingForm").submit();	
+			<%}%>
+		});
+		
+		var standard;
+		var checkArr = [];
+		$(document).on("click", "#movieName", function() {
+			$("#rMovieId").val($(this).text());
+			standard = $(this).parent().find("input").val()
+			$.ajax({
+				type : "post",
+				url : "main?command=booking2",
+				data : "id=" + $(this).parent().find("input").val(),
+				dataType : "json",
+				success : function(result) {
+					var str = "";
+					$.each(result, function(index, item) {
+						str = "<a href='#'>" + item + " </a><br>"
+					});
+					$("#date").empty();
+					$("#date").append(str);
+				},
+				error : function(err) {
+					console.log("에러발생 : " + result);
+				}
+			}) // ajax종료
+		});//moviename클릭
+
+		$(document).on("click", "#date", function() {
+			$("#MovieDate").val($(this).text())
+			$.ajax({
+				type : "post",
+				url : "main?command=booking3",
+				data : "id=" + standard,
+				dataType : "json",
+				success : function(result) {
+					var str = "";
+					$.each(result, function(index, item) {
+						str = "<a href='#' >" + item + " </a><br>"
+					});
+					$("#time").empty();
+					$("#time").append(str);
+				},
+				error : function(err) {
+					console.log("에러발생 : " + result);
+				}
+			});//ajax
+		});//날짜클릭
+		
+		$(document).on("click", "#time", function() {
+			$("#MovieTime").val($(this).text())
+			var items = [];
+			$.ajax({
+				type : "post",
+				url : "main?command=booking4",
+				data : "id=" + standard,
+				dataType : "json",
+				success : function(result) {
+					// alert(result)
+					$("#movieNumber").val(standard)
+
+					$.each(result, function(index, item) {
+						items[index] = item;
+					});
+					$("#movieImg").attr("src", items[0]);
+					$("#rRoomNum").val(items[1]);
+					$("#screenNumber").val(items[2]);
+				}
+			});//ajax
+		});//시간클릭
+		
+	});//jquery 끝.
 </script>
 </head>
 <body>
@@ -303,50 +308,48 @@ body {
 								<div class="lib-header-seperator"></div>
 							</div>
 							<div class="lib-row lib-desc" style="width: 384px;">
-								<form method="post" id="bookingForm" action="main?command=booking">
-									<input type="hidden" id="movieNumber"  name="movieNumber" >
-									<input type="hidden" id="screenNumber"  name="screenNumber">
-								<table style="width: 477px; height: 361px;">
-									<tr>
-										<td>영화명 :</td>
-										<td><input type="text" id="rMovieId"  name="rMovieId" readonly="readonly"
-											style="width: 315px;"></td>
-									</tr>
-									<tr>
-										<td>상영관 :</td>
-										<td><input type="text" id="rRoomNum"  name="rRoomNum" readonly="readonly"
-											style="width: 313px;"></td>
-									</tr>
-									<tr>
-										<td>날 짜 :</td>
-										<td><input type="text" id="MovieDate" name="MovieDate"
-											readonly="readonly" style="width: 310px;"></td>
-									</tr>
-									<tr>
-										<td>시 간 :</td>
-										<td><input type="text" id="MovieTime" name="MovieTime"
-											readonly="readonly" style="width: 314px;"></td>
-									</tr>
-									<tr>
-										<td>예매수:</td>
-										<td>
-										<select id="bookingNum"  name="bookingNum"  size="1">
-										    <option value="7" selected>예매 인원</option>
-										    <option value="1">1</option>
-										    <option value="2">2</option>
-										    <option value="3">3</option>
-										    <option value="4">4</option>
-										    <option value="5">5</option>
-										</select>
-										</td>
-									</tr>
-								</table>
-							<div class="container" id="btndiv">
-				<button type="submit"  id=" sendButton" class="btn btn-primary btn-lg btn-block"
-					width="10px">예매</button>
-				<button type="button" class="btn btn-default btn-lg btn-block">취소</button>
-			</div>
-		</form>
+								<form method="post" id="bookingForm"
+									action="main?command=booking">
+									<input type="hidden" id="movieNumber" name="movieNumber">
+									<input type="hidden" id="screenNumber" name="screenNumber">
+									<table style="width: 477px; height: 361px;">
+										<tr>
+											<td>영화명 :</td>
+											<td><input type="text" id="rMovieId" name="rMovieId"
+												readonly="readonly" style="width: 315px;"></td>
+										</tr>
+										<tr>
+											<td>상영관 :</td>
+											<td><input type="text" id="rRoomNum" name="rRoomNum"
+												readonly="readonly" style="width: 313px;"></td>
+										</tr>
+										<tr>
+											<td>날 짜 :</td>
+											<td><input type="text" id="MovieDate" name="MovieDate"
+												readonly="readonly" style="width: 310px;"></td>
+										</tr>
+										<tr>
+											<td>시 간 :</td>
+											<td><input type="text" id="MovieTime" name="MovieTime"
+												readonly="readonly" style="width: 314px;"></td>
+										</tr>
+										<tr>
+											<td>예매수:</td>
+											<td><select id="bookingNum" name="bookingNum" size="1">
+													<option value="7" selected>예매 인원</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+											</select></td>
+										</tr>
+									</table>
+									<div class="container" id="btndiv">
+										<button type="submit" id="sendButton" class="btn btn-primary btn-lg btn-block" width="10px">예매</button>
+										<button type="button" class="btn btn-default btn-lg btn-block">취소</button>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -357,8 +360,9 @@ body {
 
 	<!-- 예약 테이블  -->
 	<section id="prices">
-	 <script>
-	 </script>
+		<script>
+			
+		</script>
 		<div class="container">
 			<div class="prices-box">
 				<div class="row">
@@ -374,33 +378,36 @@ body {
 
 						<div class="bottom-content text-center">
 							<ul class="features-border list-unstyled">
-<c:choose>
-    <c:when test="${empty requestScope.bookingList}">
-        <li>
-            <p align="center"><b><span style="font-size:9pt;">등록된 영화제목이 없습니다.</span></b></p>
-		</li>        
-    </c:when>
-    <c:otherwise>
-    <form method="post" action="main?command=booking"  id="bookingForm01" name="bookingForm01" >
-	<c:forEach items="${requestScope.bookingList}" var="revDTO">
-		        <li>
-		            <p align="center">
-		            <span style="font-size:9pt;">
-		            	<a href="#"  id="movieName"> ${revDTO.movieTitle}</a>
-		            	<input type="hidden"  name="movieNo" value="${revDTO.movieNum}" >
-		           	</span>
-		           </p>
-		        </li>
-    </c:forEach>
-    </form>
-	</c:otherwise>
-    </c:choose>
-    
-    <!-- -------------------------------------------- -->
-    
-				</ul>
-		</div>
-			</div>
+								<c:choose>
+									<c:when test="${empty requestScope.bookingList}">
+										<li>
+											<p align="center">
+												<b><span style="font-size: 9pt;">등록된 영화제목이 없습니다.</span></b>
+											</p>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<form method="post" action="main?command=booking"
+											id="bookingForm01" name="bookingForm01">
+											<c:forEach items="${requestScope.bookingList}" var="revDTO">
+												<li>
+													<p align="center">
+														<span style="font-size: 9pt;"> <a href="#"
+															id="movieName"> ${revDTO.movieTitle}</a> <input
+															type="hidden" name="movieNo" value="${revDTO.movieNum}">
+														</span>
+													</p>
+												</li>
+											</c:forEach>
+										</form>
+									</c:otherwise>
+								</c:choose>
+
+								<!-- -------------------------------------------- -->
+
+							</ul>
+						</div>
+					</div>
 					<div
 						class="col-lg-4 col-md-4 col-sm-4 col-xs-12 price-table aos-init aos-animate"
 						data-aos="fade-up">
@@ -409,26 +416,26 @@ body {
 								<h3>날짜</h3>
 							</div>
 						</div>
-					<div class="bottom-content text-center">
-				<ul class="features-border list-unstyled">
-		<!-- ------------------------------------- -->
-       		 <li id="date"> </li>
-				</ul>
+						<div class="bottom-content text-center">
+							<ul class="features-border list-unstyled">
+								<!-- ------------------------------------- -->
+								<li id="date"></li>
+							</ul>
 						</div>
 					</div>
-				<div
+					<div
 						class="col-lg-4 col-md-4 col-sm-4 col-xs-12 price-table aos-init aos-animate"
 						data-aos="fade-left">
 
 						<div class="top-content text-center">
 							<div class="title">
-								<h3 >시 간</h3>
+								<h3>시 간</h3>
 							</div>
 						</div>
-						<div class="bottom-content text-center">	
-								<ul class="features-border list-unstyled">
-				       	 			<li id="time"></li>
-								</ul>
+						<div class="bottom-content text-center">
+							<ul class="features-border list-unstyled">
+								<li id="time"></li>
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -438,7 +445,7 @@ body {
 
 	<br />
 	<%@include file="bottom.jsp"%>
-	
-	
+
+
 </body>
 </html>

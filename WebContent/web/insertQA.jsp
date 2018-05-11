@@ -110,6 +110,15 @@ button {
 		});
 	});
 	
+	
+	<% 
+	if((String)session.getAttribute("userid")==null){
+	%>
+		alert("로그인해주세요.");
+		location.href="${pageContext.request.contextPath}/main?command=QA";
+	<%}%>
+	
+	
 function checkVaild(){
 	
 	var f = window.document.writeFrom;

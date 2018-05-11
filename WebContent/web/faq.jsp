@@ -287,7 +287,7 @@
 			</table>
 			</div>
 			
-		<a href="QAboard.jsp" class="button">개인 문의하기</a>
+		<a href="main?command=QA" class="button">개인 문의하기</a>
 		
 			<!-- 공백 -->				
 			<div>
