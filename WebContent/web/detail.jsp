@@ -19,12 +19,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="application/x-javascript">
 	
-	
-	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } 
-
-
 
 </script>
 <link href="${pageContext.request.contextPath}/web/css/bootstrap.css" rel="stylesheet" type="text/css"
@@ -90,7 +86,6 @@ th{
 	<div class="container">
 
 		<div class="row">
-
 			<div class="col-md-12">
 
 				<div class="card mb-4">

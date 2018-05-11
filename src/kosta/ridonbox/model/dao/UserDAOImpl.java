@@ -446,7 +446,6 @@ public class UserDAOImpl implements UserDAO {
 		
 			return list;
 	}
-
 	@Override
 	public QnADTO selectByQaNo(int qnaNo) throws SQLException {
 		Connection con = DbUtil.getConnection();

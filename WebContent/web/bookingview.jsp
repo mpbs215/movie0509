@@ -13,43 +13,32 @@
 <script type="application/x-javascript">
 	
 	
-	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } 
 
-
 </script>
 <!-- //for-mobile-apps -->
-<link href="${pageContext.request.contextPath}/web/css/bootstrap.css"
-	rel="stylesheet" type="text/css" media="all" />
-<link href="${pageContext.request.contextPath}/web/css/style.css"
-	rel="stylesheet" type="text/css" media="all" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/web/css/contactstyle.css"
-	type="text/css" media="all" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/web/css/faqstyle.css"
-	type="text/css" media="all" />
-<link href="${pageContext.request.contextPath}/web/css/single.css"
-	rel='stylesheet' type='text/css' />
-<link href="${pageContext.request.contextPath}/web/css/medile.css"
-	rel='stylesheet' type='text/css' />
+<link href="${pageContext.request.contextPath}/web/css/bootstrap.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link href="${pageContext.request.contextPath}/web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/web/css/contactstyle.css" type="text/css"
+	media="all" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/web/css/faqstyle.css" type="text/css"
+	media="all" />
+<link href="${pageContext.request.contextPath}/web/css/single.css" rel='stylesheet' type='text/css' />
+<link href="${pageContext.request.contextPath}/web/css/medile.css" rel='stylesheet' type='text/css' />
 <!-- banner-slider -->
-<link
-	href="${pageContext.request.contextPath}/web/css/jquery.slidey.min.css"
-	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/web/css/jquery.slidey.min.css" rel="stylesheet">
 <!-- //banner-slider -->
 <!-- pop-up -->
-<link href="${pageContext.request.contextPath}/web/css/popuo-box.css"
-	rel="stylesheet" type="text/css" media="all" />
+<link href="${pageContext.request.contextPath}/web/css/popuo-box.css" rel="stylesheet" type="text/css"
+	media="all" />
 <!-- //pop-up -->
 <!-- font-awesome icons -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/web/css/font-awesome.min.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/web/css/font-awesome.min.css" />
 <!-- //font-awesome icons -->
 <!-- js -->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/web/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/web/js/jquery-2.1.4.min.js"></script>
 <!-- //js -->
 <!-- banner-bottom-plugin -->
 <!-- <link href="css/owl.carousel.css" rel="stylesheet" type="text/css" media="all">
@@ -139,9 +128,7 @@ body {
 
 
 
-
  
-
 
 
 
@@ -151,9 +138,7 @@ body {
 
 
 
-
  
-
 
 
 
@@ -190,11 +175,6 @@ body {
 #prices .features-border li {
 	border-top: 1px solid #c7c7c7;
 	padding: 10px 0px;
-}
-
-.container{
-	margin: 0px auto;
-	text-align: center;
 }
 </style>
 
@@ -275,7 +255,7 @@ body {
 </head>
 <body>
 	<%@include file="head.jsp"%>
-	<div class="container">
+	<div class="container"  >
 		<div class="row row-margin-bottom" style="width: 384px;">
 			<div class="col-md-5 no-padding lib-item" data-category="view"
 				style="width: 850px; height: 500px;">
@@ -283,9 +263,7 @@ body {
 					<div class="row box-shadow"
 						style="margin: 0px auto; text-align: center">
 						<div class="col-md-6">
-							<img class="lib-img-show"
-								src="${pageContext.request.contextPath}/web/2.jpg"
-								style="height: 100%">
+							<img id="movieImg"class="lib-img-show" src="${pageContext.request.contextPath}/web/2.jpg" style="height: 100%">
 						</div>
 						<div class="col-md-6">
 							<div class="lib-row lib-header" style="font-size: 30px">
@@ -428,7 +406,6 @@ body {
 	
 	<br />
 	<%@include file="bottom.jsp"%>
-	
 	
 </body>
 </html>
