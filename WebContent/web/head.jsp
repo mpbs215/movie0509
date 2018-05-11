@@ -7,7 +7,7 @@
 		<div class="header">
 		<div class="container">
 			<div class="w3layouts_logo">
-				<a href="${pageContext.request.contextPath}/web/index.jsp"><h1>One<span>Movies</span></h1></a>
+				<a href="${pageContext.request.contextPath}/main?command=main"><h1>One<span>Movies</span></h1></a>
 			</div>
 			<div class="w3_search">
 				<form action="${pageContext.request.contextPath}/web/detail.jsp" method="post"  >
@@ -144,7 +144,7 @@ if((String)session.getAttribute("userid")==null){
 }else{ //session id값이 있을때.%>
 	<script>
 	$(function(){
-		$("#logbtn").text("LoginOut");
+		$("#logbtn").text("LogOut");
 		var str ="<%=(String)session.getAttribute("userid")%>";
 		
 		$("#conid").val("<%=(String)session.getAttribute("userid")%>님 접속중")
@@ -155,7 +155,7 @@ if((String)session.getAttribute("userid")==null){
 <script type="text/javascript">
 $(function(){
 	$("#logbtn").click(function(){
-		if($(this).text() =="LoginOut"){
+		if($(this).text() =="LogOut"){
 			if(confirm("로그아웃 하시겠습니까?????")){
 			location.href="${pageContext.request.contextPath}/main?command=loginout";}
 		}

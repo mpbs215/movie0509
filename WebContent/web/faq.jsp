@@ -53,7 +53,7 @@
 							<div>
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="padding:35px 0 0px 0;">
 							  <tr>
-							    <td align="center"> <img src="images/sub_banner.png"></td>
+							    <td align="center"> <img src="${pageContext.request.contextPath}/web/images/sub_banner.png"></td>
 							  </tr>
 							</table>
 							</div>

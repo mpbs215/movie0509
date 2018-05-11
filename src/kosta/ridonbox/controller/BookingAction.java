@@ -62,7 +62,7 @@ public class BookingAction implements Action {
 				
 				result = service.revList(revDTO);
 				
-				if (result ==0) { mv.setPath("web/error.jsp"); }
+				if (result ==0) { mv.setPath("errorView/error.jsp"); }
 				
 		} catch (SQLException e) { e.printStackTrace();
 							request.setAttribute("errorMsg", e.getMessage());

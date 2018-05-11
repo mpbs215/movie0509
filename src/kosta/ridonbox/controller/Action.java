@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kosta.ridonbox.model.dto.ModelAndView;
 
+// test
 public interface Action {
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 

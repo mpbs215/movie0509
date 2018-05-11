@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <meta charset="utf-8">
+
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -180,10 +181,19 @@ body {
 
 <script>
 			$(function(){
-				
+			<%-- 	
 				$("#sendButton").click(function(){
-						$("#bookingForm").submit();			
-				})
+					<% 
+					if((String)session.getAttribute("userid")==null){
+					%>
+						console.log("!111");
+						alert(1111);
+						//slocation.href="errorView/error.jsp";
+					<%}else{%>
+					
+						$("#bookingForm").submit();	
+					<%}%>
+				}) --%>
 				
 				var standard;
 				var checkArr = [];
@@ -403,7 +413,7 @@ body {
 			</div>
 		</div>
 	</section>
-	
+
 	<br />
 	<%@include file="bottom.jsp"%>
 	
