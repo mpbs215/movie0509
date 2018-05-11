@@ -302,8 +302,11 @@ select * from RESERVATION;
 select * from MEMBER;
 select * from BOARD;
 select * from EVENT;
+<<<<<<< HEAD
+=======
 
 <<<<<<< HEAD
 =======
 delete from reservation where rev_pep=5
+>>>>>>> branch 'master' of https://github.com/mpbs215/movie0509.git
 

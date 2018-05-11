@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/web/js/jquery-2.1.4.min.js"></script>
 		<div class="header">
 		<div class="container">
 			<div class="w3layouts_logo">
 				<a href="${pageContext.request.contextPath}/main?command=main"><h1>One<span>Movies</span></h1></a>
 			</div>
 			<div class="w3_search">
-				<form action="#" method="post">
+				<form action="${pageContext.request.contextPath}/web/detail.jsp" method="post"  >
 					<input type="text" name="Search" placeholder="제목 검색" required="">
 					<input type="submit" value="검색">
 				</form>
