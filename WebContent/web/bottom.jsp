@@ -7,16 +7,16 @@
 			<div class="w3ls_footer_grid">
 				<div class="col-md-6 w3ls_footer_grid_left">
 					<address style="color: white">
-					(04377)서울특별시 용산구 한강대로 23길 55, 아이파크몰 6층(한강로동)<br/>
-					대표이사 : 서정사업자등록번호 : 104-81-45690<br/>
+					(13494)경기도 성남시 분당구 대왕판교로 670-8층 세미나실<br/>
+					대표이사 : 김돈황  사업자등록번호 : 김돈황이랩을할다 홍홍<br/>
 					통신판매업신고번호 : 2017-서울용산-0662<br/>
-					개인정보보호 책임자 : 마케팅 담당 정종민대표 <br/>
+					개인정보보호 책임자 : 마케팅 담당 윤희용대표 <br/>
 					이메일 : cjcgvmaster@cj.net<br/>
-					CGV고객센터 : 1544-1122
+					RIDON고객센터 : 1588-1588
 					</address>
 				</div>
 				<div class="col-md-6 w3ls_footer_grid_right">
-					<a href="${pageContext.request.contextPath}/web/index.jsp"><h2>One<span>Movies</span></h2></a>
+					<a href="${pageContext.request.contextPath}/web/index.jsp"><h2>RD<span>Movies</span></h2></a>
 				</div>
 				<div class="clearfix"> </div>
 			</div>

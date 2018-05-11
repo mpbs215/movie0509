@@ -121,10 +121,7 @@ th{
 						<th style="color: white">영화상태</th>
 						<td>${movie.movieState}</td>
 					</tr>
-					<tr>
-						<th style="color: white">줄거리</th>
-						<td>돈황이의 세계정복</td>
-					</tr>
+					
 				</table>
 			</div>
 			<div class="row">
@@ -151,7 +148,7 @@ th{
 							</div>
 							<div class="col-md-8 single-right-grid-right">
 								<a href="${pageContext.request.contextPath}/main?command=detail&movieNum=${movielist.movieNum}" class="title"> ${movielist.movieTitle}</a>
-								<p class="author"><a href="#" class="author">${movielist.movieDir}</a></p>
+								<p class="author">${movielist.movieDir}</p>
 								<p class="views">${movielist.movieCountry}</p>
 							</div>
 							<div class="clearfix"> </div>

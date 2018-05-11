@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <title>무비 원</title>
@@ -73,15 +74,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div id="slidey" style="display:none;">
 		<ul>
 		<c:forEach items="${movielist}" var="movielist">
-			<li><img src="${movielist.moviePath}" alt=" "><p class='title'>${movielist.movieTitle}</p><p class='description'> Tarzan, having acclimated to life in London, is called back to his former home in the jungle to investigate the activities at a mining encampment.</p></li>
+			<li><img src="${movielist.moviePath}" alt=" "><p class='title'>${movielist.movieTitle}</p></li>
 		</c:forEach>	
-		
-		
-			<li><img src="${pageContext.request.contextPath}/web/images/2.jpg" alt=" "><p class='title'>Maximum Ride</p><p class='description'>Six children, genetically cross-bred with avian DNA, take flight around the country to discover their origins. Along the way, their mysterious past is ...</p></li>
-			<li><img src="${pageContext.request.contextPath}/web/images/3.jpg" alt=" "><p class='title'>Independence</p><p class='description'>The fate of humanity hangs in the balance as the U.S. President and citizens decide if these aliens are to be trusted ...or feared.</p></li>
-			<li><img src="${pageContext.request.contextPath}/web/images/4.jpg" alt=" "><p class='title'>Central Intelligence</p><p class='description'>Bullied as a teen for being overweight, Bob Stone (Dwayne Johnson) shows up to his high school reunion looking fit and muscular. Claiming to be on a top-secret ...</p></li>
-			<li><img src="${pageContext.request.contextPath}/web/images/6.jpg" alt=" "><p class='title'>Ice Age</p><p class='description'>In the film's epilogue, Scrat keeps struggling to control the alien ship until it crashes on Mars, destroying all life on the planet.</p></li>
-			<li><img src="${pageContext.request.contextPath}/web/images/7.jpg" alt=" "><p class='title'>X - Man</p><p class='description'>In 1977, paranormal investigators Ed (Patrick Wilson) and Lorraine Warren come out of a self-imposed sabbatical to travel to Enfield, a borough in north ...</p></li>
 		
 		
 		</ul>   	
@@ -109,8 +103,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
 				<ul id="myTab" class="nav nav-tabs" role="tablist">
 					<li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">최신개봉작</a></li>
-					<li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">관객수</a></li>
-					<li role="presentation"><a href="#rating" id="rating-tab" role="tab" data-toggle="tab" aria-controls="rating" aria-expanded="true">평점</a></li>
+					
 				</ul>
 
 				<div id="myTabContent" class="tab-content">
@@ -123,8 +116,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<c:forEach items="${movielist}" var="movielist">
 						
 							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="${pageContext.request.contextPath}/main?command=detail&movieNum=${movielist.movieNum}" class="hvr-shutter-out-horizontal"><img
-									src="${movielist.moviePath}" title="album-name" alt=" " />
+								<a href="${pageContext.request.contextPath}/main?command=detail&movieNum=${movielist.movieNum}" class="hvr-shutter-out-horizontal">
+								
+									<img	src="${movielist.moviePath}" title="album-name"  class="img-responsive" alt=" " />
+								
 									<div class="w3l-action-icon">
 										<i class="fa fa-play-circle" aria-hidden="true"></i>
 									</div> </a>
@@ -137,18 +132,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="mid-2" >
 										<div class="w3l-movie-text">
 										개봉일 : ${movielist.movieDate}<br>
-										
 												제작 국가 : ${movielist.movieCountry}
 										</div>
-										<div class="clearfix"></div>
 									</div>
 									<div>
 										<button type="button" class="btn btn-info btn-bloc outline" onclick="location.href='${pageContext.request.contextPath}/main?command=booking&bookingNum=8&movieNum=${movielist.movieNum}'">예매하기</button>
 									</div>
-
 								</div>
 							</div>
 						</c:forEach>
+						
+						
+						
 <!-- 							최신개봉작순 끝-->
 							
 							
@@ -160,38 +155,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						
 						
 						
-						<!-- 							관객수 -->
-						<c:forEach items="${movielist}" var="movielist">
 						
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="${pageContext.request.contextPath}/main?command=detail&movieNum=${movielist.movieNum}" class="hvr-shutter-out-horizontal"><img
-									src="${movielist.moviePath}" title="album-name" alt=" " />
-									<div class="w3l-action-icon">
-										<i class="fa fa-play-circle" aria-hidden="true"></i>
-									</div> </a>
-								<div class="mid-1">
-									<div class="w3l-movie-text">
-										<h6>
-											<a href="${pageContext.request.contextPath}/main?command=detail&movieNum=${movielist.movieNum}">${movielist.movieTitle }</a>
-										</h6>
-									</div>
-									<div class="mid-2">
-
-										<div class="w3l-movie-text">
-										개봉일 : ${movielist.movieDate}<br>
-										
-												제작 국가 : ${movielist.movieCountry}
-										</div>
-										<div class="clearfix"></div>
-									</div>
-									<div>
-										<button type="button" class="btn btn-info btn-bloc outline" onclick="location.href='${pageContext.request.contextPath}/main?command=booking&bookingNum=8&movieNum=${movielist.movieNum}'">예매하기</button>
-									</div>
-
-								</div>
-							</div>
-						</c:forEach>
-						<!-- 							관객수 끝 -->
 						
 						
 						
@@ -205,37 +169,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						
 						
 						
-						<!-- 							평점순 -->
-						<c:forEach items="${movielist}" var="movielist">
 						
-							<div class="col-md-2 w3l-movie-gride-agile">
-								<a href="${pageContext.request.contextPath}/main?command=detail&movieNum=${movielist.movieNum}" class="hvr-shutter-out-horizontal"><img
-									src="${movielist.moviePath}" title="album-name" alt=" " />
-									<div class="w3l-action-icon">
-										<i class="fa fa-play-circle" aria-hidden="true"></i>
-									</div> </a>
-								<div class="mid-1">
-									<div class="w3l-movie-text">
-										<h6>
-											<a href="${pageContext.request.contextPath}/main?command=detail&movieNum=${movielist.movieNum}">${movielist.movieTitle }</a>
-										</h6>
-									</div>
-									<div class="mid-2">
-										<div class="w3l-movie-text">
-										개봉일 : ${movielist.movieDate}<br>
-										
-												제작 국가 : ${movielist.movieCountry}
-										</div>
-										<div class="clearfix"></div>
-									</div>
-									<div>
-										<button type="button" class="btn btn-info btn-bloc outline" onclick="location.href='${pageContext.request.contextPath}/main?command=booking&bookingNum=8&movieNum=${movielist.movieNum}'">예매하기</button>
-									</div>
-
-								</div>
-							</div>
-						</c:forEach>
-						<!-- 							평점순  끝-->
 						
 						
 						

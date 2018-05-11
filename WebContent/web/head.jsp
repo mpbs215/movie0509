@@ -4,12 +4,11 @@
 		<div class="header">
 		<div class="container">
 			<div class="w3layouts_logo">
-				<a href="${pageContext.request.contextPath}/main?command=main"><h1>One<span>Movies</span></h1></a>
+				<a href="${pageContext.request.contextPath}/main?command=main"><h1>RD<span>Movies</span></h1></a>
 			</div>
 			<div class="w3_search">
 				<form action="#" method="post">
-					<input type="text" name="Search" placeholder="제목 검색" required="">
-					<input type="submit" value="검색">
+					
 				</form>
 			</div>
 			<div class="w3l_sign_in_register">
@@ -179,7 +178,6 @@ $(function(){
 							<li><a href="${pageContext.request.contextPath}/main?command=main">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/main?command=booking&bookingNum=8" >예매</a></li>
 							<li><a href="${pageContext.request.contextPath}/main?command=info">영화 정보</a></li>
-							<li><a href="${pageContext.request.contextPath}/main?command=event">이벤트</a></li>
 							<li><a href="${pageContext.request.contextPath}/main?command=myPage">MyPage</a></li>
 							<li><a href="${pageContext.request.contextPath}/main?command=QA">Q&A</a></li>
 							<li><a href="${pageContext.request.contextPath}/main?command=faq">영화관 이용안내</a></li>

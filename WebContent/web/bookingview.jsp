@@ -201,20 +201,7 @@ body {
 
 <script>
 			$(function(){
-			<%-- 	
-				$("#sendButton").click(function(){
-					<% 
-					if((String)session.getAttribute("userid")==null){
-					%>
-						console.log("!111");
-						alert(1111);
-						//slocation.href="errorView/error.jsp";
-					<%}else{%>
-					
-						$("#bookingForm").submit();	
-					<%}%>
-				}) --%>
-				
+
 				var standard;
 				var checkArr = [];
 				$(document).on("click","#movieName",function(){

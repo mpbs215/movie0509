@@ -10,7 +10,7 @@ font-family: 'Roboto Condensed', sans-serif;
 }
 .video-grid-single-page-agileits img {
     width: 40%;
-    margin-left: 320px;
+    margin-left: 250px;
 }
 #video {
   position: relative;
@@ -447,8 +447,8 @@ width:100%;
   margin: .5em 0;
 }
 .single-right-grid-right p.author {
-    font-size: 13px;
-    color: #9E9E9E;
+    font-size: 1em;
+    color: #ff8d1b;
     margin: 0em 0;
 }
 .single-right-grid-right p.author a {
