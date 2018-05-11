@@ -123,9 +123,16 @@ button {
 			}
 			if($(this).val()=="저장하기"){
 				sendUpdate();
+			}if($(this).val()=="답변하기"){
+				$("#qnacomend").attr("readonly",false);
+			}if($(this).val()=="답변저장"){
+				sendUpCommend();
 			}
-		})
-	});
+			
+		});
+		
+		$("#conid").val("<%=(String)session.getAttribute("userid")%>님 접속중")
+	});//jquery 끝
 	
 	function sendDelete(){
 		document.requestForm.command.value="deleteQA";
@@ -137,10 +144,32 @@ button {
 		document.requestForm.submit();
 	}
 	
+	function sendUpCommend(){
+		document.requestForm.command.value="commendQA";
+		document.requestForm.submit();
+	}
+
+
 </script>
 </head>
 <body>
 	<%@include file="head.jsp"%>
+	
+	<% 
+	if(((String)session.getAttribute("userid")).equals("admin") ){
+	%>
+		<script>
+		console.log('<%=(String)session.getAttribute("userid")%>');
+		$(function(){
+			$("#comdbtn").attr({"style":"display:display"})
+			$("#upbtn").hide();
+			$("#delbtn").val("답변저장");
+		})
+		
+		</script>
+	<%
+	}
+	%>
 	<div class="general">
 		<div class="container">
 			<div>
@@ -157,6 +186,10 @@ button {
   								<br />
   								<textarea class="form-control" rows="20" name="context" id="qnacontext" readonly="readonly">${qna.context}</textarea>
   								<br />
+  								<label for="comment"  style="float:left">답변</label>
+  								<br />
+  								<textarea class="form-control" rows="20" name="commend" id="qnacomend" readonly="readonly">${qna.comment}</textarea>
+  								<br />
   								<label for="usr"  style="float:left">비밀번호</label>
   								<br />
   								
@@ -167,7 +200,8 @@ button {
   								
   								<input type="button" id="delbtn" value="삭제하기"  class="pull-right btn-danger"/>
 			                    <input type="button" value="목록으로" onClick="location.href='${pageContext.request.contextPath}/main?command=QA'" class="pull-left btn-success" />
-			                    <input type="button" value="수정하기" class="pull-left btn-success" />
+			                    <input type="button" value="수정하기" id="upbtn" class="pull-left btn-success" />
+			                    <input type="button" value="답변하기"  id="comdbtn" class="pull-left btn-success"  style="display:none;"/>
 								</form>				
 						</div>
 					</div>

@@ -10,13 +10,13 @@ font-family: 'Roboto Condensed', sans-serif;
 }
 .video-grid-single-page-agileits img {
     width: 40%;
-    margin-left: 200px;
+    margin-left: 320px;
 }
 #video {
   position: relative;
   background: #000;
      width: 100%
-    margin: 40px auto;
+    margin: 50px auto;
 }
 
 #video img,

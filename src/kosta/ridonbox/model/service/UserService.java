@@ -160,5 +160,13 @@ public int revList(ReservationDTO revDTO) throws SQLException;
 		 * @param : qaNo (pk) 
 		 * */
 		QnADTO selectByQaNo(int qaNo) throws SQLException;
+		
+		/**
+		 * qa의 commend 업로드
+		 * @param qaNo
+		 * @return
+		 * @throws SQLException
+		 */
+		public int qaCommendUpdate(QnADTO qaNo) throws SQLException;
 		  
 }

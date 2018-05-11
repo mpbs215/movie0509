@@ -162,6 +162,7 @@ $(function(){
 </script>
 
 <body>
+<<<<<<< HEAD
 	<%@include file="adminHead.jsp"%>
 	<script
 		src="${pageContext.request.contextPath}/web/js/jquery.slidey.js"></script>
@@ -207,5 +208,33 @@ $(function(){
 		</div>
 	</div>
 	<%@include file="bottom.jsp"%>
+=======
+	<%@include file = "adminHead.jsp" %>
+	<div class="container"  style="margin-top: 5%">
+	<table class="table table-striped">
+		<thead class="bg-warning">
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>날짜</th>
+				<th>조회수</th>
+			</tr>
+		</thead>
+		<tbody id="boardList">
+			<tr>
+				<td>번호</td>
+				<td>제목</td>
+				<td>작성자</td>
+				<td>날짜</td>
+				<td>조회수</td>
+			</tr>
+		</tbody>
+	</table>
+	<hr />
+	<a class="btn btn-default pull-right"  style="margin-bottom:5%" onclick="location.href='${pageContext.request.contextPath}/web/insertEvent.jsp'">글쓰기</a>
+</div>
+		<%@include file="bottom.jsp"%>
+>>>>>>> branch 'master' of https://github.com/mpbs215/movie0509.git
 </body>
 </html>

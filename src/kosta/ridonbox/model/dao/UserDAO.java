@@ -132,6 +132,7 @@ public interface UserDAO {
 	 * @return int : 1 이상 - 성공, 0 - 실패
 	 */
 	public int qaUpdate(QnADTO qnADTO) throws SQLException;
+	
 
 	/**
 	 * QA 삭제
@@ -187,5 +188,13 @@ public interface UserDAO {
 	 * 	예매 테이블에 저장해야 하는 정보들을 DTO에 insert해준다.
 	 * */
 	public int revList(ReservationDTO revDTO) throws SQLException;
+
+	/**
+	 * 사용자 qna 답변 업로드하는 메소드
+	 * @param qaDTO
+	 * @return
+	 * @throws SQLException
+	 */
+	int qaCommendUpdate(QnADTO qaDTO) throws SQLException;
 	
 }
